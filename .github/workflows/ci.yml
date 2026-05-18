@@ -1,0 +1,114 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      # TODO: substituir USER/graphenda-shared pelo remoto Git real
+      # (decisao #2 do PLANO-DIVISAO-EM-PROJETOS.md)
+      - name: Install graphenda-shared (Git URL)
+        run: |
+          pip install "graphenda-shared @ git+https://github.com/USER/graphenda-shared@v0.1.0"
+      - name: Install graphenda-build with dev extras
+        run: pip install -e ".[dev,test]"
+      - name: Ruff
+        run: ruff check graphenda_build/ scripts/ tests/
+      - name: Black (check only)
+        run: black --check graphenda_build/ scripts/ tests/
+      - name: Isort (check only)
+        run: isort --check-only graphenda_build/ scripts/ tests/
+      - name: Mypy
+        run: mypy graphenda_build/
+
+  test-unit:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      # TODO: substituir USER/graphenda-shared pelo remoto Git real
+      - name: Install graphenda-shared
+        run: pip install "graphenda-shared @ git+https://github.com/USER/graphenda-shared@v0.1.0"
+      - name: Install
+        run: pip install -e ".[dev,test]"
+      - name: Run pytest
+        run: pytest tests/ -v -m "not integration" --cov=graphenda_build --cov-report=xml
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ github.sha }}
+          path: coverage.xml
+
+  test-integration:
+    name: Integration Tests (Neo4j)
+    runs-on: ubuntu-latest
+    services:
+      neo4j:
+        image: neo4j:5.20-community
+        ports:
+          - 7687:7687
+        env:
+          NEO4J_AUTH: neo4j/graphenda-ci
+        options: >-
+          --health-cmd "wget --quiet --tries=1 --spider http://localhost:7474 || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      # TODO: substituir USER/graphenda-shared pelo remoto Git real
+      - name: Install graphenda-shared
+        run: pip install "graphenda-shared @ git+https://github.com/USER/graphenda-shared@v0.1.0"
+      - name: Install
+        run: pip install -e ".[dev,test]"
+      - name: Wait for Neo4j
+        run: |
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            curl -fs http://localhost:7474 && break
+            sleep 3
+          done
+      - name: Run integration tests
+        env:
+          NEO4J_URI: bolt://localhost:7687
+          NEO4J_USER: neo4j
+          NEO4J_PASSWORD: graphenda-ci
+        run: pytest tests/ -v -m integration
+
+  build-docker:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    needs: [lint, test-unit]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: |
+          docker build -f infra/docker/Dockerfile.build -t graphenda-build:ci .
+      - name: Smoke run --help
+        run: docker run --rm graphenda-build:ci --help
