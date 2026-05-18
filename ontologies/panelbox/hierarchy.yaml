@@ -1,0 +1,30 @@
+levels:
+  1:
+    name: "Facts"
+    description: "Entidades concretas da biblioteca PanelBox: estimadores, testes, parametros, erros-padrao, datasets, padroes de codigo, metricas e literatura"
+    entity_types:
+      - Estimator
+      - DiagnosticTest
+      - Parameter
+      - StandardError
+      - Dataset
+      - CodePattern
+      - ResultMetric
+      - Literature
+
+  2:
+    name: "Concepts"
+    description: "Conceitos estatisticos e econometricos que os estimadores e testes abordam"
+    entity_types:
+      - StatisticalConcept
+
+  3:
+    name: "Domains"
+    description: "Familias de modelos que agrupam estimadores relacionados (Static, GMM, Spatial, etc.)"
+    entity_types:
+      - ModelFamily
+
+cross_level_relationships:
+  - ADDRESSES
+  - TESTS_FOR
+  - BELONGS_TO

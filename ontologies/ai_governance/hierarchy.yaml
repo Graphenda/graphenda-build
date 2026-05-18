@@ -1,0 +1,30 @@
+levels:
+  1:
+    name: "Facts"
+    description: "Artigos legais, medidas de controle, processos de auditoria e requisitos"
+    entity_types:
+      - LegalArticle
+      - ControlMeasure
+      - AuditProcess
+      - ComplianceRequirement
+
+  2:
+    name: "Concepts"
+    description: "Categorias de risco e standards"
+    entity_types:
+      - RiskCategory
+      - Standard
+
+  3:
+    name: "Domains"
+    description: "Frameworks regulatorios e orgaos reguladores"
+    entity_types:
+      - RegulatoryFramework
+      - RegulatoryBody
+
+cross_level_relationships:
+  - REGULATES
+  - REQUIRES_COMPLIANCE
+  - DEFINED_BY
+  - MITIGATES
+  - REFERENCES

@@ -1,0 +1,2049 @@
+entities:
+
+  # =========================================================================
+  # MODEL FAMILIES - Level 3 (13 total)
+  # =========================================================================
+
+  - type: ModelFamily
+    name: "Static Models"
+    properties:
+      description: "Linear panel data models without lagged dependent variables"
+      module_prefix: "panelbox.models.static"
+
+  - type: ModelFamily
+    name: "GMM"
+    properties:
+      description: "Generalized Method of Moments estimators for dynamic panels"
+      module_prefix: "panelbox.gmm"
+
+  - type: ModelFamily
+    name: "Spatial Models"
+    properties:
+      description: "Spatial econometric models for data with geographic or network dependence"
+      module_prefix: "panelbox.models.spatial"
+
+  - type: ModelFamily
+    name: "Discrete Choice"
+    properties:
+      description: "Models for binary, multinomial, and ordered categorical outcomes"
+      module_prefix: "panelbox.models.discrete"
+
+  - type: ModelFamily
+    name: "Count Models"
+    properties:
+      description: "Models for count data (Poisson, Negative Binomial, Zero-Inflated)"
+      module_prefix: "panelbox.models.count"
+
+  - type: ModelFamily
+    name: "Censored Models"
+    properties:
+      description: "Models for censored/truncated dependent variables (Tobit)"
+      module_prefix: "panelbox.models.censored"
+
+  - type: ModelFamily
+    name: "Quantile Models"
+    properties:
+      description: "Quantile regression for heterogeneous effects across distribution"
+      module_prefix: "panelbox.models.quantile"
+
+  - type: ModelFamily
+    name: "Selection Models"
+    properties:
+      description: "Models correcting for sample selection bias"
+      module_prefix: "panelbox.models.selection"
+
+  - type: ModelFamily
+    name: "Instrumental Variables"
+    properties:
+      description: "Two-stage estimators for endogenous regressors"
+      module_prefix: "panelbox.models.iv"
+
+  - type: ModelFamily
+    name: "Stochastic Frontier"
+    properties:
+      description: "Models for technical efficiency estimation"
+      module_prefix: "panelbox.models.frontier"
+
+  - type: ModelFamily
+    name: "VAR"
+    properties:
+      description: "Vector Autoregressive models for panel data"
+      module_prefix: "panelbox.models.var"
+
+  - type: ModelFamily
+    name: "Robust Regression"
+    properties:
+      description: "Estimators robust to outliers and heavy tails"
+      module_prefix: "panelbox.models.robust"
+
+  - type: ModelFamily
+    name: "Mixed Effects"
+    properties:
+      description: "Hierarchical/multilevel models with random coefficients"
+      module_prefix: "panelbox.models.mixed"
+
+  # =========================================================================
+  # STATISTICAL CONCEPTS - Level 2
+  # =========================================================================
+
+  - type: StatisticalConcept
+    name: "Endogeneity"
+    properties:
+      description: "Correlation between regressors and error term"
+      formal_definition: "E(u|X) != 0"
+      implications: "OLS estimates are biased and inconsistent"
+
+  - type: StatisticalConcept
+    name: "Heteroskedasticity"
+    properties:
+      description: "Non-constant variance of errors"
+      formal_definition: "Var(u_i|X_i) != sigma^2"
+      implications: "OLS SEs are biased; use robust or clustered SEs"
+
+  - type: StatisticalConcept
+    name: "SerialCorrelation"
+    properties:
+      description: "Correlation between error terms across time"
+      formal_definition: "Cov(u_it, u_is) != 0 for t != s"
+      implications: "OLS SEs underestimate true variance; use HAC or clustered SEs"
+
+  - type: StatisticalConcept
+    name: "SpatialAutocorrelation"
+    properties:
+      description: "Dependence between observations in spatial proximity"
+      formal_definition: "Cov(y_i, y_j) = f(d_ij) != 0"
+      implications: "Standard models produce biased estimates; need spatial models"
+
+  - type: StatisticalConcept
+    name: "CrossSectionalDependence"
+    properties:
+      description: "Correlation between cross-sectional units"
+      formal_definition: "Cov(u_it, u_jt) != 0 for i != j"
+      implications: "Standard panel SEs are biased; use Driscoll-Kraay or PCSE"
+
+  - type: StatisticalConcept
+    name: "UnitRoot"
+    properties:
+      description: "Non-stationarity in panel time series"
+      formal_definition: "rho = 1 in y_it = rho * y_i(t-1) + u_it"
+      implications: "Spurious regression; need differencing or cointegration"
+
+  - type: StatisticalConcept
+    name: "Cointegration"
+    properties:
+      description: "Long-run equilibrium between non-stationary series"
+      formal_definition: "I(1) series with I(0) linear combination"
+      implications: "VECM appropriate; levels regression valid despite unit roots"
+
+  - type: StatisticalConcept
+    name: "Overidentification"
+    properties:
+      description: "More instruments than endogenous variables"
+      formal_definition: "L > K where L = instruments, K = endogenous"
+      implications: "Hansen/Sargan tests validate instrument exogeneity"
+
+  - type: StatisticalConcept
+    name: "Multicollinearity"
+    properties:
+      description: "High correlation between independent variables"
+      formal_definition: "det(X'X) approx 0"
+      implications: "Large SEs, unstable coefficients"
+
+  - type: StatisticalConcept
+    name: "OmittedVariableBias"
+    properties:
+      description: "Bias from excluding relevant variables"
+      formal_definition: "E(b_OLS) = beta + (X'X)^-1 X'Z gamma"
+      implications: "FE can control for time-invariant omitted variables"
+
+  - type: StatisticalConcept
+    name: "SelectionBias"
+    properties:
+      description: "Bias from non-random sample selection"
+      formal_definition: "E(y|selected) != E(y)"
+      implications: "Need Heckman correction or matching"
+
+  - type: StatisticalConcept
+    name: "Overdispersion"
+    properties:
+      description: "Variance exceeds mean in count data"
+      formal_definition: "Var(y) > E(y)"
+      implications: "Poisson model misspecified; use Negative Binomial"
+
+  - type: StatisticalConcept
+    name: "ExcessZeros"
+    properties:
+      description: "More zeros than expected by count distribution"
+      implications: "Standard count models underfit; use Zero-Inflated models"
+
+  - type: StatisticalConcept
+    name: "TechnicalEfficiency"
+    properties:
+      description: "Distance from production frontier"
+      formal_definition: "TE = exp(-u) where u >= 0"
+      implications: "SFA decomposes error into noise and inefficiency"
+
+  - type: StatisticalConcept
+    name: "UnobservedHeterogeneity"
+    properties:
+      description: "Individual-specific effects not captured by observables"
+      formal_definition: "y_it = X_it*beta + alpha_i + u_it"
+      implications: "FE or RE needed; pooled OLS biased if correlated with X"
+
+  - type: StatisticalConcept
+    name: "DynamicPanelBias"
+    properties:
+      description: "Nickell bias from lagged dependent variable with FE"
+      formal_definition: "Bias = O(1/T) in FE with y_(t-1)"
+      implications: "GMM needed for dynamic panels with small T"
+
+  - type: StatisticalConcept
+    name: "Poolability"
+    properties:
+      description: "Whether data can be pooled across individuals"
+      formal_definition: "H0: beta_i = beta for all i"
+      implications: "If rejected, individual effects needed (FE/RE)"
+
+  - type: StatisticalConcept
+    name: "Censoring"
+    properties:
+      description: "Dependent variable bounded at threshold"
+      formal_definition: "y* = max(0, X*beta + u)"
+      implications: "OLS biased; Tobit or censored regression needed"
+
+  - type: StatisticalConcept
+    name: "QuantileEffects"
+    properties:
+      description: "Heterogeneous effects across the conditional distribution"
+      implications: "Mean regression misses distributional effects; QR reveals"
+
+  - type: StatisticalConcept
+    name: "SampleSelectionBias"
+    properties:
+      description: "Non-random observability of dependent variable"
+      formal_definition: "E(y|observed) != E(y)"
+      implications: "Heckman two-step or MLE correction needed"
+
+  - type: StatisticalConcept
+    name: "InversMillsRatio"
+    properties:
+      description: "Correction term in Heckman selection model"
+      formal_definition: "lambda(z) = phi(z)/Phi(z)"
+      implications: "Significant lambda indicates selection bias"
+
+  - type: StatisticalConcept
+    name: "GrangerCausality"
+    properties:
+      description: "Predictive causality in time series context"
+      formal_definition: "X Granger-causes Y if past X improves prediction of Y"
+      implications: "Panel VAR enables testing with Wald tests"
+
+  - type: StatisticalConcept
+    name: "ImpulseResponseFunction"
+    properties:
+      description: "Dynamic response of variables to shocks"
+      formal_definition: "IRF(h) = dY_(t+h)/dEpsilon_t"
+      implications: "Panel VAR provides cross-unit averaged IRFs"
+
+  - type: StatisticalConcept
+    name: "InstrumentProliferation"
+    properties:
+      description: "Too many instruments relative to sample size in GMM"
+      implications: "Weakens Hansen test; use collapse option or limit lags"
+
+  - type: StatisticalConcept
+    name: "VarianceDecomposition"
+    properties:
+      description: "Decomposition of total variance into within and between components"
+      formal_definition: "Var(y) = Var_within + Var_between"
+
+  # =========================================================================
+  # ESTIMATORS - Level 1: Static Models
+  # =========================================================================
+
+  - type: Estimator
+    name: "PooledOLS"
+    properties:
+      module_path: "panelbox.models.static.pooled_ols"
+      class_name: "PooledOLS"
+      description: "Pooled OLS ignoring panel structure"
+      estimation_method: "OLS"
+      supports_unbalanced: true
+
+  - type: Estimator
+    name: "FixedEffects"
+    properties:
+      module_path: "panelbox.models.static.fixed_effects"
+      class_name: "FixedEffects"
+      description: "Within estimator removing individual fixed effects"
+      estimation_method: "OLS on demeaned data"
+      assumptions: "Effects correlated with regressors; strict exogeneity"
+      supports_unbalanced: true
+
+  - type: Estimator
+    name: "RandomEffects"
+    properties:
+      module_path: "panelbox.models.static.random_effects"
+      class_name: "RandomEffects"
+      description: "GLS estimator treating individual effects as random"
+      estimation_method: "GLS"
+      assumptions: "Effects uncorrelated with regressors"
+      supports_unbalanced: true
+
+  - type: Estimator
+    name: "BetweenEstimator"
+    properties:
+      module_path: "panelbox.models.static.between"
+      class_name: "BetweenEstimator"
+      description: "OLS on individual means (between variation only)"
+      estimation_method: "OLS"
+      supports_unbalanced: true
+
+  - type: Estimator
+    name: "FirstDifferenceEstimator"
+    properties:
+      module_path: "panelbox.models.static.first_difference"
+      class_name: "FirstDifferenceEstimator"
+      description: "OLS on first-differenced data to remove fixed effects"
+      estimation_method: "OLS"
+      assumptions: "Strict exogeneity; errors may follow random walk"
+      supports_unbalanced: true
+
+  # =========================================================================
+  # ESTIMATORS - Level 1: GMM
+  # =========================================================================
+
+  - type: Estimator
+    name: "DifferenceGMM"
+    properties:
+      module_path: "panelbox.gmm.difference_gmm"
+      class_name: "DifferenceGMM"
+      description: "Arellano-Bond difference GMM for dynamic panels"
+      estimation_method: "GMM"
+      assumptions: "No second-order autocorrelation; valid instruments"
+      min_T: 3
+      supports_unbalanced: true
+
+  - type: Estimator
+    name: "SystemGMM"
+    properties:
+      module_path: "panelbox.gmm.system_gmm"
+      class_name: "SystemGMM"
+      description: "Blundell-Bond system GMM with level and difference equations"
+      estimation_method: "GMM"
+      assumptions: "No second-order autocorrelation; mean stationarity"
+      min_T: 3
+      supports_unbalanced: true
+
+  - type: Estimator
+    name: "BiasCorrectedGMM"
+    properties:
+      module_path: "panelbox.gmm.bias_corrected"
+      class_name: "BiasCorrectedGMM"
+      description: "Bias-corrected GMM for improved finite-sample performance"
+      estimation_method: "GMM"
+
+  - type: Estimator
+    name: "ContinuousUpdatedGMM"
+    properties:
+      module_path: "panelbox.gmm.cue_gmm"
+      class_name: "ContinuousUpdatedGMM"
+      description: "Continuously Updated Estimator for efficient GMM"
+      estimation_method: "GMM"
+
+  # =========================================================================
+  # ESTIMATORS - Level 1: Spatial
+  # =========================================================================
+
+  - type: Estimator
+    name: "SpatialLag"
+    properties:
+      module_path: "panelbox.models.spatial.spatial_lag"
+      class_name: "SpatialLag"
+      description: "Spatial Autoregressive model (SAR) with spatially lagged dependent variable"
+      estimation_method: "MLE"
+      assumptions: "Known spatial weights matrix; no spatial error correlation"
+
+  - type: Estimator
+    name: "SpatialError"
+    properties:
+      module_path: "panelbox.models.spatial.spatial_error"
+      class_name: "SpatialError"
+      description: "Spatial Error Model (SEM) with spatially correlated errors"
+      estimation_method: "MLE"
+      assumptions: "Known spatial weights matrix; no substantive spatial interaction"
+
+  - type: Estimator
+    name: "SpatialDurbin"
+    properties:
+      module_path: "panelbox.models.spatial.spatial_durbin"
+      class_name: "SpatialDurbin"
+      description: "SDM nesting SAR with spatially lagged covariates"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "DynamicSpatialPanel"
+    properties:
+      module_path: "panelbox.models.spatial.dynamic_spatial"
+      class_name: "DynamicSpatialPanel"
+      description: "Dynamic spatial panel with temporal and spatial lags"
+      estimation_method: "QML"
+
+  - type: Estimator
+    name: "GeneralNestingSpatial"
+    properties:
+      module_path: "panelbox.models.spatial.gns"
+      class_name: "GeneralNestingSpatial"
+      description: "GNS model nesting SAR, SEM, and SDM"
+      estimation_method: "MLE"
+
+  # =========================================================================
+  # ESTIMATORS - Level 1: Discrete Choice
+  # =========================================================================
+
+  - type: Estimator
+    name: "PooledLogit"
+    properties:
+      module_path: "panelbox.models.discrete.pooled_logit"
+      class_name: "PooledLogit"
+      description: "Pooled logistic regression for binary outcomes"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "PooledProbit"
+    properties:
+      module_path: "panelbox.models.discrete.pooled_probit"
+      class_name: "PooledProbit"
+      description: "Pooled probit regression for binary outcomes"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "FixedEffectsLogit"
+    properties:
+      module_path: "panelbox.models.discrete.fe_logit"
+      class_name: "FixedEffectsLogit"
+      description: "Conditional logit with individual fixed effects"
+      estimation_method: "Conditional MLE"
+      assumptions: "Sufficient within-group variation in outcome"
+
+  - type: Estimator
+    name: "RandomEffectsProbit"
+    properties:
+      module_path: "panelbox.models.discrete.re_probit"
+      class_name: "RandomEffectsProbit"
+      description: "Random effects probit with normally distributed effects"
+      estimation_method: "MLE (quadrature)"
+
+  - type: Estimator
+    name: "MultinomialLogit"
+    properties:
+      module_path: "panelbox.models.discrete.multinomial_logit"
+      class_name: "MultinomialLogit"
+      description: "Multinomial logit for unordered categorical outcomes"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "ConditionalLogit"
+    properties:
+      module_path: "panelbox.models.discrete.conditional_logit"
+      class_name: "ConditionalLogit"
+      description: "Conditional logit for choice-specific attributes"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "OrderedLogit"
+    properties:
+      module_path: "panelbox.models.discrete.ordered_logit"
+      class_name: "OrderedLogit"
+      description: "Ordered logit for ordinal outcomes"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "OrderedProbit"
+    properties:
+      module_path: "panelbox.models.discrete.ordered_probit"
+      class_name: "OrderedProbit"
+      description: "Ordered probit for ordinal outcomes"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "RandomEffectsOrderedLogit"
+    properties:
+      module_path: "panelbox.models.discrete.re_ordered_logit"
+      class_name: "RandomEffectsOrderedLogit"
+      description: "Random effects ordered logit"
+      estimation_method: "MLE (quadrature)"
+
+  - type: Estimator
+    name: "DynamicBinaryPanel"
+    properties:
+      module_path: "panelbox.models.discrete.dynamic_binary"
+      class_name: "DynamicBinaryPanel"
+      description: "Dynamic binary panel with lagged dependent variable"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "CorrelatedRandomEffectsLogit"
+    properties:
+      module_path: "panelbox.models.discrete.cre_logit"
+      class_name: "CorrelatedRandomEffectsLogit"
+      description: "CRE logit with Mundlak-Chamberlain device"
+      estimation_method: "MLE"
+
+  # =========================================================================
+  # ESTIMATORS - Level 1: Count
+  # =========================================================================
+
+  - type: Estimator
+    name: "PooledPoisson"
+    properties:
+      module_path: "panelbox.models.count.pooled_poisson"
+      class_name: "PooledPoisson"
+      description: "Pooled Poisson regression for count data"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "PoissonFixedEffects"
+    properties:
+      module_path: "panelbox.models.count.poisson_fe"
+      class_name: "PoissonFixedEffects"
+      description: "Poisson with individual fixed effects"
+      estimation_method: "Conditional MLE"
+
+  - type: Estimator
+    name: "RandomEffectsPoisson"
+    properties:
+      module_path: "panelbox.models.count.poisson_re"
+      class_name: "RandomEffectsPoisson"
+      description: "Random effects Poisson with gamma-distributed effects"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "PoissonQML"
+    properties:
+      module_path: "panelbox.models.count.poisson_qml"
+      class_name: "PoissonQML"
+      description: "Quasi-MLE Poisson robust to distributional misspecification"
+      estimation_method: "QML"
+
+  - type: Estimator
+    name: "NegativeBinomial"
+    properties:
+      module_path: "panelbox.models.count.negative_binomial"
+      class_name: "NegativeBinomial"
+      description: "Negative Binomial for overdispersed count data"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "FixedEffectsNegativeBinomial"
+    properties:
+      module_path: "panelbox.models.count.negbin_fe"
+      class_name: "FixedEffectsNegativeBinomial"
+      description: "Conditional NegBin with fixed effects"
+      estimation_method: "Conditional MLE"
+
+  - type: Estimator
+    name: "ZeroInflatedPoisson"
+    properties:
+      module_path: "panelbox.models.count.zip"
+      class_name: "ZeroInflatedPoisson"
+      description: "Zero-inflated Poisson for excess zeros"
+      estimation_method: "MLE (EM)"
+
+  - type: Estimator
+    name: "ZeroInflatedNegativeBinomial"
+    properties:
+      module_path: "panelbox.models.count.zinb"
+      class_name: "ZeroInflatedNegativeBinomial"
+      description: "Zero-inflated NegBin for overdispersion and excess zeros"
+      estimation_method: "MLE (EM)"
+
+  - type: Estimator
+    name: "PPML"
+    properties:
+      module_path: "panelbox.models.count.ppml"
+      class_name: "PPML"
+      description: "Pseudo Poisson Maximum Likelihood for gravity models"
+      estimation_method: "PPML"
+
+  # =========================================================================
+  # ESTIMATORS - Level 1: Censored, Quantile, Selection, IV, Frontier, VAR
+  # =========================================================================
+
+  - type: Estimator
+    name: "PooledTobit"
+    properties:
+      module_path: "panelbox.models.censored.pooled_tobit"
+      class_name: "PooledTobit"
+      description: "Pooled Tobit for censored dependent variable"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "RandomEffectsTobit"
+    properties:
+      module_path: "panelbox.models.censored.re_tobit"
+      class_name: "RandomEffectsTobit"
+      description: "Random effects Tobit for panel censored data"
+      estimation_method: "MLE (quadrature)"
+
+  - type: Estimator
+    name: "HonoreTrimmedEstimator"
+    properties:
+      module_path: "panelbox.models.censored.honore"
+      class_name: "HonoreTrimmedEstimator"
+      description: "Honore semiparametric FE estimator for censored panels"
+      estimation_method: "Semiparametric"
+
+  - type: Estimator
+    name: "PooledQuantile"
+    properties:
+      module_path: "panelbox.models.quantile.pooled_quantile"
+      class_name: "PooledQuantile"
+      description: "Pooled quantile regression"
+      estimation_method: "Linear programming"
+
+  - type: Estimator
+    name: "FixedEffectsQuantile"
+    properties:
+      module_path: "panelbox.models.quantile.fe_quantile"
+      class_name: "FixedEffectsQuantile"
+      description: "Koenker (2004) penalized FE quantile regression"
+      estimation_method: "Penalized QR"
+
+  - type: Estimator
+    name: "CanayTwoStep"
+    properties:
+      module_path: "panelbox.models.quantile.canay"
+      class_name: "CanayTwoStep"
+      description: "Canay two-step debiased FE quantile regression"
+      estimation_method: "Two-step QR"
+
+  - type: Estimator
+    name: "DynamicQuantile"
+    properties:
+      module_path: "panelbox.models.quantile.dynamic_quantile"
+      class_name: "DynamicQuantile"
+      description: "Dynamic quantile regression with lagged dependent variable"
+      estimation_method: "IV-QR"
+
+  - type: Estimator
+    name: "LocationScale"
+    properties:
+      module_path: "panelbox.models.quantile.location_scale"
+      class_name: "LocationScale"
+      description: "Machado-Santos Silva location-scale quantile regression"
+      estimation_method: "Two-step"
+
+  - type: Estimator
+    name: "QuantileTreatmentEffects"
+    properties:
+      module_path: "panelbox.models.quantile.qte"
+      class_name: "QuantileTreatmentEffects"
+      description: "Quantile treatment effects estimation"
+      estimation_method: "QR"
+
+  - type: Estimator
+    name: "FEQuantileComparison"
+    properties:
+      module_path: "panelbox.models.quantile.comparison"
+      class_name: "FEQuantileComparison"
+      description: "Comparison framework for FE quantile methods"
+      estimation_method: "Multiple"
+
+  - type: Estimator
+    name: "QuantileMonotonicity"
+    properties:
+      module_path: "panelbox.models.quantile.monotonicity"
+      class_name: "QuantileMonotonicity"
+      description: "Monotonicity rearrangement for quantile estimates"
+      estimation_method: "Post-processing"
+
+  - type: Estimator
+    name: "PanelHeckman"
+    properties:
+      module_path: "panelbox.models.selection.panel_heckman"
+      class_name: "PanelHeckman"
+      description: "Panel Heckman two-step selection model"
+      estimation_method: "Two-step (Probit + OLS)"
+
+  - type: Estimator
+    name: "PanelIV"
+    properties:
+      module_path: "panelbox.models.iv.panel_iv"
+      class_name: "PanelIV"
+      description: "Panel instrumental variables (2SLS) estimator"
+      estimation_method: "2SLS"
+      assumptions: "Valid instruments: relevant and exogenous"
+
+  - type: Estimator
+    name: "StochasticFrontier"
+    properties:
+      module_path: "panelbox.models.frontier.stochastic_frontier"
+      class_name: "StochasticFrontier"
+      description: "Stochastic frontier analysis for efficiency estimation"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "FourComponentSFA"
+    properties:
+      module_path: "panelbox.models.frontier.four_component"
+      class_name: "FourComponentSFA"
+      description: "Kumbhakar et al. 4-component SFA: persistent + transient inefficiency"
+      estimation_method: "MLE"
+
+  - type: Estimator
+    name: "PanelVAR"
+    properties:
+      module_path: "panelbox.models.var.panel_var"
+      class_name: "PanelVAR"
+      description: "Panel VAR with GMM estimation"
+      estimation_method: "GMM"
+      min_T: 4
+
+  - type: Estimator
+    name: "PanelVECM"
+    properties:
+      module_path: "panelbox.models.var.panel_vecm"
+      class_name: "PanelVECM"
+      description: "Panel Vector Error Correction Model for cointegrated series"
+      estimation_method: "MLE"
+
+  # =========================================================================
+  # DIAGNOSTIC TESTS - Level 1
+  # =========================================================================
+
+  - type: DiagnosticTest
+    name: "HausmanTest"
+    properties:
+      module_path: "panelbox.tests.hausman"
+      function_name: "hausman_test"
+      null_hypothesis: "Random effects are consistent (effects uncorrelated with regressors)"
+      reject_means: "Use Fixed Effects"
+      distribution: "Chi-squared"
+      interpretation_guide: "p < 0.05: reject H0, use FE"
+
+  - type: DiagnosticTest
+    name: "ChowTest"
+    properties:
+      module_path: "panelbox.tests.chow"
+      function_name: "chow_test"
+      null_hypothesis: "All individual effects are zero (poolability)"
+      reject_means: "Individual effects exist; use FE or RE"
+      distribution: "F"
+
+  - type: DiagnosticTest
+    name: "BreuschPaganTest"
+    properties:
+      module_path: "panelbox.tests.breusch_pagan"
+      function_name: "breusch_pagan_test"
+      null_hypothesis: "Homoskedasticity"
+      reject_means: "Heteroskedasticity present; use robust SEs"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "WhiteTest"
+    properties:
+      module_path: "panelbox.tests.white"
+      function_name: "white_test"
+      null_hypothesis: "Homoskedasticity"
+      reject_means: "Heteroskedasticity present"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "ModifiedWaldTest"
+    properties:
+      module_path: "panelbox.tests.modified_wald"
+      function_name: "modified_wald_test"
+      null_hypothesis: "Homoskedasticity in FE model"
+      reject_means: "Groupwise heteroskedasticity"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "WooldridgeARTest"
+    properties:
+      module_path: "panelbox.tests.wooldridge_ar"
+      function_name: "wooldridge_ar_test"
+      null_hypothesis: "No first-order serial correlation"
+      reject_means: "Serial correlation present; use clustered or HAC SEs"
+      distribution: "F"
+
+  - type: DiagnosticTest
+    name: "BreuschGodfreyTest"
+    properties:
+      module_path: "panelbox.tests.breusch_godfrey"
+      function_name: "breusch_godfrey_test"
+      null_hypothesis: "No serial correlation up to order p"
+      reject_means: "Serial correlation present"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "BaltagiWuTest"
+    properties:
+      module_path: "panelbox.tests.baltagi_wu"
+      function_name: "baltagi_wu_test"
+      null_hypothesis: "No serial correlation in RE model"
+      reject_means: "Serial correlation in random effects"
+      distribution: "LBI statistic"
+
+  - type: DiagnosticTest
+    name: "PesaranCDTest"
+    properties:
+      module_path: "panelbox.tests.pesaran_cd"
+      function_name: "pesaran_cd_test"
+      null_hypothesis: "No cross-sectional dependence"
+      reject_means: "CSD present; use Driscoll-Kraay or PCSE"
+      distribution: "Normal (N(0,1))"
+
+  - type: DiagnosticTest
+    name: "BreuschPaganLMTest"
+    properties:
+      module_path: "panelbox.tests.bp_lm"
+      function_name: "bp_lm_test"
+      null_hypothesis: "No cross-sectional dependence"
+      reject_means: "Cross-sectional dependence present"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "FreesTest"
+    properties:
+      module_path: "panelbox.tests.frees"
+      function_name: "frees_test"
+      null_hypothesis: "No cross-sectional dependence"
+      reject_means: "Cross-sectional dependence present"
+      distribution: "Q statistic"
+
+  - type: DiagnosticTest
+    name: "MundlakTest"
+    properties:
+      module_path: "panelbox.tests.mundlak"
+      function_name: "mundlak_test"
+      null_hypothesis: "RE consistent (no correlation between effects and regressors)"
+      reject_means: "Use FE; Mundlak correction needed"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "RESETTest"
+    properties:
+      module_path: "panelbox.tests.reset"
+      function_name: "reset_test"
+      null_hypothesis: "Correct functional form"
+      reject_means: "Possible misspecification; consider nonlinear terms"
+      distribution: "F"
+
+  - type: DiagnosticTest
+    name: "HansenJTest"
+    properties:
+      module_path: "panelbox.tests.hansen_j"
+      function_name: "hansen_j_test"
+      null_hypothesis: "All instruments valid (overidentification)"
+      reject_means: "Some instruments may be invalid"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "SarganTest"
+    properties:
+      module_path: "panelbox.tests.sargan"
+      function_name: "sargan_test"
+      null_hypothesis: "All instruments valid"
+      reject_means: "Instruments not exogenous"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "ArellanoBondAR1Test"
+    properties:
+      module_path: "panelbox.tests.arellano_bond_ar"
+      function_name: "ab_ar1_test"
+      null_hypothesis: "No first-order autocorrelation in differences"
+      reject_means: "AR(1) present (expected in difference GMM)"
+      distribution: "Normal"
+
+  - type: DiagnosticTest
+    name: "ArellanoBondAR2Test"
+    properties:
+      module_path: "panelbox.tests.arellano_bond_ar"
+      function_name: "ab_ar2_test"
+      null_hypothesis: "No second-order autocorrelation in differences"
+      reject_means: "AR(2) present; GMM instruments invalid"
+      distribution: "Normal"
+
+  - type: DiagnosticTest
+    name: "LMLagTest"
+    properties:
+      module_path: "panelbox.tests.spatial_lm"
+      function_name: "lm_lag_test"
+      null_hypothesis: "No spatial lag dependence"
+      reject_means: "SAR model appropriate"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "LMErrorTest"
+    properties:
+      module_path: "panelbox.tests.spatial_lm"
+      function_name: "lm_error_test"
+      null_hypothesis: "No spatial error dependence"
+      reject_means: "SEM model appropriate"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "RobustLMLagTest"
+    properties:
+      module_path: "panelbox.tests.spatial_lm"
+      function_name: "robust_lm_lag_test"
+      null_hypothesis: "No spatial lag (controlling for error)"
+      reject_means: "SAR preferred over SEM"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "RobustLMErrorTest"
+    properties:
+      module_path: "panelbox.tests.spatial_lm"
+      function_name: "robust_lm_error_test"
+      null_hypothesis: "No spatial error (controlling for lag)"
+      reject_means: "SEM preferred over SAR"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "MoranIPanelTest"
+    properties:
+      module_path: "panelbox.tests.moran_i"
+      function_name: "moran_i_panel_test"
+      null_hypothesis: "No spatial autocorrelation in residuals"
+      reject_means: "Spatial model needed"
+      distribution: "Normal"
+
+  - type: DiagnosticTest
+    name: "SpatialHausmanTest"
+    properties:
+      module_path: "panelbox.tests.spatial_hausman"
+      function_name: "spatial_hausman_test"
+      null_hypothesis: "Spatial RE consistent"
+      reject_means: "Use spatial FE"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "LLCTest"
+    properties:
+      module_path: "panelbox.tests.llc"
+      function_name: "llc_test"
+      null_hypothesis: "Panels contain unit roots (common process)"
+      reject_means: "Panels are stationary"
+      distribution: "Normal"
+
+  - type: DiagnosticTest
+    name: "IPSTest"
+    properties:
+      module_path: "panelbox.tests.ips"
+      function_name: "ips_test"
+      null_hypothesis: "All panels contain unit roots"
+      reject_means: "Some panels are stationary"
+      distribution: "Normal"
+
+  - type: DiagnosticTest
+    name: "FisherTest"
+    properties:
+      module_path: "panelbox.tests.fisher"
+      function_name: "fisher_test"
+      null_hypothesis: "All panels contain unit roots"
+      reject_means: "Some panels are stationary"
+      distribution: "Chi-squared"
+
+  - type: DiagnosticTest
+    name: "BreitungTest"
+    properties:
+      module_path: "panelbox.tests.breitung"
+      function_name: "breitung_test"
+      null_hypothesis: "Panels contain unit roots"
+      reject_means: "Panels are stationary"
+      distribution: "Normal"
+
+  - type: DiagnosticTest
+    name: "HadriTest"
+    properties:
+      module_path: "panelbox.tests.hadri"
+      function_name: "hadri_test"
+      null_hypothesis: "All panels are stationary"
+      reject_means: "Some panels have unit roots"
+      distribution: "Normal"
+
+  - type: DiagnosticTest
+    name: "KaoTest"
+    properties:
+      module_path: "panelbox.tests.kao"
+      function_name: "kao_test"
+      null_hypothesis: "No cointegration"
+      reject_means: "Cointegration exists; VECM appropriate"
+      distribution: "Normal"
+
+  - type: DiagnosticTest
+    name: "PedroniTest"
+    properties:
+      module_path: "panelbox.tests.pedroni"
+      function_name: "pedroni_test"
+      null_hypothesis: "No cointegration"
+      reject_means: "Cointegration exists"
+      distribution: "Normal"
+
+  - type: DiagnosticTest
+    name: "WesterlundTest"
+    properties:
+      module_path: "panelbox.tests.westerlund"
+      function_name: "westerlund_test"
+      null_hypothesis: "No cointegration"
+      reject_means: "Cointegration in some or all panels"
+      distribution: "Normal"
+
+  # =========================================================================
+  # LITERATURE - Level 1
+  # =========================================================================
+
+  - type: Literature
+    name: "Hausman (1978)"
+    properties:
+      full_citation: "Hausman, J.A. (1978). Specification Tests in Econometrics. Econometrica, 46(6)."
+      year: 1978
+      key_contribution: "Specification test for FE vs RE"
+
+  - type: Literature
+    name: "Mundlak (1978)"
+    properties:
+      full_citation: "Mundlak, Y. (1978). On the Pooling of Time Series and Cross Section Data. Econometrica, 46(1)."
+      year: 1978
+      key_contribution: "Correlated random effects approach"
+
+  - type: Literature
+    name: "Breusch & Pagan (1979)"
+    properties:
+      full_citation: "Breusch, T.S. & Pagan, A.R. (1979). A Simple Test for Heteroscedasticity. Econometrica, 47(5)."
+      year: 1979
+      key_contribution: "LM test for heteroskedasticity"
+
+  - type: Literature
+    name: "Wooldridge (2002)"
+    properties:
+      full_citation: "Wooldridge, J.M. (2002). Econometric Analysis of Cross Section and Panel Data. MIT Press."
+      year: 2002
+      key_contribution: "Comprehensive panel data reference"
+
+  - type: Literature
+    name: "Pesaran (2004)"
+    properties:
+      full_citation: "Pesaran, M.H. (2004). General Diagnostic Tests for Cross Section Dependence in Panels."
+      year: 2004
+      key_contribution: "CD test for cross-sectional dependence"
+
+  - type: Literature
+    name: "Arellano & Bond (1991)"
+    properties:
+      full_citation: "Arellano, M. & Bond, S. (1991). Some Tests of Specification for Panel Data. Review of Economic Studies, 58."
+      year: 1991
+      key_contribution: "Difference GMM estimator for dynamic panels"
+
+  - type: Literature
+    name: "Blundell & Bond (1998)"
+    properties:
+      full_citation: "Blundell, R. & Bond, S. (1998). Initial Conditions and Moment Restrictions in Dynamic Panel Data Models. Journal of Econometrics, 87."
+      year: 1998
+      key_contribution: "System GMM estimator"
+
+  - type: Literature
+    name: "Koenker (2004)"
+    properties:
+      full_citation: "Koenker, R. (2004). Quantile Regression for Longitudinal Data. Journal of Multivariate Analysis, 91."
+      year: 2004
+      key_contribution: "Fixed effects quantile regression with penalty"
+
+  - type: Literature
+    name: "Machado & Santos Silva (2019)"
+    properties:
+      full_citation: "Machado, J.A.F. & Santos Silva, J.M.C. (2019). Quantiles via Moments. Journal of Econometrics, 213."
+      year: 2019
+      key_contribution: "Location-Scale quantile regression"
+
+  - type: Literature
+    name: "Heckman (1979)"
+    properties:
+      full_citation: "Heckman, J.J. (1979). Sample Selection Bias as a Specification Error. Econometrica, 47."
+      year: 1979
+      key_contribution: "Two-step selection correction"
+
+  - type: Literature
+    name: "Aigner, Lovell & Schmidt (1977)"
+    properties:
+      full_citation: "Aigner, D., Lovell, C.A.K. & Schmidt, P. (1977). Formulation and Estimation of Stochastic Frontier Models. Journal of Econometrics, 6."
+      year: 1977
+      key_contribution: "Original stochastic frontier model"
+
+  - type: Literature
+    name: "Kumbhakar, Lien & Hardaker (2014)"
+    properties:
+      full_citation: "Kumbhakar, S.C., Lien, G. & Hardaker, J.B. (2014). Technical Efficiency in Competing Panel Data Models. Journal of Productivity Analysis, 41."
+      year: 2014
+      key_contribution: "Four-component SFA model"
+
+  - type: Literature
+    name: "LeSage & Pace (2009)"
+    properties:
+      full_citation: "LeSage, J.P. & Pace, R.K. (2009). Introduction to Spatial Econometrics. CRC Press."
+      year: 2009
+      key_contribution: "Comprehensive spatial econometrics reference"
+
+  - type: Literature
+    name: "Levin, Lin & Chu (2002)"
+    properties:
+      full_citation: "Levin, A., Lin, C.F. & Chu, C.S.J. (2002). Unit Root Tests in Panel Data. Journal of Econometrics, 108."
+      year: 2002
+      key_contribution: "LLC panel unit root test"
+
+  - type: Literature
+    name: "Im, Pesaran & Shin (2003)"
+    properties:
+      full_citation: "Im, K.S., Pesaran, M.H. & Shin, Y. (2003). Testing for Unit Roots in Heterogeneous Panels. Journal of Econometrics, 115."
+      year: 2003
+      key_contribution: "IPS panel unit root test"
+
+  # =========================================================================
+  # STANDARD ERRORS - Level 1
+  # =========================================================================
+
+  - type: StandardError
+    name: "RobustSE"
+    properties:
+      class_name: "RobustStandardErrors"
+      module_path: "panelbox.standard_errors.robust"
+      description: "Heteroskedasticity-consistent SE (HC0-HC3)"
+      cov_type_param: "robust"
+
+  - type: StandardError
+    name: "ClusteredSE"
+    properties:
+      class_name: "ClusteredStandardErrors"
+      module_path: "panelbox.standard_errors.clustered"
+      description: "Cluster-robust SE for within-group correlation"
+      cov_type_param: "clustered"
+
+  - type: StandardError
+    name: "DriscollKraay"
+    properties:
+      class_name: "DriscollKraayStandardErrors"
+      module_path: "panelbox.standard_errors.driscoll_kraay"
+      description: "SE robust to heteroskedasticity, serial and cross-sectional dependence"
+      cov_type_param: "driscoll_kraay"
+
+  - type: StandardError
+    name: "NeweyWest"
+    properties:
+      class_name: "NeweyWestStandardErrors"
+      module_path: "panelbox.standard_errors.newey_west"
+      description: "HAC standard errors with kernel-based lag selection"
+      cov_type_param: "newey_west"
+
+  - type: StandardError
+    name: "PCSE"
+    properties:
+      class_name: "PanelCorrectedStandardErrors"
+      module_path: "panelbox.standard_errors.pcse"
+      description: "Panel-Corrected Standard Errors (Beck & Katz 1995)"
+      cov_type_param: "pcse"
+
+  - type: StandardError
+    name: "SpatialHAC"
+    properties:
+      class_name: "SpatialHAC"
+      module_path: "panelbox.standard_errors.spatial_hac"
+      description: "Spatial HAC for spatial correlation"
+      cov_type_param: "spatial_hac"
+
+  # =========================================================================
+  # DATASETS - Level 1
+  # =========================================================================
+
+  - type: Dataset
+    name: "grunfeld"
+    properties:
+      loader_function: "load_grunfeld"
+      description: "Grunfeld (1958) investment data. 10 firms, 20 years."
+      n_entities: 10
+      n_periods: 20
+
+  - type: Dataset
+    name: "abdata"
+    properties:
+      loader_function: "load_abdata"
+      description: "Arellano-Bond employment data for GMM examples."
+      n_entities: 140
+      n_periods: 9
+
+  - type: Dataset
+    name: "cigar"
+    properties:
+      loader_function: "load_cigar"
+      description: "US cigarette consumption data across states."
+      n_entities: 46
+      n_periods: 30
+
+  - type: Dataset
+    name: "crime"
+    properties:
+      loader_function: "load_crime"
+      description: "North Carolina county crime data."
+      n_entities: 90
+      n_periods: 7
+
+  - type: Dataset
+    name: "health"
+    properties:
+      loader_function: "load_health"
+      description: "Healthcare visits panel data."
+      n_entities: 7293
+      n_periods: 4
+
+  # =========================================================================
+  # CODE PATTERNS - Level 1
+  # =========================================================================
+
+  - type: CodePattern
+    name: "ModelFitPattern"
+    properties:
+      description: "Standard pattern for fitting any PanelBox estimator"
+      code: "model = Model(formula, data, entity_col, time_col); result = model.fit()"
+      usage: "All estimators follow this pattern"
+
+  - type: CodePattern
+    name: "CovTypePattern"
+    properties:
+      description: "Standard error specification via cov_type parameter"
+      code: "result = model.fit(cov_type='clustered')"
+      usage: "All linear models accept cov_type parameter"
+
+  - type: CodePattern
+    name: "DiagnosticWorkflow"
+    properties:
+      description: "Recommended diagnostic test sequence for static models"
+      code: "run pooled -> Chow test -> FE/RE -> Hausman -> heteroskedasticity -> serial correlation -> CSD"
+      usage: "Recommended validation sequence for static models"
+
+  - type: CodePattern
+    name: "GMMInstrumentSpec"
+    properties:
+      description: "GMM instrument specification syntax"
+      code: "gmm_instruments=['L.y'], iv_instruments=['x1', 'x2']"
+      usage: "DifferenceGMM and SystemGMM instrument specification"
+
+  - type: CodePattern
+    name: "SpatialWeightsSpec"
+    properties:
+      description: "Spatial weights matrix specification"
+      code: "W = spatial_weights_matrix(coords, type='queen')"
+      usage: "All spatial models require a weights matrix"
+
+  # =========================================================================
+  # RESULT METRICS - Level 1
+  # =========================================================================
+
+  - type: ResultMetric
+    name: "R_squared"
+    properties:
+      description: "Coefficient of determination"
+      interpretation: "Proportion of variance explained; higher is better (0-1)"
+
+  - type: ResultMetric
+    name: "R_squared_within"
+    properties:
+      description: "Within R-squared for panel models"
+      interpretation: "Variance explained by within-group variation"
+
+  - type: ResultMetric
+    name: "R_squared_between"
+    properties:
+      description: "Between R-squared for panel models"
+      interpretation: "Variance explained by between-group variation"
+
+  - type: ResultMetric
+    name: "R_squared_overall"
+    properties:
+      description: "Overall R-squared for panel models"
+      interpretation: "Total variance explained combining within and between"
+
+  - type: ResultMetric
+    name: "AIC"
+    properties:
+      description: "Akaike Information Criterion"
+      interpretation: "Lower is better; penalizes model complexity"
+
+  - type: ResultMetric
+    name: "BIC"
+    properties:
+      description: "Bayesian Information Criterion"
+      interpretation: "Lower is better; stronger penalty for complexity than AIC"
+
+  - type: ResultMetric
+    name: "LogLikelihood"
+    properties:
+      description: "Log-likelihood of the model"
+      interpretation: "Higher (less negative) is better fit"
+
+  - type: ResultMetric
+    name: "F_statistic"
+    properties:
+      description: "F-test for overall significance"
+      interpretation: "Large F with small p-value indicates significant model"
+
+  - type: ResultMetric
+    name: "Sigma_u"
+    properties:
+      description: "Standard deviation of individual effects"
+      interpretation: "Captures between-group heterogeneity"
+
+  - type: ResultMetric
+    name: "Sigma_e"
+    properties:
+      description: "Standard deviation of idiosyncratic error"
+      interpretation: "Captures within-group variation"
+
+  - type: ResultMetric
+    name: "Rho"
+    properties:
+      description: "Fraction of variance due to individual effects"
+      interpretation: "rho = sigma_u^2 / (sigma_u^2 + sigma_e^2); high rho favors FE/RE"
+
+# =============================================================================
+# RELATIONSHIPS
+# =============================================================================
+
+relationships:
+
+  # =========================================================================
+  # BELONGS_TO (Estimators -> Model Families)
+  # =========================================================================
+
+  # Static
+  - source: "PooledOLS"
+    relation: "BELONGS_TO"
+    target: "Static Models"
+  - source: "FixedEffects"
+    relation: "BELONGS_TO"
+    target: "Static Models"
+  - source: "RandomEffects"
+    relation: "BELONGS_TO"
+    target: "Static Models"
+  - source: "BetweenEstimator"
+    relation: "BELONGS_TO"
+    target: "Static Models"
+  - source: "FirstDifferenceEstimator"
+    relation: "BELONGS_TO"
+    target: "Static Models"
+
+  # GMM
+  - source: "DifferenceGMM"
+    relation: "BELONGS_TO"
+    target: "GMM"
+  - source: "SystemGMM"
+    relation: "BELONGS_TO"
+    target: "GMM"
+  - source: "BiasCorrectedGMM"
+    relation: "BELONGS_TO"
+    target: "GMM"
+  - source: "ContinuousUpdatedGMM"
+    relation: "BELONGS_TO"
+    target: "GMM"
+
+  # Spatial
+  - source: "SpatialLag"
+    relation: "BELONGS_TO"
+    target: "Spatial Models"
+  - source: "SpatialError"
+    relation: "BELONGS_TO"
+    target: "Spatial Models"
+  - source: "SpatialDurbin"
+    relation: "BELONGS_TO"
+    target: "Spatial Models"
+  - source: "DynamicSpatialPanel"
+    relation: "BELONGS_TO"
+    target: "Spatial Models"
+  - source: "GeneralNestingSpatial"
+    relation: "BELONGS_TO"
+    target: "Spatial Models"
+
+  # Discrete
+  - source: "PooledLogit"
+    relation: "BELONGS_TO"
+    target: "Discrete Choice"
+  - source: "PooledProbit"
+    relation: "BELONGS_TO"
+    target: "Discrete Choice"
+  - source: "FixedEffectsLogit"
+    relation: "BELONGS_TO"
+    target: "Discrete Choice"
+  - source: "RandomEffectsProbit"
+    relation: "BELONGS_TO"
+    target: "Discrete Choice"
+  - source: "MultinomialLogit"
+    relation: "BELONGS_TO"
+    target: "Discrete Choice"
+  - source: "ConditionalLogit"
+    relation: "BELONGS_TO"
+    target: "Discrete Choice"
+  - source: "OrderedLogit"
+    relation: "BELONGS_TO"
+    target: "Discrete Choice"
+  - source: "OrderedProbit"
+    relation: "BELONGS_TO"
+    target: "Discrete Choice"
+  - source: "RandomEffectsOrderedLogit"
+    relation: "BELONGS_TO"
+    target: "Discrete Choice"
+  - source: "DynamicBinaryPanel"
+    relation: "BELONGS_TO"
+    target: "Discrete Choice"
+  - source: "CorrelatedRandomEffectsLogit"
+    relation: "BELONGS_TO"
+    target: "Discrete Choice"
+
+  # Count
+  - source: "PooledPoisson"
+    relation: "BELONGS_TO"
+    target: "Count Models"
+  - source: "PoissonFixedEffects"
+    relation: "BELONGS_TO"
+    target: "Count Models"
+  - source: "RandomEffectsPoisson"
+    relation: "BELONGS_TO"
+    target: "Count Models"
+  - source: "PoissonQML"
+    relation: "BELONGS_TO"
+    target: "Count Models"
+  - source: "NegativeBinomial"
+    relation: "BELONGS_TO"
+    target: "Count Models"
+  - source: "FixedEffectsNegativeBinomial"
+    relation: "BELONGS_TO"
+    target: "Count Models"
+  - source: "ZeroInflatedPoisson"
+    relation: "BELONGS_TO"
+    target: "Count Models"
+  - source: "ZeroInflatedNegativeBinomial"
+    relation: "BELONGS_TO"
+    target: "Count Models"
+  - source: "PPML"
+    relation: "BELONGS_TO"
+    target: "Count Models"
+
+  # Censored
+  - source: "PooledTobit"
+    relation: "BELONGS_TO"
+    target: "Censored Models"
+  - source: "RandomEffectsTobit"
+    relation: "BELONGS_TO"
+    target: "Censored Models"
+  - source: "HonoreTrimmedEstimator"
+    relation: "BELONGS_TO"
+    target: "Censored Models"
+
+  # Quantile
+  - source: "PooledQuantile"
+    relation: "BELONGS_TO"
+    target: "Quantile Models"
+  - source: "FixedEffectsQuantile"
+    relation: "BELONGS_TO"
+    target: "Quantile Models"
+  - source: "CanayTwoStep"
+    relation: "BELONGS_TO"
+    target: "Quantile Models"
+  - source: "DynamicQuantile"
+    relation: "BELONGS_TO"
+    target: "Quantile Models"
+  - source: "LocationScale"
+    relation: "BELONGS_TO"
+    target: "Quantile Models"
+  - source: "QuantileTreatmentEffects"
+    relation: "BELONGS_TO"
+    target: "Quantile Models"
+  - source: "FEQuantileComparison"
+    relation: "BELONGS_TO"
+    target: "Quantile Models"
+  - source: "QuantileMonotonicity"
+    relation: "BELONGS_TO"
+    target: "Quantile Models"
+
+  # Selection
+  - source: "PanelHeckman"
+    relation: "BELONGS_TO"
+    target: "Selection Models"
+
+  # IV
+  - source: "PanelIV"
+    relation: "BELONGS_TO"
+    target: "Instrumental Variables"
+
+  # Frontier
+  - source: "StochasticFrontier"
+    relation: "BELONGS_TO"
+    target: "Stochastic Frontier"
+  - source: "FourComponentSFA"
+    relation: "BELONGS_TO"
+    target: "Stochastic Frontier"
+
+  # VAR
+  - source: "PanelVAR"
+    relation: "BELONGS_TO"
+    target: "VAR"
+  - source: "PanelVECM"
+    relation: "BELONGS_TO"
+    target: "VAR"
+
+  # =========================================================================
+  # ALTERNATIVE_TO
+  # =========================================================================
+
+  - source: "FixedEffects"
+    relation: "ALTERNATIVE_TO"
+    target: "RandomEffects"
+    properties:
+      comparison_note: "FE is consistent when effects correlated with regressors; RE is more efficient when uncorrelated"
+  - source: "FixedEffects"
+    relation: "ALTERNATIVE_TO"
+    target: "FirstDifferenceEstimator"
+    properties:
+      comparison_note: "Both remove FE; FD better under random walk errors"
+  - source: "SystemGMM"
+    relation: "ALTERNATIVE_TO"
+    target: "DifferenceGMM"
+    properties:
+      comparison_note: "System GMM more efficient but requires additional moment conditions"
+  - source: "SpatialLag"
+    relation: "ALTERNATIVE_TO"
+    target: "SpatialError"
+    properties:
+      comparison_note: "SAR for substantive interaction; SEM for nuisance dependence"
+  - source: "SpatialDurbin"
+    relation: "ALTERNATIVE_TO"
+    target: "SpatialLag"
+    properties:
+      comparison_note: "SDM nests SAR and tests for omitted spatially lagged covariates"
+  - source: "PooledLogit"
+    relation: "ALTERNATIVE_TO"
+    target: "PooledProbit"
+    properties:
+      comparison_note: "Logit has logistic CDF; Probit has normal CDF. Usually similar results."
+  - source: "FixedEffectsLogit"
+    relation: "ALTERNATIVE_TO"
+    target: "RandomEffectsProbit"
+    properties:
+      comparison_note: "FE Logit consistent with correlated effects; RE Probit more efficient"
+  - source: "NegativeBinomial"
+    relation: "ALTERNATIVE_TO"
+    target: "PooledPoisson"
+    properties:
+      comparison_note: "NB handles overdispersion that Poisson cannot"
+  - source: "ZeroInflatedPoisson"
+    relation: "ALTERNATIVE_TO"
+    target: "PooledPoisson"
+    properties:
+      comparison_note: "ZIP handles excess zeros via two-part model"
+  - source: "PooledQuantile"
+    relation: "ALTERNATIVE_TO"
+    target: "PooledOLS"
+    properties:
+      comparison_note: "QR captures heterogeneous effects at different quantiles"
+  - source: "PanelIV"
+    relation: "ALTERNATIVE_TO"
+    target: "FixedEffects"
+    properties:
+      comparison_note: "IV needed when endogeneity is from time-varying factors"
+
+  # =========================================================================
+  # VALIDATES (Tests -> Estimators)
+  # =========================================================================
+
+  - source: "HausmanTest"
+    relation: "VALIDATES"
+    target: "RandomEffects"
+    properties: { mandatory: true, order: 1 }
+  - source: "HausmanTest"
+    relation: "VALIDATES"
+    target: "FixedEffects"
+  - source: "ChowTest"
+    relation: "VALIDATES"
+    target: "PooledOLS"
+    properties: { mandatory: true, order: 1 }
+  - source: "BreuschPaganTest"
+    relation: "VALIDATES"
+    target: "PooledOLS"
+  - source: "BreuschPaganTest"
+    relation: "VALIDATES"
+    target: "FixedEffects"
+  - source: "WooldridgeARTest"
+    relation: "VALIDATES"
+    target: "FixedEffects"
+  - source: "PesaranCDTest"
+    relation: "VALIDATES"
+    target: "FixedEffects"
+  - source: "MundlakTest"
+    relation: "VALIDATES"
+    target: "RandomEffects"
+  - source: "RESETTest"
+    relation: "VALIDATES"
+    target: "PooledOLS"
+  - source: "RESETTest"
+    relation: "VALIDATES"
+    target: "FixedEffects"
+  - source: "HansenJTest"
+    relation: "VALIDATES"
+    target: "DifferenceGMM"
+  - source: "HansenJTest"
+    relation: "VALIDATES"
+    target: "SystemGMM"
+  - source: "SarganTest"
+    relation: "VALIDATES"
+    target: "DifferenceGMM"
+  - source: "SarganTest"
+    relation: "VALIDATES"
+    target: "SystemGMM"
+  - source: "ArellanoBondAR1Test"
+    relation: "VALIDATES"
+    target: "DifferenceGMM"
+  - source: "ArellanoBondAR2Test"
+    relation: "VALIDATES"
+    target: "DifferenceGMM"
+  - source: "ArellanoBondAR1Test"
+    relation: "VALIDATES"
+    target: "SystemGMM"
+  - source: "ArellanoBondAR2Test"
+    relation: "VALIDATES"
+    target: "SystemGMM"
+  - source: "LMLagTest"
+    relation: "VALIDATES"
+    target: "SpatialLag"
+  - source: "LMErrorTest"
+    relation: "VALIDATES"
+    target: "SpatialError"
+  - source: "RobustLMLagTest"
+    relation: "VALIDATES"
+    target: "SpatialLag"
+  - source: "RobustLMErrorTest"
+    relation: "VALIDATES"
+    target: "SpatialError"
+  - source: "MoranIPanelTest"
+    relation: "VALIDATES"
+    target: "SpatialLag"
+  - source: "MoranIPanelTest"
+    relation: "VALIDATES"
+    target: "SpatialError"
+  - source: "SpatialHausmanTest"
+    relation: "VALIDATES"
+    target: "SpatialLag"
+  - source: "SpatialHausmanTest"
+    relation: "VALIDATES"
+    target: "SpatialError"
+  - source: "LLCTest"
+    relation: "VALIDATES"
+    target: "PanelVAR"
+  - source: "IPSTest"
+    relation: "VALIDATES"
+    target: "PanelVAR"
+  - source: "KaoTest"
+    relation: "VALIDATES"
+    target: "PanelVECM"
+  - source: "PedroniTest"
+    relation: "VALIDATES"
+    target: "PanelVECM"
+  - source: "WhiteTest"
+    relation: "VALIDATES"
+    target: "PooledOLS"
+  - source: "WhiteTest"
+    relation: "VALIDATES"
+    target: "FixedEffects"
+  - source: "ModifiedWaldTest"
+    relation: "VALIDATES"
+    target: "FixedEffects"
+  - source: "BreuschGodfreyTest"
+    relation: "VALIDATES"
+    target: "PooledOLS"
+  - source: "BreuschGodfreyTest"
+    relation: "VALIDATES"
+    target: "FixedEffects"
+  - source: "BaltagiWuTest"
+    relation: "VALIDATES"
+    target: "RandomEffects"
+  - source: "BreuschPaganLMTest"
+    relation: "VALIDATES"
+    target: "FixedEffects"
+  - source: "FreesTest"
+    relation: "VALIDATES"
+    target: "FixedEffects"
+
+  # =========================================================================
+  # TESTS_FOR (Tests -> Concepts)
+  # =========================================================================
+
+  - source: "HausmanTest"
+    relation: "TESTS_FOR"
+    target: "Endogeneity"
+  - source: "BreuschPaganTest"
+    relation: "TESTS_FOR"
+    target: "Heteroskedasticity"
+  - source: "WhiteTest"
+    relation: "TESTS_FOR"
+    target: "Heteroskedasticity"
+  - source: "ModifiedWaldTest"
+    relation: "TESTS_FOR"
+    target: "Heteroskedasticity"
+  - source: "WooldridgeARTest"
+    relation: "TESTS_FOR"
+    target: "SerialCorrelation"
+  - source: "BreuschGodfreyTest"
+    relation: "TESTS_FOR"
+    target: "SerialCorrelation"
+  - source: "BaltagiWuTest"
+    relation: "TESTS_FOR"
+    target: "SerialCorrelation"
+  - source: "PesaranCDTest"
+    relation: "TESTS_FOR"
+    target: "CrossSectionalDependence"
+  - source: "BreuschPaganLMTest"
+    relation: "TESTS_FOR"
+    target: "CrossSectionalDependence"
+  - source: "FreesTest"
+    relation: "TESTS_FOR"
+    target: "CrossSectionalDependence"
+  - source: "ChowTest"
+    relation: "TESTS_FOR"
+    target: "Poolability"
+  - source: "MundlakTest"
+    relation: "TESTS_FOR"
+    target: "UnobservedHeterogeneity"
+  - source: "LMLagTest"
+    relation: "TESTS_FOR"
+    target: "SpatialAutocorrelation"
+  - source: "LMErrorTest"
+    relation: "TESTS_FOR"
+    target: "SpatialAutocorrelation"
+  - source: "MoranIPanelTest"
+    relation: "TESTS_FOR"
+    target: "SpatialAutocorrelation"
+  - source: "HansenJTest"
+    relation: "TESTS_FOR"
+    target: "InstrumentProliferation"
+  - source: "SarganTest"
+    relation: "TESTS_FOR"
+    target: "InstrumentProliferation"
+  - source: "LLCTest"
+    relation: "TESTS_FOR"
+    target: "UnitRoot"
+  - source: "IPSTest"
+    relation: "TESTS_FOR"
+    target: "UnitRoot"
+  - source: "FisherTest"
+    relation: "TESTS_FOR"
+    target: "UnitRoot"
+  - source: "BreitungTest"
+    relation: "TESTS_FOR"
+    target: "UnitRoot"
+  - source: "HadriTest"
+    relation: "TESTS_FOR"
+    target: "UnitRoot"
+  - source: "KaoTest"
+    relation: "TESTS_FOR"
+    target: "Cointegration"
+  - source: "PedroniTest"
+    relation: "TESTS_FOR"
+    target: "Cointegration"
+  - source: "WesterlundTest"
+    relation: "TESTS_FOR"
+    target: "Cointegration"
+
+  # =========================================================================
+  # ADDRESSES (Estimators -> Concepts)
+  # =========================================================================
+
+  - source: "FixedEffects"
+    relation: "ADDRESSES"
+    target: "UnobservedHeterogeneity"
+  - source: "RandomEffects"
+    relation: "ADDRESSES"
+    target: "UnobservedHeterogeneity"
+  - source: "FirstDifferenceEstimator"
+    relation: "ADDRESSES"
+    target: "UnobservedHeterogeneity"
+  - source: "DifferenceGMM"
+    relation: "ADDRESSES"
+    target: "DynamicPanelBias"
+  - source: "SystemGMM"
+    relation: "ADDRESSES"
+    target: "DynamicPanelBias"
+  - source: "PanelIV"
+    relation: "ADDRESSES"
+    target: "Endogeneity"
+  - source: "DifferenceGMM"
+    relation: "ADDRESSES"
+    target: "Endogeneity"
+  - source: "SystemGMM"
+    relation: "ADDRESSES"
+    target: "Endogeneity"
+  - source: "SpatialLag"
+    relation: "ADDRESSES"
+    target: "SpatialAutocorrelation"
+  - source: "SpatialError"
+    relation: "ADDRESSES"
+    target: "SpatialAutocorrelation"
+  - source: "SpatialDurbin"
+    relation: "ADDRESSES"
+    target: "SpatialAutocorrelation"
+  - source: "PanelHeckman"
+    relation: "ADDRESSES"
+    target: "SampleSelectionBias"
+  - source: "NegativeBinomial"
+    relation: "ADDRESSES"
+    target: "Overdispersion"
+  - source: "ZeroInflatedPoisson"
+    relation: "ADDRESSES"
+    target: "Overdispersion"
+  - source: "PooledTobit"
+    relation: "ADDRESSES"
+    target: "Censoring"
+  - source: "RandomEffectsTobit"
+    relation: "ADDRESSES"
+    target: "Censoring"
+  - source: "HonoreTrimmedEstimator"
+    relation: "ADDRESSES"
+    target: "Censoring"
+  - source: "StochasticFrontier"
+    relation: "ADDRESSES"
+    target: "TechnicalEfficiency"
+  - source: "FourComponentSFA"
+    relation: "ADDRESSES"
+    target: "TechnicalEfficiency"
+  - source: "PanelVECM"
+    relation: "ADDRESSES"
+    target: "Cointegration"
+  - source: "PooledQuantile"
+    relation: "ADDRESSES"
+    target: "QuantileEffects"
+  - source: "FixedEffectsQuantile"
+    relation: "ADDRESSES"
+    target: "QuantileEffects"
+  - source: "PanelHeckman"
+    relation: "ADDRESSES"
+    target: "InversMillsRatio"
+  - source: "PanelVAR"
+    relation: "ADDRESSES"
+    target: "GrangerCausality"
+  - source: "PanelVAR"
+    relation: "ADDRESSES"
+    target: "ImpulseResponseFunction"
+
+  # =========================================================================
+  # BASED_ON (Tests/Estimators -> Literature)
+  # =========================================================================
+
+  - source: "HausmanTest"
+    relation: "BASED_ON"
+    target: "Hausman (1978)"
+  - source: "MundlakTest"
+    relation: "BASED_ON"
+    target: "Mundlak (1978)"
+  - source: "BreuschPaganTest"
+    relation: "BASED_ON"
+    target: "Breusch & Pagan (1979)"
+  - source: "WooldridgeARTest"
+    relation: "BASED_ON"
+    target: "Wooldridge (2002)"
+  - source: "PesaranCDTest"
+    relation: "BASED_ON"
+    target: "Pesaran (2004)"
+  - source: "DifferenceGMM"
+    relation: "BASED_ON"
+    target: "Arellano & Bond (1991)"
+  - source: "SystemGMM"
+    relation: "BASED_ON"
+    target: "Blundell & Bond (1998)"
+  - source: "FixedEffectsQuantile"
+    relation: "BASED_ON"
+    target: "Koenker (2004)"
+  - source: "LocationScale"
+    relation: "BASED_ON"
+    target: "Machado & Santos Silva (2019)"
+  - source: "PanelHeckman"
+    relation: "BASED_ON"
+    target: "Heckman (1979)"
+  - source: "StochasticFrontier"
+    relation: "BASED_ON"
+    target: "Aigner, Lovell & Schmidt (1977)"
+  - source: "FourComponentSFA"
+    relation: "BASED_ON"
+    target: "Kumbhakar, Lien & Hardaker (2014)"
+  - source: "SpatialLag"
+    relation: "BASED_ON"
+    target: "LeSage & Pace (2009)"
+  - source: "SpatialError"
+    relation: "BASED_ON"
+    target: "LeSage & Pace (2009)"
+  - source: "LLCTest"
+    relation: "BASED_ON"
+    target: "Levin, Lin & Chu (2002)"
+  - source: "IPSTest"
+    relation: "BASED_ON"
+    target: "Im, Pesaran & Shin (2003)"
+
+  # =========================================================================
+  # SUPPORTS_SE
+  # =========================================================================
+
+  - source: "PooledOLS"
+    relation: "SUPPORTS_SE"
+    target: "RobustSE"
+  - source: "PooledOLS"
+    relation: "SUPPORTS_SE"
+    target: "ClusteredSE"
+  - source: "PooledOLS"
+    relation: "SUPPORTS_SE"
+    target: "PCSE"
+  - source: "FixedEffects"
+    relation: "SUPPORTS_SE"
+    target: "RobustSE"
+  - source: "FixedEffects"
+    relation: "SUPPORTS_SE"
+    target: "ClusteredSE"
+  - source: "FixedEffects"
+    relation: "SUPPORTS_SE"
+    target: "DriscollKraay"
+  - source: "RandomEffects"
+    relation: "SUPPORTS_SE"
+    target: "RobustSE"
+  - source: "RandomEffects"
+    relation: "SUPPORTS_SE"
+    target: "ClusteredSE"
+  - source: "FirstDifferenceEstimator"
+    relation: "SUPPORTS_SE"
+    target: "ClusteredSE"
+  - source: "FirstDifferenceEstimator"
+    relation: "SUPPORTS_SE"
+    target: "NeweyWest"
+  - source: "SpatialLag"
+    relation: "SUPPORTS_SE"
+    target: "SpatialHAC"
+  - source: "SpatialError"
+    relation: "SUPPORTS_SE"
+    target: "SpatialHAC"
+  - source: "PooledPoisson"
+    relation: "SUPPORTS_SE"
+    target: "ClusteredSE"
+  - source: "PooledLogit"
+    relation: "SUPPORTS_SE"
+    target: "ClusteredSE"
+  - source: "PooledProbit"
+    relation: "SUPPORTS_SE"
+    target: "ClusteredSE"
+
+  # =========================================================================
+  # DEMONSTRATED_IN (Estimators -> Datasets)
+  # =========================================================================
+
+  - source: "FixedEffects"
+    relation: "DEMONSTRATED_IN"
+    target: "grunfeld"
+  - source: "RandomEffects"
+    relation: "DEMONSTRATED_IN"
+    target: "grunfeld"
+  - source: "PooledOLS"
+    relation: "DEMONSTRATED_IN"
+    target: "grunfeld"
+  - source: "BetweenEstimator"
+    relation: "DEMONSTRATED_IN"
+    target: "grunfeld"
+  - source: "FirstDifferenceEstimator"
+    relation: "DEMONSTRATED_IN"
+    target: "grunfeld"
+  - source: "DifferenceGMM"
+    relation: "DEMONSTRATED_IN"
+    target: "abdata"
+  - source: "SystemGMM"
+    relation: "DEMONSTRATED_IN"
+    target: "abdata"
+  - source: "PooledPoisson"
+    relation: "DEMONSTRATED_IN"
+    target: "health"
+  - source: "NegativeBinomial"
+    relation: "DEMONSTRATED_IN"
+    target: "health"
+  - source: "PooledQuantile"
+    relation: "DEMONSTRATED_IN"
+    target: "cigar"
+
+  # =========================================================================
+  # PRECONDITION (Tests -> Estimators)
+  # =========================================================================
+
+  - source: "ChowTest"
+    relation: "PRECONDITION"
+    target: "PooledOLS"
+  - source: "HausmanTest"
+    relation: "PRECONDITION"
+    target: "RandomEffects"
+  - source: "ArellanoBondAR2Test"
+    relation: "PRECONDITION"
+    target: "DifferenceGMM"
+  - source: "ArellanoBondAR2Test"
+    relation: "PRECONDITION"
+    target: "SystemGMM"
+  - source: "HansenJTest"
+    relation: "PRECONDITION"
+    target: "SystemGMM"
+  - source: "LMLagTest"
+    relation: "PRECONDITION"
+    target: "SpatialLag"
+  - source: "LMErrorTest"
+    relation: "PRECONDITION"
+    target: "SpatialError"
+  - source: "LLCTest"
+    relation: "PRECONDITION"
+    target: "PanelVAR"
+  - source: "KaoTest"
+    relation: "PRECONDITION"
+    target: "PanelVECM"
+
+  # =========================================================================
+  # SUCCEEDS (Test ordering)
+  # =========================================================================
+
+  - source: "BreuschPaganTest"
+    relation: "SUCCEEDS"
+    target: "ChowTest"
+  - source: "WooldridgeARTest"
+    relation: "SUCCEEDS"
+    target: "BreuschPaganTest"
+  - source: "PesaranCDTest"
+    relation: "SUCCEEDS"
+    target: "WooldridgeARTest"
+
+  # =========================================================================
+  # USES_PATTERN
+  # =========================================================================
+
+  - source: "FixedEffects"
+    relation: "USES_PATTERN"
+    target: "ModelFitPattern"
+  - source: "RandomEffects"
+    relation: "USES_PATTERN"
+    target: "ModelFitPattern"
+  - source: "PooledOLS"
+    relation: "USES_PATTERN"
+    target: "ModelFitPattern"
+  - source: "FixedEffects"
+    relation: "USES_PATTERN"
+    target: "CovTypePattern"
+  - source: "SystemGMM"
+    relation: "USES_PATTERN"
+    target: "GMMInstrumentSpec"
+  - source: "DifferenceGMM"
+    relation: "USES_PATTERN"
+    target: "GMMInstrumentSpec"
+  - source: "SpatialLag"
+    relation: "USES_PATTERN"
+    target: "SpatialWeightsSpec"
+  - source: "SpatialError"
+    relation: "USES_PATTERN"
+    target: "SpatialWeightsSpec"
+  - source: "HausmanTest"
+    relation: "USES_PATTERN"
+    target: "DiagnosticWorkflow"

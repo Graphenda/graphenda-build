@@ -1,0 +1,129 @@
+name: panelbox
+version: "1.0"
+description: "Biblioteca PanelBox para econometria de dados em painel - estimadores, testes diagnosticos, padroes de codigo e validacao"
+
+entity_types:
+  # Level 1 - Facts
+  Estimator:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      module_path: { type: str, required: true, description: "Python module path (e.g. panelbox.models.static.fixed_effects)" }
+      class_name: { type: str, required: true, description: "Python class name" }
+      description: { type: str, required: true }
+      estimation_method: { type: str, description: "Estimation approach (OLS, MLE, GMM, QR, etc.)" }
+      usage_example: { type: str, description: "Python code snippet showing basic usage" }
+      assumptions: { type: list, description: "Statistical assumptions for valid inference" }
+      min_T: { type: int, description: "Minimum number of time periods required" }
+      min_N: { type: int, description: "Minimum number of entities recommended" }
+      supports_unbalanced: { type: bool }
+
+  DiagnosticTest:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      module_path: { type: str, required: true, description: "Python module path" }
+      function_name: { type: str, required: true, description: "Python function or class name" }
+      null_hypothesis: { type: str, required: true }
+      reject_means: { type: str, required: true, description: "Interpretation when H0 is rejected" }
+      distribution: { type: str, description: "Test statistic distribution (Chi-squared, F, etc.)" }
+      interpretation_guide: { type: str }
+      usage_example: { type: str }
+
+  Parameter:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      type: { type: str, description: "Python type hint" }
+      default: { type: str }
+      description: { type: str, required: true }
+      valid_values: { type: list, description: "Accepted values for enum-like params" }
+
+  StandardError:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      class_name: { type: str, description: "Python class name" }
+      module_path: { type: str, description: "Python module path" }
+      description: { type: str, required: true }
+      cov_type_param: { type: str, description: "Value for cov_type parameter" }
+
+  Dataset:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      loader_function: { type: str, description: "Function to load (e.g. load_grunfeld)" }
+      description: { type: str, required: true }
+      n_entities: { type: int, description: "Number of cross-sectional units" }
+      n_periods: { type: int, description: "Number of time periods" }
+      variables: { type: list, description: "Key variables in the dataset" }
+
+  CodePattern:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      description: { type: str, required: true }
+      code: { type: str, required: true, description: "Python code implementing the pattern" }
+      usage: { type: str, description: "When to use this pattern" }
+
+  ResultMetric:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      description: { type: str, required: true }
+      interpretation: { type: str, description: "How to interpret the value" }
+
+  Literature:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      full_citation: { type: str }
+      year: { type: int }
+      key_contribution: { type: str }
+
+  # Level 2 - Concepts
+  StatisticalConcept:
+    level: 2
+    properties:
+      name: { type: str, required: true }
+      description: { type: str, required: true }
+      formal_definition: { type: str }
+      implications: { type: str, description: "What happens if this is present/violated" }
+
+  # Level 3 - Domains
+  ModelFamily:
+    level: 3
+    properties:
+      name: { type: str, required: true }
+      description: { type: str, required: true }
+      module_prefix: { type: str, description: "Common module prefix (e.g. panelbox.models.static)" }
+
+relationship_types:
+  BELONGS_TO: { source: Estimator, target: ModelFamily, cross_level: true }
+  INHERITS_FROM: { source: Estimator, target: Estimator }
+  VALIDATES:
+    source: DiagnosticTest
+    target: Estimator
+    properties:
+      mandatory: { type: bool, description: "Whether this validation is mandatory" }
+      order: { type: int, description: "Suggested order of execution" }
+  REQUIRES:
+    source: Estimator
+    target: Parameter
+    properties:
+      is_optional: { type: bool }
+  PRODUCES: { source: Estimator, target: ResultMetric }
+  ADDRESSES: { source: Estimator, target: StatisticalConcept, cross_level: true }
+  TESTS_FOR: { source: DiagnosticTest, target: StatisticalConcept, cross_level: true }
+  BASED_ON: { source: [Estimator, DiagnosticTest], target: Literature }
+  ALTERNATIVE_TO:
+    source: Estimator
+    target: Estimator
+    properties:
+      comparison_note: { type: str, description: "Key difference between the two" }
+  PRECONDITION: { source: DiagnosticTest, target: Estimator, description: "Test should be run before using an estimator" }
+  SUPPORTS_SE: { source: Estimator, target: StandardError }
+  DEMONSTRATED_IN: { source: Estimator, target: Dataset }
+  IMPLEMENTED_BY: { source: CodePattern, target: Estimator }
+  USES_PATTERN: { source: [Estimator, DiagnosticTest], target: CodePattern }
+  SUCCEEDS: { source: DiagnosticTest, target: DiagnosticTest }

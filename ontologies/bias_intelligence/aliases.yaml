@@ -1,0 +1,62 @@
+# Fairness Metrics
+"DI": "Disparate_Impact"
+"disparate impact": "Disparate_Impact"
+"impacto desproporcional": "Disparate_Impact"
+"SP": "Statistical_Parity"
+"paridade estatistica": "Statistical_Parity"
+"demographic parity": "Statistical_Parity"
+"paridade demografica": "Statistical_Parity"
+"equalized odds": "Equalized_Odds"
+"igualdade de odds": "Equalized_Odds"
+"calibration": "Calibration"
+"calibracao": "Calibration"
+
+# Bias Types
+"vies de selecao": "Selection_Bias"
+"selection bias": "Selection_Bias"
+"vies de medicao": "Measurement_Bias"
+"measurement bias": "Measurement_Bias"
+"vies algoritmico": "Algorithmic_Bias"
+"algorithmic bias": "Algorithmic_Bias"
+"vies historico": "Historical_Bias"
+"historical bias": "Historical_Bias"
+
+# Protected Attributes
+"raca": "Race"
+"race": "Race"
+"genero": "Gender"
+"gender": "Gender"
+"sexo": "Gender"
+"idade": "Age"
+"age": "Age"
+"deficiencia": "Disability"
+"disability": "Disability"
+"religiao": "Religion"
+"religion": "Religion"
+
+# Proxy Variables
+"proxy": "ProxyVariable"
+"CEP": "ZipCode"
+"zip code": "ZipCode"
+"codigo postal": "ZipCode"
+"bairro": "Neighborhood"
+"neighborhood": "Neighborhood"
+"escola": "School"
+"school": "School"
+"nome": "Name"
+
+# Mitigation Strategies
+"reweighing": "Reweighing"
+"reponderacao": "Reweighing"
+"adversarial debiasing": "Adversarial_Debiasing"
+"calibrated equalized odds": "Calibrated_Equalized_Odds"
+
+# Domains
+"credito": "Credit_Lending"
+"credit": "Credit_Lending"
+"contratacao": "Hiring"
+"hiring": "Hiring"
+"justica criminal": "Criminal_Justice"
+"criminal justice": "Criminal_Justice"
+"saude": "Healthcare"
+"healthcare": "Healthcare"

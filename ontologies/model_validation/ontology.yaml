@@ -1,0 +1,288 @@
+name: model_validation
+version: "1.0"
+description: >
+  Ontologia abrangente para validacao de modelos. Cobre todos os tipos de modelo
+  (regressao, classificacao, deep learning, NLP, LLM, econometria, survival, etc.)
+  com conceitos de validacao compartilhados, metricas, testes diagnosticos,
+  tecnicas e regulacoes.
+
+# ===========================================================================
+# ENTITY TYPES
+# ===========================================================================
+
+entity_types:
+
+  # -----------------------------------------------------------------------
+  # Level 1 — Facts (entidades concretas e atomicas)
+  # -----------------------------------------------------------------------
+
+  Model:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      model_type: { type: str, description: "supervised, unsupervised, reinforcement, generative, etc." }
+      complexity: { type: str, valid_values: ["low", "medium", "high", "very_high"] }
+      interpretability: { type: str, valid_values: ["white_box", "grey_box", "black_box"] }
+
+  Metric:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      metric_type: { type: str, description: "accuracy, error, ranking, calibration, fairness, etc." }
+      range: { type: str, description: "ex: [0, 1], (-inf, inf), [0, inf)" }
+      higher_is_better: { type: bool }
+
+  StatisticalTest:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      null_hypothesis: { type: str }
+      description: { type: str }
+      test_type: { type: str, description: "parametric, non-parametric, asymptotic" }
+
+  Hyperparameter:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      typical_range: { type: str }
+      type: { type: str, valid_values: ["continuous", "discrete", "categorical"] }
+
+  Library:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      language: { type: str, description: "Python, R, Julia, etc." }
+      description: { type: str }
+
+  Regulation:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      issuer: { type: str, description: "Fed, ECB, EU, NIST, Basel Committee, etc." }
+      year: { type: int }
+      description: { type: str }
+      jurisdiction: { type: str }
+
+  Visualization:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      visualization_type: { type: str, valid_values: ["plot", "table", "diagram", "heatmap"] }
+
+  # -----------------------------------------------------------------------
+  # Level 2 — Concepts (conceitos abstratos compartilhados entre dominios)
+  # -----------------------------------------------------------------------
+
+  ValidationConcept:
+    level: 2
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      severity: { type: str, valid_values: ["low", "medium", "high", "critical"] }
+
+  ModelingTechnique:
+    level: 2
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      technique_type: { type: str, description: "validation, preprocessing, regularization, tuning, etc." }
+
+  Assumption:
+    level: 2
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      formal_definition: { type: str }
+
+  RegulatoryFramework:
+    level: 2
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      scope: { type: str, description: "banking, insurance, all_sectors, healthcare, etc." }
+
+  TaskType:
+    level: 2
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      data_type: { type: str, description: "tabular, text, image, graph, time_series, etc." }
+
+  # -----------------------------------------------------------------------
+  # Level 3 — Domains (tipos de modelo / areas de modelagem)
+  # -----------------------------------------------------------------------
+
+  ModelDomain:
+    level: 3
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      maturity: { type: str, valid_values: ["established", "mature", "emerging", "experimental"] }
+
+  IndustrySector:
+    level: 3
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      regulatory_pressure: { type: str, valid_values: ["low", "medium", "high", "very_high"] }
+
+
+# ===========================================================================
+# RELATIONSHIP TYPES
+# ===========================================================================
+
+relationship_types:
+
+  # --- Model relationships ---
+  BELONGS_TO:
+    source: Model
+    target: ModelDomain
+    cross_level: true
+    description: "Model pertence a um dominio de modelagem"
+
+  EVALUATED_BY:
+    source: Model
+    target: Metric
+    description: "Model e avaliado por esta metrica"
+
+  VALIDATED_BY:
+    source: Model
+    target: StatisticalTest
+    description: "Model e validado por este teste"
+
+  HAS_HYPERPARAMETER:
+    source: Model
+    target: Hyperparameter
+    description: "Model possui este hiperparametro"
+
+  IMPLEMENTED_IN:
+    source: Model
+    target: Library
+    description: "Model esta implementado nesta biblioteca"
+
+  EXTENDS:
+    source: Model
+    target: Model
+    description: "Model estende/generaliza outro model"
+
+  ALTERNATIVE_TO:
+    source: Model
+    target: Model
+    description: "Model e alternativa a outro para o mesmo problema"
+
+  PERFORMS_TASK:
+    source: Model
+    target: TaskType
+    cross_level: true
+    description: "Model realiza este tipo de tarefa"
+
+  HAS_ASSUMPTION:
+    source: Model
+    target: Assumption
+    cross_level: true
+    description: "Model requer esta premissa"
+
+  # --- Validation concept relationships ---
+  ADDRESSES:
+    source: Model
+    target: ValidationConcept
+    cross_level: true
+    description: "Model aborda/trata este conceito de validacao"
+
+  SUFFERS_FROM:
+    source: Model
+    target: ValidationConcept
+    cross_level: true
+    description: "Model e suscetivel a este problema"
+
+  MEASURES:
+    source: Metric
+    target: ValidationConcept
+    cross_level: true
+    description: "Metrica mede este conceito"
+
+  TESTS_FOR:
+    source: StatisticalTest
+    target: ValidationConcept
+    cross_level: true
+    description: "Teste diagnostica este conceito"
+
+  TESTS_ASSUMPTION:
+    source: StatisticalTest
+    target: Assumption
+    cross_level: true
+    description: "Teste verifica esta premissa"
+
+  MITIGATES:
+    source: ModelingTechnique
+    target: ValidationConcept
+    description: "Tecnica mitiga este problema"
+
+  VISUALIZED_BY:
+    source: ValidationConcept
+    target: Visualization
+    cross_level: true
+    description: "Conceito e visualizado por este grafico/plot"
+
+  # --- Regulatory relationships ---
+  REGULATED_BY:
+    source: Model
+    target: Regulation
+    description: "Model e regulado por esta norma"
+
+  PART_OF_FRAMEWORK:
+    source: Regulation
+    target: RegulatoryFramework
+    cross_level: true
+    description: "Regulacao faz parte deste framework"
+
+  APPLIES_TO_SECTOR:
+    source: RegulatoryFramework
+    target: IndustrySector
+    description: "Framework se aplica a este setor"
+
+  # --- Domain relationships ---
+  DOMAIN_USES_TASK:
+    source: ModelDomain
+    target: TaskType
+    description: "Dominio utiliza este tipo de tarefa"
+
+  DOMAIN_APPLIES_TO:
+    source: ModelDomain
+    target: IndustrySector
+    description: "Dominio e usado neste setor"
+
+  # --- Technique relationships ---
+  TECHNIQUE_USES:
+    source: ModelingTechnique
+    target: Metric
+    cross_level: true
+    description: "Tecnica utiliza esta metrica"
+
+  SUCCEEDS:
+    source: StatisticalTest
+    target: StatisticalTest
+    description: "Teste e mais robusto/moderno que outro"
+
+
+# ===========================================================================
+# HIERARCHY RELATIONSHIPS (derivadas automaticamente pelo Build)
+# ===========================================================================
+
+hierarchy_relationships:
+  ABSTRACTS:
+    from_level: 2
+    to_level: 1
+    derived_from: ["ADDRESSES", "SUFFERS_FROM", "MEASURES", "TESTS_FOR", "MITIGATES"]
+  GROUPS:
+    from_level: 3
+    to_level: 2
+    derived_from: ["BELONGS_TO", "PERFORMS_TASK", "DOMAIN_USES_TASK"]
+  PART_OF:
+    from_level: 4
+    to_level: 3
+    derived_from: "meta_community_clustering"

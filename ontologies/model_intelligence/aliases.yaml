@@ -1,0 +1,28 @@
+# Estimadores
+"FE": "FixedEffects"
+"RE": "RandomEffects"
+"efeitos fixos": "FixedEffects"
+"efeitos aleatorios": "RandomEffects"
+"OLS": "OrdinaryLeastSquares"
+"MQO": "OrdinaryLeastSquares"
+"minimos quadrados": "OrdinaryLeastSquares"
+"GMM": "GeneralizedMethodOfMoments"
+"GLS": "GeneralizedLeastSquares"
+"MQG": "GeneralizedLeastSquares"
+"2SLS": "TwoStageLeastSquares"
+"IV": "InstrumentalVariables"
+"variaveis instrumentais": "InstrumentalVariables"
+
+# Testes
+"Hausman": "HausmanTest"
+"teste de Hausman": "HausmanTest"
+"Breusch-Pagan": "BreuschPaganTest"
+"BP test": "BreuschPaganTest"
+"Wooldridge": "WooldridgeTest"
+
+# Conceitos
+"heteroscedasticidade": "Heteroscedasticity"
+"autocorrelacao": "Autocorrelation"
+"serial correlation": "Autocorrelation"
+"multicolinearidade": "Multicollinearity"
+"endogeneidade": "Endogeneity"

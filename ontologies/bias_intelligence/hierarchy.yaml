@@ -1,0 +1,30 @@
+levels:
+  1:
+    name: "Facts"
+    description: "Modelos, features, atributos protegidos, proxies, estrategias e datasets"
+    entity_types:
+      - MLModel
+      - Feature
+      - ProtectedAttribute
+      - ProxyVariable
+      - MitigationStrategy
+      - Dataset
+
+  2:
+    name: "Concepts"
+    description: "Tipos de vies e metricas de fairness"
+    entity_types:
+      - BiasType
+      - FairnessMetric
+
+  3:
+    name: "Domains"
+    description: "Dominios de aplicacao de fairness"
+    entity_types:
+      - FairnessDomain
+
+cross_level_relationships:
+  - MITIGATES_BIAS
+  - EXHIBITS
+  - AFFECTS
+  - APPLIES_TO

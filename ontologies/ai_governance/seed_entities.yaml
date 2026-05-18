@@ -1,0 +1,229 @@
+entities:
+  # Level 3 - Domains (RegulatoryFramework)
+  - type: RegulatoryFramework
+    name: "European_AI_Act"
+    properties:
+      jurisdiction: "European Union"
+      effective_date: "2024-08-01"
+      description: "Regulamento europeu para inteligencia artificial baseado em risco"
+
+  - type: RegulatoryFramework
+    name: "Basel_III"
+    properties:
+      jurisdiction: "Global (BIS)"
+      effective_date: "2023-01-01"
+      description: "Framework de regulacao bancaria com requisitos de capital e risco"
+
+  - type: RegulatoryFramework
+    name: "Lei_Geral_Protecao_Dados"
+    properties:
+      jurisdiction: "Brazil"
+      effective_date: "2020-09-18"
+      description: "Lei brasileira de protecao de dados pessoais"
+
+  - type: RegulatoryFramework
+    name: "General_Data_Protection_Regulation"
+    properties:
+      jurisdiction: "European Union"
+      effective_date: "2018-05-25"
+      description: "Regulamento europeu de protecao de dados pessoais"
+
+  # Level 3 - Domains (RegulatoryBody)
+  - type: RegulatoryBody
+    name: "European_Commission"
+    properties:
+      country: "EU"
+      role: "Orgao regulador principal da Uniao Europeia"
+
+  - type: RegulatoryBody
+    name: "Basel_Committee_Banking_Supervision"
+    properties:
+      country: "International"
+      role: "Comite de supervisao bancaria global"
+
+  - type: RegulatoryBody
+    name: "Banco_Central_Brasil"
+    properties:
+      country: "Brazil"
+      role: "Autoridade monetaria e reguladora do sistema financeiro brasileiro"
+
+  - type: RegulatoryBody
+    name: "Autoridade_Nacional_Protecao_Dados"
+    properties:
+      country: "Brazil"
+      role: "Orgao responsavel pela fiscalizacao da LGPD"
+
+  - type: RegulatoryBody
+    name: "National_Institute_Standards_Technology"
+    properties:
+      country: "United States"
+      role: "Instituto de padroes e tecnologia dos EUA"
+
+  # Level 2 - Concepts (RiskCategory)
+  - type: RiskCategory
+    name: "Unacceptable_Risk_AI"
+    properties:
+      description: "Sistemas de IA proibidos pela EU AI Act"
+      severity: "critical"
+
+  - type: RiskCategory
+    name: "High_Risk_AI"
+    properties:
+      description: "Sistemas de IA com alto potencial de dano que requerem avaliacao de conformidade"
+      severity: "high"
+
+  - type: RiskCategory
+    name: "Limited_Risk_AI"
+    properties:
+      description: "Sistemas de IA com obrigacoes de transparencia"
+      severity: "medium"
+
+  - type: RiskCategory
+    name: "Minimal_Risk_AI"
+    properties:
+      description: "Sistemas de IA sem restricoes regulatorias adicionais"
+      severity: "low"
+
+  # Level 2 - Concepts (Standard)
+  - type: Standard
+    name: "ISO_27001"
+    properties:
+      issuing_body: "ISO/IEC"
+      version: "2022"
+
+  - type: Standard
+    name: "ISO_42001"
+    properties:
+      issuing_body: "ISO/IEC"
+      version: "2023"
+
+  - type: Standard
+    name: "NIST_AI_Risk_Management_Framework"
+    properties:
+      issuing_body: "NIST"
+      version: "1.0"
+
+  # Level 1 - Facts (ComplianceRequirement)
+  - type: ComplianceRequirement
+    name: "Fairness_Assessment"
+    properties:
+      description: "Avaliacao de imparcialidade do sistema de IA"
+      mandatory: true
+      deadline: "Before deployment"
+
+  - type: ComplianceRequirement
+    name: "Transparency_Disclosure"
+    properties:
+      description: "Divulgacao de que o usuario esta interagindo com IA"
+      mandatory: true
+      deadline: "At interaction time"
+
+  - type: ComplianceRequirement
+    name: "Human_Oversight"
+    properties:
+      description: "Garantir supervisao humana em decisoes automatizadas de alto risco"
+      mandatory: true
+      deadline: "Continuous"
+
+  - type: ComplianceRequirement
+    name: "Data_Protection_Impact_Assessment"
+    properties:
+      description: "Avaliacao de impacto sobre protecao de dados"
+      mandatory: true
+      deadline: "Before processing"
+
+  # Level 1 - Facts (ControlMeasure)
+  - type: ControlMeasure
+    name: "Model_Risk_Documentation"
+    properties:
+      description: "Documentacao completa do risco do modelo"
+      implementation_guide: "Criar ficha tecnica com metricas, limitacoes e dados de treinamento"
+
+  - type: ControlMeasure
+    name: "Bias_Testing_Protocol"
+    properties:
+      description: "Protocolo de teste de vies antes do deploy"
+      implementation_guide: "Executar fairness metrics em todas as classes protegidas"
+
+  # Level 1 - Facts (AuditProcess)
+  - type: AuditProcess
+    name: "Annual_AI_Audit"
+    properties:
+      steps: "1. Inventario de modelos 2. Avaliacao de risco 3. Teste de fairness 4. Relatorio"
+      frequency: "Annual"
+
+relationships:
+  # Framework -> RiskCategory
+  - source: "European_AI_Act"
+    relation: "REGULATES"
+    target: "Unacceptable_Risk_AI"
+
+  - source: "European_AI_Act"
+    relation: "REGULATES"
+    target: "High_Risk_AI"
+
+  - source: "European_AI_Act"
+    relation: "REGULATES"
+    target: "Limited_Risk_AI"
+
+  - source: "European_AI_Act"
+    relation: "REGULATES"
+    target: "Minimal_Risk_AI"
+
+  # Framework -> ComplianceRequirement
+  - source: "European_AI_Act"
+    relation: "REQUIRES_COMPLIANCE"
+    target: "Fairness_Assessment"
+
+  - source: "European_AI_Act"
+    relation: "REQUIRES_COMPLIANCE"
+    target: "Transparency_Disclosure"
+
+  - source: "European_AI_Act"
+    relation: "REQUIRES_COMPLIANCE"
+    target: "Human_Oversight"
+
+  - source: "General_Data_Protection_Regulation"
+    relation: "REQUIRES_COMPLIANCE"
+    target: "Data_Protection_Impact_Assessment"
+
+  - source: "Lei_Geral_Protecao_Dados"
+    relation: "REQUIRES_COMPLIANCE"
+    target: "Data_Protection_Impact_Assessment"
+
+  # RegulatoryBody -> Framework
+  - source: "European_Commission"
+    relation: "ISSUES"
+    target: "European_AI_Act"
+
+  - source: "Basel_Committee_Banking_Supervision"
+    relation: "ISSUES"
+    target: "Basel_III"
+
+  # Standard -> RegulatoryBody
+  - source: "NIST_AI_Risk_Management_Framework"
+    relation: "DEFINED_BY"
+    target: "National_Institute_Standards_Technology"
+
+  # ControlMeasure -> ComplianceRequirement
+  - source: "Bias_Testing_Protocol"
+    relation: "IMPLEMENTS"
+    target: "Fairness_Assessment"
+
+  - source: "Model_Risk_Documentation"
+    relation: "IMPLEMENTS"
+    target: "Transparency_Disclosure"
+
+  # ControlMeasure -> RiskCategory
+  - source: "Bias_Testing_Protocol"
+    relation: "MITIGATES"
+    target: "High_Risk_AI"
+
+  # AuditProcess -> ComplianceRequirement
+  - source: "Annual_AI_Audit"
+    relation: "AUDITS"
+    target: "Fairness_Assessment"
+
+  - source: "Annual_AI_Audit"
+    relation: "AUDITS"
+    target: "Human_Oversight"

@@ -1,0 +1,77 @@
+name: ai_governance
+version: "1.0"
+description: "Regulacao, compliance e governanca de IA"
+
+entity_types:
+  # Level 1 - Facts
+  LegalArticle:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      text: { type: str }
+      article_number: { type: str }
+      chapter: { type: str }
+
+  ControlMeasure:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      implementation_guide: { type: str }
+
+  AuditProcess:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      steps: { type: str }
+      frequency: { type: str }
+
+  ComplianceRequirement:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      mandatory: { type: bool }
+      deadline: { type: str }
+
+  # Level 2 - Concepts
+  RiskCategory:
+    level: 2
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      severity: { type: str, valid_values: [low, medium, high, critical] }
+
+  Standard:
+    level: 2
+    properties:
+      name: { type: str, required: true }
+      issuing_body: { type: str }
+      version: { type: str }
+
+  # Level 3 - Domains
+  RegulatoryFramework:
+    level: 3
+    properties:
+      name: { type: str, required: true }
+      jurisdiction: { type: str }
+      effective_date: { type: str }
+      description: { type: str }
+
+  RegulatoryBody:
+    level: 3
+    properties:
+      name: { type: str, required: true }
+      country: { type: str }
+      role: { type: str }
+
+relationship_types:
+  REGULATES: { source: RegulatoryFramework, target: RiskCategory, cross_level: true }
+  REQUIRES_COMPLIANCE: { source: RegulatoryFramework, target: ComplianceRequirement, cross_level: true }
+  DEFINED_BY: { source: Standard, target: RegulatoryBody, cross_level: true }
+  MITIGATES: { source: ControlMeasure, target: RiskCategory, cross_level: true }
+  AUDITS: { source: AuditProcess, target: ComplianceRequirement }
+  REFERENCES: { source: LegalArticle, target: Standard, cross_level: true }
+  IMPLEMENTS: { source: ControlMeasure, target: ComplianceRequirement }
+  SUPERSEDES: { source: RegulatoryFramework, target: RegulatoryFramework }
+  ISSUES: { source: RegulatoryBody, target: RegulatoryFramework }

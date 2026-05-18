@@ -1,0 +1,87 @@
+name: model_intelligence
+version: "1.0"
+description: "Modelos de risco, econometria de painel e validacao"
+
+entity_types:
+  # Level 1 - Facts
+  Estimator:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      module_path: { type: str }
+      description: { type: str }
+      assumptions: { type: str }
+      supports_unbalanced: { type: bool }
+
+  DiagnosticTest:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      null_hypothesis: { type: str }
+      interpretation_guide: { type: str }
+
+  Parameter:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      type: { type: str }
+      default: { type: str }
+
+  StandardError:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+
+  Dataset:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+
+  CodePattern:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      code: { type: str }
+
+  ResultMetric:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+
+  Literature:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      authors: { type: str }
+      year: { type: int }
+
+  # Level 2 - Concepts
+  StatisticalConcept:
+    level: 2
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      formal_definition: { type: str }
+
+  # Level 3 - Domains
+  ModelFamily:
+    level: 3
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+
+relationship_types:
+  VALIDATES: { source: DiagnosticTest, target: Estimator }
+  REQUIRES: { source: Estimator, target: Parameter }
+  PRODUCES: { source: Estimator, target: ResultMetric }
+  ADDRESSES: { source: Estimator, target: StatisticalConcept, cross_level: true }
+  TESTS_FOR: { source: DiagnosticTest, target: StatisticalConcept, cross_level: true }
+  BELONGS_TO: { source: Estimator, target: ModelFamily, cross_level: true }
+  INHERITS_FROM: { source: Estimator, target: Estimator }
+  ALTERNATIVE_TO: { source: Estimator, target: Estimator }
+  SUPPORTS_SE: { source: Estimator, target: StandardError }
+  DEMONSTRATED_IN: { source: Estimator, target: Dataset }
+  IMPLEMENTED_BY: { source: CodePattern, target: Estimator }
+  BASED_ON: { source: Estimator, target: Literature }
+  SUCCEEDS: { source: DiagnosticTest, target: DiagnosticTest }

@@ -1,0 +1,177 @@
+# =============================================================================
+# Estimadores - Static
+# =============================================================================
+"FE": "FixedEffects"
+"Fixed Effects": "FixedEffects"
+"Within Estimator": "FixedEffects"
+"Within": "FixedEffects"
+"LSDV": "FixedEffects"
+"efeitos fixos": "FixedEffects"
+"RE": "RandomEffects"
+"Random Effects": "RandomEffects"
+"GLS": "RandomEffects"
+"efeitos aleatorios": "RandomEffects"
+"Pooled OLS": "PooledOLS"
+"POLS": "PooledOLS"
+"OLS agrupado": "PooledOLS"
+"Between": "BetweenEstimator"
+"FD": "FirstDifferenceEstimator"
+"First Difference": "FirstDifferenceEstimator"
+"primeira diferenca": "FirstDifferenceEstimator"
+
+# =============================================================================
+# Estimadores - GMM
+# =============================================================================
+"Generalized Method of Moments": "GMM"
+"Metodo dos Momentos Generalizados": "GMM"
+"modelo GMM": "GMM"
+"Arellano-Bond": "DifferenceGMM"
+"Arellano Bond": "DifferenceGMM"
+"AB GMM": "DifferenceGMM"
+"Difference GMM": "DifferenceGMM"
+"Blundell-Bond": "SystemGMM"
+"Blundell Bond": "SystemGMM"
+"BB GMM": "SystemGMM"
+"System GMM": "SystemGMM"
+"CUE-GMM": "ContinuousUpdatedGMM"
+"CUE GMM": "ContinuousUpdatedGMM"
+"Bias Corrected GMM": "BiasCorrectedGMM"
+"BC GMM": "BiasCorrectedGMM"
+
+# =============================================================================
+# Estimadores - Spatial
+# =============================================================================
+"Spatial Models": "SpatialModels"
+"modelos espaciais": "SpatialModels"
+"modelo espacial": "SpatialModels"
+"painel espacial": "SpatialModels"
+"SAR": "SpatialLag"
+"Spatial Lag": "SpatialLag"
+"Spatial Autoregressive": "SpatialLag"
+"lag espacial": "SpatialLag"
+"SEM": "SpatialError"
+"Spatial Error": "SpatialError"
+"erro espacial": "SpatialError"
+"SDM": "SpatialDurbin"
+"Spatial Durbin": "SpatialDurbin"
+"GNS": "GeneralNestingSpatial"
+"dynamic spatial": "DynamicSpatialPanels"
+"painel espacial dinamico": "DynamicSpatialPanels"
+
+# =============================================================================
+# Estimadores - Count
+# =============================================================================
+"Poisson FE": "PoissonFixedEffects"
+"Poisson RE": "RandomEffectsPoisson"
+"NegBin": "NegativeBinomial"
+"Negative Binomial": "NegativeBinomial"
+"ZIP": "ZeroInflatedPoisson"
+"ZINB": "ZeroInflatedNegativeBinomial"
+"Gravity Model": "PPML"
+
+# =============================================================================
+# Estimadores - Discrete
+# =============================================================================
+"Logit": "PooledLogit"
+"Probit": "PooledProbit"
+"FE Logit": "FixedEffectsLogit"
+"RE Probit": "RandomEffectsProbit"
+
+# =============================================================================
+# Estimadores - Frontier
+# =============================================================================
+"SFA": "StochasticFrontier"
+"Stochastic Frontier": "StochasticFrontier"
+"Four Component": "FourComponentSFA"
+
+# =============================================================================
+# Estimadores - VAR
+# =============================================================================
+"Panel VAR": "PanelVAR"
+"PVAR": "PanelVAR"
+"VECM": "PanelVECM"
+
+# =============================================================================
+# Estimadores - Outros
+# =============================================================================
+"Tobit": "PooledTobit"
+"Heckman": "PanelHeckman"
+"2SLS": "PanelIV"
+"IV": "PanelIV"
+
+# =============================================================================
+# Testes Diagnosticos
+# =============================================================================
+"Hausman": "HausmanTest"
+"Hausman test": "HausmanTest"
+"teste de Hausman": "HausmanTest"
+"Hansen J": "HansenJTest"
+"Hansen J-test": "HansenJTest"
+"Hansen test": "HansenJTest"
+"Sargan": "SarganTest"
+"Sargan test": "SarganTest"
+"AR(1) test": "AR1Test"
+"AR(2) test": "AR2Test"
+"Arellano-Bond test": "ArellanoBondARTest"
+"Moran I": "MoranITest"
+"Moran's I": "MoranITest"
+"Breusch-Pagan": "BreuschPaganTest"
+"BP test": "BreuschPaganTest"
+"Modified Wald": "ModifiedWaldTest"
+"White test": "WhiteTest"
+"Wooldridge AR": "WooldridgeARTest"
+"Wooldridge test": "WooldridgeARTest"
+"Pesaran CD": "PesaranCDTest"
+"LLC": "LLCTest"
+"IPS": "IPSTest"
+"Mundlak": "MundlakTest"
+"Chow": "ChowTest"
+"RESET": "RESETTest"
+
+# =============================================================================
+# Conceitos Estatisticos
+# =============================================================================
+"endogeneity": "Endogeneity"
+"endogeneidade": "Endogeneity"
+"endogeno": "Endogeneity"
+"heteroscedasticity": "Heteroskedasticity"
+"heteroskedasticity": "Heteroskedasticity"
+"heterocedasticidade": "Heteroskedasticity"
+"autocorrelation": "SerialCorrelation"
+"serial correlation": "SerialCorrelation"
+"autocorrelacao": "SerialCorrelation"
+"correlacao serial": "SerialCorrelation"
+"AR(1)": "SerialCorrelation"
+"spatial autocorrelation": "SpatialAutocorrelation"
+"spatial dependence": "SpatialAutocorrelation"
+"autocorrelacao espacial": "SpatialAutocorrelation"
+"dependencia espacial": "SpatialAutocorrelation"
+"cross-sectional dependence": "CrossSectionalDependence"
+"CSD": "CrossSectionalDependence"
+"dependencia transversal": "CrossSectionalDependence"
+"unit root": "UnitRoot"
+"non-stationarity": "UnitRoot"
+"raiz unitaria": "UnitRoot"
+"estacionariedade": "UnitRoot"
+"cointegration": "Cointegration"
+"cointegracao": "Cointegration"
+"overidentification": "Overidentification"
+"instrument validity": "Overidentification"
+"sobreidentificacao": "Overidentification"
+"multicollinearity": "Multicollinearity"
+"multicolinearidade": "Multicollinearity"
+"omitted variable": "OmittedVariableBias"
+"variavel omitida": "OmittedVariableBias"
+"selection bias": "SelectionBias"
+"Heckman bias": "SelectionBias"
+"sample selection": "SelectionBias"
+"vies de selecao": "SelectionBias"
+"overdispersion": "Overdispersion"
+"sobredispersao": "Overdispersion"
+"excess zeros": "ExcessZeros"
+"zero inflation": "ExcessZeros"
+"excesso de zeros": "ExcessZeros"
+"inefficiency": "TechnicalInefficiency"
+"technical efficiency": "TechnicalInefficiency"
+"ineficiencia": "TechnicalInefficiency"
+"eficiencia tecnica": "TechnicalInefficiency"

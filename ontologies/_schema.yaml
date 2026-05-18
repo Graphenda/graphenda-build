@@ -1,0 +1,34 @@
+# =============================================================================
+# Graphenda Engine - Meta-Schema
+# =============================================================================
+# Define a estrutura que toda ontologia deve seguir.
+# Usado pelo OntologyRegistry para validacao automatica.
+# =============================================================================
+
+meta_schema:
+  version: "1.0"
+
+  required_root_fields:
+    - name
+    - version
+    - description
+    - entity_types
+    - relationship_types
+
+  entity_type_schema:
+    required_fields:
+      - level
+      - properties
+    level:
+      type: int
+      min: 1
+      max: 4
+    properties:
+      type: map
+      value_schema:
+        required_fields: [type]
+        optional_fields: [required, default, description, valid_values]
+
+  relationship_type_schema:
+    required_fields: [source, target]
+    optional_fields: [properties, cross_level]

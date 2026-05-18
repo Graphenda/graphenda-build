@@ -1,0 +1,132 @@
+entities:
+  # Level 3 - Domains
+  - type: ModelFamily
+    name: "PanelDataModels"
+    properties:
+      description: "Modelos para dados em painel (longitudinais)"
+
+  - type: ModelFamily
+    name: "CrossSectionModels"
+    properties:
+      description: "Modelos para dados de corte transversal"
+
+  # Level 2 - Concepts
+  - type: StatisticalConcept
+    name: "Heteroscedasticity"
+    properties:
+      description: "Variancia dos erros nao e constante"
+      formal_definition: "Var(u_i|X_i) != sigma^2"
+
+  - type: StatisticalConcept
+    name: "Autocorrelation"
+    properties:
+      description: "Correlacao serial nos termos de erro"
+      formal_definition: "Cov(u_i, u_j) != 0 para i != j"
+
+  - type: StatisticalConcept
+    name: "Endogeneity"
+    properties:
+      description: "Correlacao entre regressores e termo de erro"
+      formal_definition: "E(u|X) != 0"
+
+  - type: StatisticalConcept
+    name: "Multicollinearity"
+    properties:
+      description: "Alta correlacao entre variaveis independentes"
+
+  # Level 1 - Facts
+  - type: Estimator
+    name: "FixedEffects"
+    properties:
+      module_path: "linearmodels.panel.model.PanelOLS"
+      description: "Estimador de efeitos fixos para dados em painel"
+      assumptions: "Efeitos individuais correlacionados com regressores"
+      supports_unbalanced: true
+
+  - type: Estimator
+    name: "RandomEffects"
+    properties:
+      module_path: "linearmodels.panel.model.RandomEffects"
+      description: "Estimador de efeitos aleatorios para dados em painel"
+      assumptions: "Efeitos individuais nao correlacionados com regressores"
+      supports_unbalanced: true
+
+  - type: Estimator
+    name: "OrdinaryLeastSquares"
+    properties:
+      module_path: "statsmodels.regression.linear_model.OLS"
+      description: "Minimos quadrados ordinarios"
+      supports_unbalanced: false
+
+  - type: DiagnosticTest
+    name: "HausmanTest"
+    properties:
+      null_hypothesis: "Efeitos aleatorios sao consistentes"
+      interpretation_guide: "p < 0.05: rejeita H0, usar efeitos fixos"
+
+  - type: DiagnosticTest
+    name: "BreuschPaganTest"
+    properties:
+      null_hypothesis: "Homocedasticidade"
+      interpretation_guide: "p < 0.05: rejeita H0, ha heteroscedasticidade"
+
+  - type: DiagnosticTest
+    name: "WooldridgeTest"
+    properties:
+      null_hypothesis: "Sem autocorrelacao de primeira ordem"
+      interpretation_guide: "p < 0.05: rejeita H0, ha autocorrelacao"
+
+  - type: StandardError
+    name: "RobustSE"
+    properties:
+      description: "Erros-padrao robustos a heteroscedasticidade (HC1)"
+
+  - type: StandardError
+    name: "ClusteredSE"
+    properties:
+      description: "Erros-padrao clusterizados por grupo"
+
+relationships:
+  - source: "FixedEffects"
+    relation: "BELONGS_TO"
+    target: "PanelDataModels"
+
+  - source: "RandomEffects"
+    relation: "BELONGS_TO"
+    target: "PanelDataModels"
+
+  - source: "OrdinaryLeastSquares"
+    relation: "BELONGS_TO"
+    target: "CrossSectionModels"
+
+  - source: "HausmanTest"
+    relation: "VALIDATES"
+    target: "FixedEffects"
+
+  - source: "HausmanTest"
+    relation: "VALIDATES"
+    target: "RandomEffects"
+
+  - source: "BreuschPaganTest"
+    relation: "TESTS_FOR"
+    target: "Heteroscedasticity"
+
+  - source: "WooldridgeTest"
+    relation: "TESTS_FOR"
+    target: "Autocorrelation"
+
+  - source: "FixedEffects"
+    relation: "ADDRESSES"
+    target: "Endogeneity"
+
+  - source: "FixedEffects"
+    relation: "ALTERNATIVE_TO"
+    target: "RandomEffects"
+
+  - source: "FixedEffects"
+    relation: "SUPPORTS_SE"
+    target: "RobustSE"
+
+  - source: "FixedEffects"
+    relation: "SUPPORTS_SE"
+    target: "ClusteredSE"

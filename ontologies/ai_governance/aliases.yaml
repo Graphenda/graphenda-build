@@ -1,0 +1,35 @@
+# Frameworks regulatorios
+"EU AI Act": "European_AI_Act"
+"AI Act": "European_AI_Act"
+"lei de IA europeia": "European_AI_Act"
+"LGPD": "Lei_Geral_Protecao_Dados"
+"lei geral de protecao de dados": "Lei_Geral_Protecao_Dados"
+"GDPR": "General_Data_Protection_Regulation"
+"regulamento geral de protecao de dados": "General_Data_Protection_Regulation"
+"Basel": "Basel_III"
+"Basel 3": "Basel_III"
+"Basileia": "Basel_III"
+"Basileia 3": "Basel_III"
+
+# Orgaos reguladores
+"BCBS": "Basel_Committee_Banking_Supervision"
+"Comite de Basileia": "Basel_Committee_Banking_Supervision"
+"BCB": "Banco_Central_Brasil"
+"Banco Central": "Banco_Central_Brasil"
+"BACEN": "Banco_Central_Brasil"
+"European Commission": "European_Commission"
+"Comissao Europeia": "European_Commission"
+"ANPD": "Autoridade_Nacional_Protecao_Dados"
+
+# Standards
+"ISO 27001": "ISO_27001"
+"ISO 42001": "ISO_42001"
+"NIST AI RMF": "NIST_AI_Risk_Management_Framework"
+"NIST": "National_Institute_Standards_Technology"
+
+# Categorias de risco
+"alto risco": "High_Risk_AI"
+"high risk": "High_Risk_AI"
+"risco inaceitavel": "Unacceptable_Risk_AI"
+"risco limitado": "Limited_Risk_AI"
+"risco minimo": "Minimal_Risk_AI"

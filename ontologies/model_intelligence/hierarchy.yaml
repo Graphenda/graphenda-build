@@ -1,0 +1,30 @@
+levels:
+  1:
+    name: "Facts"
+    description: "Entidades concretas: estimadores, testes, parametros"
+    entity_types:
+      - Estimator
+      - DiagnosticTest
+      - Parameter
+      - StandardError
+      - Dataset
+      - CodePattern
+      - ResultMetric
+      - Literature
+
+  2:
+    name: "Concepts"
+    description: "Conceitos estatisticos abstratos"
+    entity_types:
+      - StatisticalConcept
+
+  3:
+    name: "Domains"
+    description: "Familias de modelos e dominios"
+    entity_types:
+      - ModelFamily
+
+cross_level_relationships:
+  - ADDRESSES
+  - TESTS_FOR
+  - BELONGS_TO

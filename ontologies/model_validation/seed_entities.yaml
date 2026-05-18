@@ -1,0 +1,1148 @@
+# ===========================================================================
+# SEED ENTITIES — Model Validation Ontology
+# ===========================================================================
+
+entities:
+
+  # =========================================================================
+  # Level 3 — Domains (25 dominios de modelagem)
+  # =========================================================================
+
+  - type: ModelDomain
+    name: "LinearRegressionModels"
+    properties:
+      description: "Modelos lineares classicos: OLS, WLS, GLS, Ridge, Lasso, ElasticNet"
+      maturity: "established"
+
+  - type: ModelDomain
+    name: "PanelDataModels"
+    properties:
+      description: "Modelos para dados longitudinais: Fixed Effects, Random Effects, GMM"
+      maturity: "established"
+
+  - type: ModelDomain
+    name: "TimeSeriesModels"
+    properties:
+      description: "Modelos para dados temporais: ARIMA, GARCH, VAR, ETS"
+      maturity: "established"
+
+  - type: ModelDomain
+    name: "GeneralizedLinearModels"
+    properties:
+      description: "Extensao de modelos lineares para distribuicoes nao-normais: Logistic, Poisson, Gamma"
+      maturity: "established"
+
+  - type: ModelDomain
+    name: "SurvivalModels"
+    properties:
+      description: "Modelos para tempo ate evento: Cox PH, AFT, Kaplan-Meier"
+      maturity: "established"
+
+  - type: ModelDomain
+    name: "ClassificationModels"
+    properties:
+      description: "ML supervisionado para classes discretas: Random Forest, XGBoost, SVM"
+      maturity: "mature"
+
+  - type: ModelDomain
+    name: "RegressionMLModels"
+    properties:
+      description: "ML supervisionado para variavel continua: tree-based, SVR, kNN"
+      maturity: "mature"
+
+  - type: ModelDomain
+    name: "EnsembleModels"
+    properties:
+      description: "Combinacao de modelos: Bagging, Boosting, Stacking, Voting"
+      maturity: "mature"
+
+  - type: ModelDomain
+    name: "ClusteringModels"
+    properties:
+      description: "Modelos nao-supervisionados de agrupamento: K-Means, DBSCAN, GMM"
+      maturity: "mature"
+
+  - type: ModelDomain
+    name: "DimensionalityReduction"
+    properties:
+      description: "Reducao de dimensionalidade: PCA, t-SNE, UMAP, Factor Analysis"
+      maturity: "mature"
+
+  - type: ModelDomain
+    name: "BayesianModels"
+    properties:
+      description: "Inferencia bayesiana: Gaussian Processes, Hierarchical Models, BART"
+      maturity: "mature"
+
+  - type: ModelDomain
+    name: "ReinforcementLearning"
+    properties:
+      description: "Aprendizado por reforco: DQN, PPO, Multi-Armed Bandits"
+      maturity: "emerging"
+
+  - type: ModelDomain
+    name: "DeepLearningVision"
+    properties:
+      description: "Redes neurais para imagens: CNNs, Object Detection, Segmentation"
+      maturity: "mature"
+
+  - type: ModelDomain
+    name: "DeepLearningTabular"
+    properties:
+      description: "Redes neurais para dados tabulares: MLP, TabNet, FT-Transformer"
+      maturity: "emerging"
+
+  - type: ModelDomain
+    name: "DeepLearningSequential"
+    properties:
+      description: "Redes neurais para sequencias: LSTM, GRU, Temporal Transformers"
+      maturity: "mature"
+
+  - type: ModelDomain
+    name: "NLPClassical"
+    properties:
+      description: "NLP pre-deep learning: TF-IDF, Topic Modeling, NER baseado em regras"
+      maturity: "established"
+
+  - type: ModelDomain
+    name: "NLPEmbeddings"
+    properties:
+      description: "Representacao vetorial de texto: Word2Vec, BERT, Sentence-BERT"
+      maturity: "mature"
+
+  - type: ModelDomain
+    name: "LargeLanguageModels"
+    properties:
+      description: "Foundation models de linguagem: GPT, Claude, Llama, Gemini"
+      maturity: "emerging"
+
+  - type: ModelDomain
+    name: "GenerativeModels"
+    properties:
+      description: "Modelos generativos: GANs, VAEs, Diffusion Models"
+      maturity: "emerging"
+
+  - type: ModelDomain
+    name: "RecommenderSystems"
+    properties:
+      description: "Sistemas de recomendacao: Collaborative Filtering, Matrix Factorization"
+      maturity: "mature"
+
+  - type: ModelDomain
+    name: "AnomalyDetection"
+    properties:
+      description: "Deteccao de anomalias e fraude: Isolation Forest, One-Class SVM, Autoencoders"
+      maturity: "mature"
+
+  - type: ModelDomain
+    name: "CausalInferenceModels"
+    properties:
+      description: "Modelos de inferencia causal: DiD, RDD, IV, Propensity Score"
+      maturity: "mature"
+
+  - type: ModelDomain
+    name: "GraphBasedModels"
+    properties:
+      description: "Modelos sobre grafos: GCN, GraphSAGE, Knowledge Graph Embeddings"
+      maturity: "emerging"
+
+  - type: ModelDomain
+    name: "OptimizationModels"
+    properties:
+      description: "Otimizacao matematica: LP, MIP, Metaheuristicas"
+      maturity: "established"
+
+  - type: ModelDomain
+    name: "SimulationModels"
+    properties:
+      description: "Simulacao: Monte Carlo, Agent-Based, Discrete Event, Stress Testing"
+      maturity: "established"
+
+  # =========================================================================
+  # Level 3 — Industry Sectors
+  # =========================================================================
+
+  - type: IndustrySector
+    name: "Banking"
+    properties:
+      description: "Bancos comerciais e de investimento"
+      regulatory_pressure: "very_high"
+
+  - type: IndustrySector
+    name: "Insurance"
+    properties:
+      description: "Seguradoras e resseguradoras"
+      regulatory_pressure: "very_high"
+
+  - type: IndustrySector
+    name: "Fintech"
+    properties:
+      description: "Empresas de tecnologia financeira"
+      regulatory_pressure: "high"
+
+  - type: IndustrySector
+    name: "Healthcare"
+    properties:
+      description: "Saude, farmaceutica, dispositivos medicos"
+      regulatory_pressure: "very_high"
+
+  - type: IndustrySector
+    name: "Government"
+    properties:
+      description: "Governo e setor publico"
+      regulatory_pressure: "high"
+
+  - type: IndustrySector
+    name: "Technology"
+    properties:
+      description: "Empresas de tecnologia e software"
+      regulatory_pressure: "medium"
+
+  - type: IndustrySector
+    name: "Retail"
+    properties:
+      description: "Varejo e e-commerce"
+      regulatory_pressure: "low"
+
+  # =========================================================================
+  # Level 2 — Validation Concepts (compartilhados entre dominios)
+  # =========================================================================
+
+  - type: ValidationConcept
+    name: "Overfitting"
+    properties:
+      description: "Modelo memoriza dados de treino e generaliza mal para dados novos"
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "Underfitting"
+    properties:
+      description: "Modelo e simples demais para capturar padroes nos dados"
+      severity: "medium"
+
+  - type: ValidationConcept
+    name: "Bias"
+    properties:
+      description: "Vies sistematico nas predicoes ou no tratamento de grupos"
+      severity: "critical"
+
+  - type: ValidationConcept
+    name: "Fairness"
+    properties:
+      description: "Equidade do modelo entre grupos demograficos protegidos"
+      severity: "critical"
+
+  - type: ValidationConcept
+    name: "Calibration"
+    properties:
+      description: "Alinhamento entre probabilidades preditas e frequencias observadas"
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "Discrimination"
+    properties:
+      description: "Capacidade do modelo de separar classes ou ordenar riscos"
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "DataDrift"
+    properties:
+      description: "Mudanca na distribuicao dos dados de entrada ao longo do tempo"
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "ConceptDrift"
+    properties:
+      description: "Mudanca na relacao entre features e target ao longo do tempo"
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "FeatureImportance"
+    properties:
+      description: "Contribuicao relativa de cada feature para a predicao"
+      severity: "medium"
+
+  - type: ValidationConcept
+    name: "ModelExplainability"
+    properties:
+      description: "Capacidade de explicar como o modelo toma decisoes"
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "ModelStability"
+    properties:
+      description: "Consistencia do modelo sob perturbacoes nos dados ou parametros"
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "Heteroscedasticity"
+    properties:
+      description: "Variancia dos erros nao e constante"
+      severity: "medium"
+
+  - type: ValidationConcept
+    name: "Autocorrelation"
+    properties:
+      description: "Correlacao serial nos termos de erro"
+      severity: "medium"
+
+  - type: ValidationConcept
+    name: "Multicollinearity"
+    properties:
+      description: "Alta correlacao entre variaveis independentes"
+      severity: "medium"
+
+  - type: ValidationConcept
+    name: "Endogeneity"
+    properties:
+      description: "Correlacao entre regressores e termo de erro"
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "Stationarity"
+    properties:
+      description: "Propriedades estatisticas constantes ao longo do tempo"
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "ClassImbalance"
+    properties:
+      description: "Distribuicao desigual de classes no dataset. Em casos extremos como fraude (0.1% positivos), metricas tradicionais como accuracy sao inuteis. Requer metricas especializadas (AUC-PR, Precision@K), tecnicas de reamostragem (SMOTE, undersampling), cost-sensitive learning e thresholds otimizados para o custo de negocio."
+      severity: "critical"
+
+  - type: ValidationConcept
+    name: "AsymmetricCost"
+    properties:
+      description: "Custo de erros e assimetrico: falso negativo (fraude nao detectada) custa muito mais que falso positivo (alerta falso). Modelos devem ser otimizados para o custo total, nao para accuracy. Em fraude bancaria, um FN pode custar milhares de dolares enquanto um FP custa apenas o tempo de investigacao."
+      severity: "critical"
+
+  - type: ValidationConcept
+    name: "RareEventModeling"
+    properties:
+      description: "Modelagem de eventos com prevalencia extremamente baixa (<1%). Comum em fraude, defaults de credito, falhas de equipamento, eventos medicos raros. Requer amostragem estratificada, metricas adequadas, validacao temporal e atencao especial a calibracao de probabilidades."
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "ThresholdOptimization"
+    properties:
+      description: "Escolha do ponto de corte (threshold) para converter probabilidades em decisoes binarias. Em fraude e anomalia, o threshold nao e 0.5 — deve ser otimizado para o tradeoff entre falsos positivos (custo operacional de investigacao) e falsos negativos (perda financeira). Tecnicas: Youden's J, custo minimo esperado, business-driven threshold."
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "TemporalValidation"
+    properties:
+      description: "Validacao que respeita a ordem temporal dos dados. Em fraude e credit scoring, NUNCA usar cross-validation aleatorio — usar time-based split onde treino e sempre anterior ao teste. Evita data leakage temporal."
+      severity: "critical"
+
+  - type: ValidationConcept
+    name: "AdversarialDrift"
+    properties:
+      description: "Em fraude, os fraudadores adaptam seu comportamento para evitar deteccao, causando drift adversarial nos padroes. Diferente de concept drift natural, e intencional e direcionado. Requer retreinamento frequente, monitoramento de taxa de deteccao e features robustas a manipulacao."
+      severity: "critical"
+
+  - type: ValidationConcept
+    name: "AlertFatigue"
+    properties:
+      description: "Excesso de falsos positivos leva investigadores a ignorar alertas reais. Em modelos de fraude, a taxa de falsos positivos deve ser controlada para manter a operacao viavel. Tipicamente, um modelo de fraude deve gerar no maximo 10-50 alertas por dia para uma equipe de investigacao."
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "Hallucination"
+    properties:
+      description: "Modelo gera informacao falsa apresentada como factual"
+      severity: "critical"
+
+  - type: ValidationConcept
+    name: "Toxicity"
+    properties:
+      description: "Modelo gera conteudo ofensivo, prejudicial ou discriminatorio"
+      severity: "critical"
+
+  - type: ValidationConcept
+    name: "Convergence"
+    properties:
+      description: "Processo de treinamento ou estimacao atinge solucao estavel"
+      severity: "medium"
+
+  - type: ValidationConcept
+    name: "Robustness"
+    properties:
+      description: "Resistencia do modelo a perturbacoes adversariais ou ruidosas"
+      severity: "high"
+
+  - type: ValidationConcept
+    name: "GoodnessOfFit"
+    properties:
+      description: "Quao bem o modelo se ajusta aos dados observados"
+      severity: "medium"
+
+  # =========================================================================
+  # Level 2 — Modeling Techniques
+  # =========================================================================
+
+  - type: ModelingTechnique
+    name: "CrossValidation"
+    properties:
+      description: "Avaliacao de modelo dividindo dados em folds de treino/teste"
+      technique_type: "validation"
+
+  - type: ModelingTechnique
+    name: "Bootstrapping"
+    properties:
+      description: "Reamostragem com reposicao para estimativa de incerteza"
+      technique_type: "validation"
+
+  - type: ModelingTechnique
+    name: "Regularization"
+    properties:
+      description: "Penalizacao de complexidade para prevenir overfitting (L1, L2, Dropout)"
+      technique_type: "regularization"
+
+  - type: ModelingTechnique
+    name: "HyperparameterTuning"
+    properties:
+      description: "Otimizacao de hiperparametros (Grid Search, Random Search, Bayesian)"
+      technique_type: "tuning"
+
+  - type: ModelingTechnique
+    name: "FeatureEngineering"
+    properties:
+      description: "Criacao e selecao de features para melhorar performance"
+      technique_type: "preprocessing"
+
+  - type: ModelingTechnique
+    name: "EarlyStopping"
+    properties:
+      description: "Interrupcao do treinamento quando performance no validation deteriora"
+      technique_type: "regularization"
+
+  - type: ModelingTechnique
+    name: "DataAugmentation"
+    properties:
+      description: "Aumento artificial do dataset de treino"
+      technique_type: "preprocessing"
+
+  - type: ModelingTechnique
+    name: "TransferLearning"
+    properties:
+      description: "Reutilizacao de modelo pre-treinado em tarefa diferente"
+      technique_type: "training"
+
+  - type: ModelingTechnique
+    name: "SMOTE"
+    properties:
+      description: "Synthetic Minority Over-sampling Technique. Gera exemplos sinteticos da classe minoritaria interpolando entre vizinhos. Variantes: SMOTE-NC (categoricas), Borderline-SMOTE, ADASYN."
+      technique_type: "resampling"
+
+  - type: ModelingTechnique
+    name: "Undersampling"
+    properties:
+      description: "Reduz a classe majoritaria para balancear o dataset. Tecnicas: Random Undersampling, Tomek Links, NearMiss, Cluster Centroids. Risco de perder informacao da classe majoritaria."
+      technique_type: "resampling"
+
+  - type: ModelingTechnique
+    name: "CostSensitiveLearning"
+    properties:
+      description: "Incorpora custos assimetricos diretamente na funcao de perda do modelo. Em fraude: peso do FN >> peso do FP. Implementacoes: sample_weight no sklearn, scale_pos_weight no XGBoost, class_weight no LogisticRegression."
+      technique_type: "training"
+
+  - type: ModelingTechnique
+    name: "FocalLoss"
+    properties:
+      description: "Funcao de perda que reduz o peso de exemplos faceis e foca nos dificeis. Originalmente para object detection (RetinaNet), amplamente usada em classificacao desbalanceada. gamma=2 e um bom default."
+      technique_type: "training"
+
+  - type: ModelingTechnique
+    name: "StratifiedSampling"
+    properties:
+      description: "Amostragem que preserva proporcao das classes em cada fold/split. Obrigatorio em datasets desbalanceados. StratifiedKFold, StratifiedShuffleSplit no sklearn."
+      technique_type: "validation"
+
+  - type: ModelingTechnique
+    name: "TemporalSplit"
+    properties:
+      description: "Divisao treino/teste baseada em tempo, nao aleatoria. Em fraude e credito, treino com dados passados e teste com dados futuros. Previne data leakage temporal."
+      technique_type: "validation"
+
+  - type: ModelingTechnique
+    name: "AnomalyScoreThresholding"
+    properties:
+      description: "Otimizacao do threshold de anomaly score para equilibrar deteccao e falsos alarmes. Tecnicas: percentile-based, business-cost optimization, precision-recall tradeoff."
+      technique_type: "postprocessing"
+
+  # =========================================================================
+  # Level 2 — Assumptions
+  # =========================================================================
+
+  - type: Assumption
+    name: "Linearity"
+    properties:
+      description: "Relacao entre variaveis e linear"
+      formal_definition: "E(Y|X) = Xb"
+
+  - type: Assumption
+    name: "Independence"
+    properties:
+      description: "Observacoes sao independentes entre si"
+      formal_definition: "Cov(e_i, e_j) = 0 para i != j"
+
+  - type: Assumption
+    name: "Normality"
+    properties:
+      description: "Residuos seguem distribuicao normal"
+      formal_definition: "e ~ N(0, sigma^2)"
+
+  - type: Assumption
+    name: "Homoscedasticity"
+    properties:
+      description: "Variancia dos erros e constante"
+      formal_definition: "Var(e_i|X_i) = sigma^2 para todo i"
+
+  - type: Assumption
+    name: "ProportionalHazards"
+    properties:
+      description: "Razao de hazard entre grupos e constante no tempo"
+      formal_definition: "h(t|X) = h_0(t) * exp(Xb)"
+
+  - type: Assumption
+    name: "StrictExogeneity"
+    properties:
+      description: "Erros nao correlacionados com regressores em todos os periodos"
+      formal_definition: "E(u_it | X_i1, ..., X_iT) = 0"
+
+  - type: Assumption
+    name: "IID"
+    properties:
+      description: "Dados sao independentes e identicamente distribuidos"
+      formal_definition: "X_i ~ F para todo i, independentes"
+
+  # =========================================================================
+  # Level 2 — Regulatory Frameworks
+  # =========================================================================
+
+  - type: RegulatoryFramework
+    name: "BaselAccord"
+    properties:
+      description: "Framework regulatorio internacional para bancos (Basel I/II/III/IV)"
+      scope: "banking"
+
+  - type: RegulatoryFramework
+    name: "EUAIActFramework"
+    properties:
+      description: "Regulacao europeia para IA baseada em risco"
+      scope: "all_sectors"
+
+  - type: RegulatoryFramework
+    name: "NISTAIRiskManagement"
+    properties:
+      description: "Framework de gestao de risco de IA do NIST (EUA)"
+      scope: "all_sectors"
+
+  - type: RegulatoryFramework
+    name: "SolvencyFramework"
+    properties:
+      description: "Framework regulatorio europeu para seguradoras"
+      scope: "insurance"
+
+  - type: RegulatoryFramework
+    name: "IFRSStandards"
+    properties:
+      description: "Normas internacionais de reporte financeiro (IFRS 9, 17)"
+      scope: "banking_insurance"
+
+  - type: RegulatoryFramework
+    name: "FDARegulations"
+    properties:
+      description: "Regulacao da FDA para modelos em saude e dispositivos medicos"
+      scope: "healthcare"
+
+  # =========================================================================
+  # Level 2 — Task Types
+  # =========================================================================
+
+  - type: TaskType
+    name: "BinaryClassification"
+    properties:
+      description: "Predicao de classe binaria (sim/nao, 0/1)"
+      data_type: "tabular"
+
+  - type: TaskType
+    name: "MulticlassClassification"
+    properties:
+      description: "Predicao de multiplas classes discretas"
+      data_type: "tabular"
+
+  - type: TaskType
+    name: "RegressionTask"
+    properties:
+      description: "Predicao de variavel continua"
+      data_type: "tabular"
+
+  - type: TaskType
+    name: "TimeSeriesForecasting"
+    properties:
+      description: "Previsao de valores futuros de uma serie temporal"
+      data_type: "time_series"
+
+  - type: TaskType
+    name: "TextGeneration"
+    properties:
+      description: "Geracao de texto em linguagem natural"
+      data_type: "text"
+
+  - type: TaskType
+    name: "TextClassification"
+    properties:
+      description: "Classificacao de textos em categorias"
+      data_type: "text"
+
+  - type: TaskType
+    name: "ImageClassification"
+    properties:
+      description: "Classificacao de imagens em categorias"
+      data_type: "image"
+
+  - type: TaskType
+    name: "ObjectDetection"
+    properties:
+      description: "Deteccao e localizacao de objetos em imagens"
+      data_type: "image"
+
+  - type: TaskType
+    name: "ClusteringTask"
+    properties:
+      description: "Agrupamento nao-supervisionado de observacoes"
+      data_type: "tabular"
+
+  - type: TaskType
+    name: "AnomalyDetectionTask"
+    properties:
+      description: "Deteccao de observacoes atipicas"
+      data_type: "tabular"
+
+  - type: TaskType
+    name: "RecommendationTask"
+    properties:
+      description: "Predicao de preferencias de usuarios para itens"
+      data_type: "tabular"
+
+  - type: TaskType
+    name: "CausalEstimation"
+    properties:
+      description: "Estimacao de efeitos causais"
+      data_type: "tabular"
+
+  # =========================================================================
+  # Level 1 — Metrics (especificos para rare events / fraude)
+  # =========================================================================
+
+  - type: Metric
+    name: "AUCPR"
+    properties:
+      description: "Area Under Precision-Recall Curve. Metrica principal para datasets extremamente desbalanceados. Diferente de AUC-ROC, nao e inflada pela classe majoritaria. Um modelo com AUC-ROC 0.99 pode ter AUC-PR 0.30 em fraude."
+      metric_type: "ranking"
+      range: "[0, 1]"
+      higher_is_better: true
+
+  - type: Metric
+    name: "PrecisionAtK"
+    properties:
+      description: "Precisao nos top K alertas. Em fraude, interessa saber: dos 100 casos que o modelo mais suspeita, quantos sao realmente fraude? Mais pratico que AUC para operacoes de investigacao."
+      metric_type: "ranking"
+      range: "[0, 1]"
+      higher_is_better: true
+
+  - type: Metric
+    name: "RecallAtFixedFPR"
+    properties:
+      description: "Recall mantendo taxa de falsos positivos fixa. Ex: qual a taxa de deteccao de fraude se eu aceito investigar no maximo 1% das transacoes? Permite dimensionar equipe de investigacao."
+      metric_type: "ranking"
+      range: "[0, 1]"
+      higher_is_better: true
+
+  - type: Metric
+    name: "AUCROC"
+    properties:
+      description: "Area Under ROC Curve. Mede discriminacao geral do modelo. Em datasets muito desbalanceados pode ser enganosa — preferir AUC-PR."
+      metric_type: "ranking"
+      range: "[0, 1]"
+      higher_is_better: true
+
+  - type: Metric
+    name: "F1Score"
+    properties:
+      description: "Media harmonica de precision e recall. Util quando ambos importam, mas em fraude geralmente recall e mais importante que precision."
+      metric_type: "accuracy"
+      range: "[0, 1]"
+      higher_is_better: true
+
+  - type: Metric
+    name: "PopulationStabilityIndex"
+    properties:
+      description: "PSI mede quanto a distribuicao dos scores mudou entre populacoes (treino vs producao). PSI > 0.25 indica drift significativo. Essencial para monitoramento de modelos de fraude em producao."
+      metric_type: "stability"
+      range: "[0, inf)"
+      higher_is_better: false
+
+  - type: Metric
+    name: "KolmogorovSmirnovStatistic"
+    properties:
+      description: "KS Statistic. Maximo da diferenca entre CDFs das classes positiva e negativa. Muito usado em credit scoring e fraude. KS > 0.40 e considerado bom."
+      metric_type: "discrimination"
+      range: "[0, 1]"
+      higher_is_better: true
+
+  - type: Metric
+    name: "ExpectedCost"
+    properties:
+      description: "Custo esperado total = C_FN * FN + C_FP * FP. Em fraude: C_FN = valor medio da fraude, C_FP = custo de investigacao. Metrica que alinha modelo com objetivo de negocio."
+      metric_type: "business"
+      range: "[0, inf)"
+      higher_is_better: false
+
+  - type: Metric
+    name: "AlertRate"
+    properties:
+      description: "Percentual de transacoes que geram alerta. Em fraude, deve ser controlada para viabilidade operacional. Tipicamente 1-5% das transacoes em modelos de primeira linha."
+      metric_type: "operational"
+      range: "[0, 1]"
+      higher_is_better: false
+
+  - type: Metric
+    name: "DetectionRate"
+    properties:
+      description: "Percentual de fraudes reais detectadas pelo modelo (= Recall). Meta tipica: >80% de deteccao com <5% de alert rate."
+      metric_type: "operational"
+      range: "[0, 1]"
+      higher_is_better: true
+
+  # =========================================================================
+  # Level 1 — Models (especificos para fraude / anomalia)
+  # =========================================================================
+
+  - type: Model
+    name: "IsolationForest"
+    properties:
+      description: "Detecta anomalias isolando observacoes com poucas splits em arvores aleatorias. Nao precisa de labels. Funciona bem em datasets com muitas features. Anomaly score baseado no path length medio."
+      model_type: "unsupervised"
+      complexity: "medium"
+      interpretability: "grey_box"
+
+  - type: Model
+    name: "XGBoost"
+    properties:
+      description: "Gradient boosting otimizado. Dominante em competicoes e industria para dados tabulares. Em fraude, usar com scale_pos_weight para class imbalance. Features de importancia nativas."
+      model_type: "supervised"
+      complexity: "medium"
+      interpretability: "grey_box"
+
+  - type: Model
+    name: "LightGBM"
+    properties:
+      description: "Gradient boosting otimizado para velocidade. Suporta is_unbalance e scale_pos_weight. Mais rapido que XGBoost em datasets grandes. Muito usado em fraude em producao por baixa latencia."
+      model_type: "supervised"
+      complexity: "medium"
+      interpretability: "grey_box"
+
+  - type: Model
+    name: "LogisticRegression"
+    properties:
+      description: "Classificador linear com output probabilistico. Baseline obrigatoria em qualquer projeto de fraude/credito. Interpretavel, rapido, funciona com class_weight='balanced'. Coeficientes tem interpretacao direta."
+      model_type: "supervised"
+      complexity: "low"
+      interpretability: "white_box"
+
+  - type: Model
+    name: "AutoencoderAnomaly"
+    properties:
+      description: "Autoencoder treinado em transacoes normais. Anomalias tem alto reconstruction error. Nao precisa de labels de fraude para treino. Util quando labels sao escassas ou ruidosas."
+      model_type: "unsupervised"
+      complexity: "high"
+      interpretability: "black_box"
+
+  - type: Model
+    name: "OneClassSVM"
+    properties:
+      description: "SVM treinado apenas na classe normal. Define fronteira de decisao ao redor de transacoes normais. Bom para datasets pequenos sem labels de fraude."
+      model_type: "unsupervised"
+      complexity: "medium"
+      interpretability: "black_box"
+
+  # =========================================================================
+  # Level 1 — Regulations (especificas para fraude)
+  # =========================================================================
+
+  - type: Regulation
+    name: "PCIDSS"
+    properties:
+      issuer: "PCI Security Standards Council"
+      description: "Payment Card Industry Data Security Standard. Exige monitoramento de transacoes e deteccao de fraude em cartoes."
+      jurisdiction: "global"
+
+  - type: Regulation
+    name: "AMLRegulations"
+    properties:
+      issuer: "FATF / FinCEN / BACEN"
+      description: "Anti-Money Laundering. Exige modelos de deteccao de lavagem de dinheiro, SAR filing, monitoramento de transacoes suspeitas."
+      jurisdiction: "global"
+
+  - type: Regulation
+    name: "SR117"
+    properties:
+      issuer: "Federal Reserve"
+      year: 2011
+      description: "Supervisory Guidance on Model Risk Management. Define padrao para validacao, documentacao e governanca de modelos em bancos."
+      jurisdiction: "USA"
+
+  # =========================================================================
+  # Level 1 — Visualizations (para fraude / rare events)
+  # =========================================================================
+
+  - type: Visualization
+    name: "PrecisionRecallCurve"
+    properties:
+      description: "Curva PR. Mais informativa que ROC em datasets desbalanceados. Mostra tradeoff entre precision (taxa de acerto nos alertas) e recall (taxa de deteccao)."
+      visualization_type: "plot"
+
+  - type: Visualization
+    name: "LiftChart"
+    properties:
+      description: "Lift chart mostra quantas vezes melhor o modelo e vs aleatorio. Em fraude: 'nos top 1% de scores, o modelo encontra 10x mais fraudes que aleatorio'."
+      visualization_type: "plot"
+
+  - type: Visualization
+    name: "CumulativeGainsChart"
+    properties:
+      description: "Mostra % de fraudes capturadas vs % de populacao investigada. Permite responder: 'investigando 5% das transacoes, capturo quantas fraudes?'"
+      visualization_type: "plot"
+
+  - type: Visualization
+    name: "ScoreDistributionPlot"
+    properties:
+      description: "Distribuicao dos scores para classe positiva vs negativa. Em fraude, deve mostrar boa separacao. Sobreposicao indica area de incerteza."
+      visualization_type: "plot"
+
+  - type: Visualization
+    name: "ConfusionMatrix"
+    properties:
+      description: "Tabela de TP, FP, FN, TN. Em fraude com 0.1% prevalencia, a diagonal principal sera dominada por TN. Focar nos valores absolutos de FN (fraudes perdidas)."
+      visualization_type: "table"
+
+  # =========================================================================
+  # RELATIONSHIPS — conexoes iniciais entre seed entities
+  # =========================================================================
+
+relationships:
+
+  # --- Domains → Industry Sectors ---
+  - source: "LinearRegressionModels"
+    relation: "DOMAIN_APPLIES_TO"
+    target: "Banking"
+  - source: "PanelDataModels"
+    relation: "DOMAIN_APPLIES_TO"
+    target: "Banking"
+  - source: "TimeSeriesModels"
+    relation: "DOMAIN_APPLIES_TO"
+    target: "Banking"
+  - source: "SurvivalModels"
+    relation: "DOMAIN_APPLIES_TO"
+    target: "Insurance"
+  - source: "ClassificationModels"
+    relation: "DOMAIN_APPLIES_TO"
+    target: "Banking"
+  - source: "ClassificationModels"
+    relation: "DOMAIN_APPLIES_TO"
+    target: "Fintech"
+  - source: "LargeLanguageModels"
+    relation: "DOMAIN_APPLIES_TO"
+    target: "Technology"
+  - source: "AnomalyDetection"
+    relation: "DOMAIN_APPLIES_TO"
+    target: "Banking"
+  - source: "RecommenderSystems"
+    relation: "DOMAIN_APPLIES_TO"
+    target: "Retail"
+  - source: "DeepLearningVision"
+    relation: "DOMAIN_APPLIES_TO"
+    target: "Healthcare"
+  - source: "CausalInferenceModels"
+    relation: "DOMAIN_APPLIES_TO"
+    target: "Healthcare"
+  - source: "SimulationModels"
+    relation: "DOMAIN_APPLIES_TO"
+    target: "Banking"
+
+  # --- Domains → Task Types ---
+  - source: "LinearRegressionModels"
+    relation: "DOMAIN_USES_TASK"
+    target: "RegressionTask"
+  - source: "PanelDataModels"
+    relation: "DOMAIN_USES_TASK"
+    target: "RegressionTask"
+  - source: "TimeSeriesModels"
+    relation: "DOMAIN_USES_TASK"
+    target: "TimeSeriesForecasting"
+  - source: "GeneralizedLinearModels"
+    relation: "DOMAIN_USES_TASK"
+    target: "BinaryClassification"
+  - source: "ClassificationModels"
+    relation: "DOMAIN_USES_TASK"
+    target: "BinaryClassification"
+  - source: "ClassificationModels"
+    relation: "DOMAIN_USES_TASK"
+    target: "MulticlassClassification"
+  - source: "RegressionMLModels"
+    relation: "DOMAIN_USES_TASK"
+    target: "RegressionTask"
+  - source: "ClusteringModels"
+    relation: "DOMAIN_USES_TASK"
+    target: "ClusteringTask"
+  - source: "AnomalyDetection"
+    relation: "DOMAIN_USES_TASK"
+    target: "AnomalyDetectionTask"
+  - source: "LargeLanguageModels"
+    relation: "DOMAIN_USES_TASK"
+    target: "TextGeneration"
+  - source: "NLPClassical"
+    relation: "DOMAIN_USES_TASK"
+    target: "TextClassification"
+  - source: "DeepLearningVision"
+    relation: "DOMAIN_USES_TASK"
+    target: "ImageClassification"
+  - source: "DeepLearningVision"
+    relation: "DOMAIN_USES_TASK"
+    target: "ObjectDetection"
+  - source: "RecommenderSystems"
+    relation: "DOMAIN_USES_TASK"
+    target: "RecommendationTask"
+  - source: "CausalInferenceModels"
+    relation: "DOMAIN_USES_TASK"
+    target: "CausalEstimation"
+
+  # --- Techniques → Validation Concepts ---
+  - source: "CrossValidation"
+    relation: "MITIGATES"
+    target: "Overfitting"
+  - source: "Regularization"
+    relation: "MITIGATES"
+    target: "Overfitting"
+  - source: "EarlyStopping"
+    relation: "MITIGATES"
+    target: "Overfitting"
+  - source: "Bootstrapping"
+    relation: "MITIGATES"
+    target: "ModelStability"
+  - source: "FeatureEngineering"
+    relation: "MITIGATES"
+    target: "Multicollinearity"
+  - source: "DataAugmentation"
+    relation: "MITIGATES"
+    target: "ClassImbalance"
+  - source: "HyperparameterTuning"
+    relation: "MITIGATES"
+    target: "Underfitting"
+
+  # --- Regulatory Frameworks → Industry Sectors ---
+  - source: "BaselAccord"
+    relation: "APPLIES_TO_SECTOR"
+    target: "Banking"
+  - source: "EUAIActFramework"
+    relation: "APPLIES_TO_SECTOR"
+    target: "Banking"
+  - source: "EUAIActFramework"
+    relation: "APPLIES_TO_SECTOR"
+    target: "Technology"
+  - source: "EUAIActFramework"
+    relation: "APPLIES_TO_SECTOR"
+    target: "Healthcare"
+  - source: "SolvencyFramework"
+    relation: "APPLIES_TO_SECTOR"
+    target: "Insurance"
+  - source: "NISTAIRiskManagement"
+    relation: "APPLIES_TO_SECTOR"
+    target: "Government"
+  - source: "IFRSStandards"
+    relation: "APPLIES_TO_SECTOR"
+    target: "Banking"
+  - source: "IFRSStandards"
+    relation: "APPLIES_TO_SECTOR"
+    target: "Insurance"
+  - source: "FDARegulations"
+    relation: "APPLIES_TO_SECTOR"
+    target: "Healthcare"
+
+  # --- Anomaly Detection / Fraud — a rede de conhecimento ---
+
+  # Domain → Concepts (o que importa em fraude)
+  - source: "AnomalyDetection"
+    relation: "DOMAIN_USES_TASK"
+    target: "BinaryClassification"
+
+  # Models → Domain
+  - source: "IsolationForest"
+    relation: "BELONGS_TO"
+    target: "AnomalyDetection"
+  - source: "XGBoost"
+    relation: "BELONGS_TO"
+    target: "ClassificationModels"
+  - source: "LightGBM"
+    relation: "BELONGS_TO"
+    target: "ClassificationModels"
+  - source: "LogisticRegression"
+    relation: "BELONGS_TO"
+    target: "GeneralizedLinearModels"
+  - source: "AutoencoderAnomaly"
+    relation: "BELONGS_TO"
+    target: "AnomalyDetection"
+  - source: "OneClassSVM"
+    relation: "BELONGS_TO"
+    target: "AnomalyDetection"
+
+  # Models → Validation Concepts (problemas que enfrentam)
+  - source: "IsolationForest"
+    relation: "SUFFERS_FROM"
+    target: "ClassImbalance"
+  - source: "XGBoost"
+    relation: "SUFFERS_FROM"
+    target: "ClassImbalance"
+  - source: "LightGBM"
+    relation: "SUFFERS_FROM"
+    target: "ClassImbalance"
+  - source: "LogisticRegression"
+    relation: "SUFFERS_FROM"
+    target: "ClassImbalance"
+  - source: "XGBoost"
+    relation: "ADDRESSES"
+    target: "RareEventModeling"
+  - source: "IsolationForest"
+    relation: "ADDRESSES"
+    target: "RareEventModeling"
+  - source: "AutoencoderAnomaly"
+    relation: "ADDRESSES"
+    target: "RareEventModeling"
+
+  # Models → Metrics (como sao avaliados)
+  - source: "IsolationForest"
+    relation: "EVALUATED_BY"
+    target: "AUCPR"
+  - source: "XGBoost"
+    relation: "EVALUATED_BY"
+    target: "AUCPR"
+  - source: "XGBoost"
+    relation: "EVALUATED_BY"
+    target: "PrecisionAtK"
+  - source: "XGBoost"
+    relation: "EVALUATED_BY"
+    target: "KolmogorovSmirnovStatistic"
+  - source: "LightGBM"
+    relation: "EVALUATED_BY"
+    target: "AUCPR"
+  - source: "LightGBM"
+    relation: "EVALUATED_BY"
+    target: "PrecisionAtK"
+  - source: "LogisticRegression"
+    relation: "EVALUATED_BY"
+    target: "AUCROC"
+  - source: "LogisticRegression"
+    relation: "EVALUATED_BY"
+    target: "KolmogorovSmirnovStatistic"
+
+  # Models → Regulations
+  - source: "IsolationForest"
+    relation: "REGULATED_BY"
+    target: "AMLRegulations"
+  - source: "XGBoost"
+    relation: "REGULATED_BY"
+    target: "SR117"
+  - source: "LogisticRegression"
+    relation: "REGULATED_BY"
+    target: "SR117"
+
+  # Regulations → Frameworks
+  - source: "SR117"
+    relation: "PART_OF_FRAMEWORK"
+    target: "BaselAccord"
+  - source: "PCIDSS"
+    relation: "PART_OF_FRAMEWORK"
+    target: "BaselAccord"
+  - source: "AMLRegulations"
+    relation: "PART_OF_FRAMEWORK"
+    target: "BaselAccord"
+
+  # Metrics → Concepts (o que medem)
+  - source: "AUCPR"
+    relation: "MEASURES"
+    target: "Discrimination"
+  - source: "AUCPR"
+    relation: "MEASURES"
+    target: "ClassImbalance"
+  - source: "PrecisionAtK"
+    relation: "MEASURES"
+    target: "ClassImbalance"
+  - source: "PrecisionAtK"
+    relation: "MEASURES"
+    target: "AlertFatigue"
+  - source: "RecallAtFixedFPR"
+    relation: "MEASURES"
+    target: "RareEventModeling"
+  - source: "PopulationStabilityIndex"
+    relation: "MEASURES"
+    target: "DataDrift"
+  - source: "KolmogorovSmirnovStatistic"
+    relation: "MEASURES"
+    target: "Discrimination"
+  - source: "ExpectedCost"
+    relation: "MEASURES"
+    target: "AsymmetricCost"
+  - source: "AlertRate"
+    relation: "MEASURES"
+    target: "AlertFatigue"
+  - source: "DetectionRate"
+    relation: "MEASURES"
+    target: "RareEventModeling"
+
+  # Techniques → Concepts (o que mitigam)
+  - source: "SMOTE"
+    relation: "MITIGATES"
+    target: "ClassImbalance"
+  - source: "Undersampling"
+    relation: "MITIGATES"
+    target: "ClassImbalance"
+  - source: "CostSensitiveLearning"
+    relation: "MITIGATES"
+    target: "AsymmetricCost"
+  - source: "CostSensitiveLearning"
+    relation: "MITIGATES"
+    target: "ClassImbalance"
+  - source: "FocalLoss"
+    relation: "MITIGATES"
+    target: "ClassImbalance"
+  - source: "StratifiedSampling"
+    relation: "MITIGATES"
+    target: "ClassImbalance"
+  - source: "TemporalSplit"
+    relation: "MITIGATES"
+    target: "TemporalValidation"
+  - source: "AnomalyScoreThresholding"
+    relation: "MITIGATES"
+    target: "ThresholdOptimization"
+  - source: "AnomalyScoreThresholding"
+    relation: "MITIGATES"
+    target: "AlertFatigue"
+
+  # Concepts → Visualizations
+  - source: "ClassImbalance"
+    relation: "VISUALIZED_BY"
+    target: "PrecisionRecallCurve"
+  - source: "ClassImbalance"
+    relation: "VISUALIZED_BY"
+    target: "LiftChart"
+  - source: "Discrimination"
+    relation: "VISUALIZED_BY"
+    target: "CumulativeGainsChart"
+  - source: "Discrimination"
+    relation: "VISUALIZED_BY"
+    target: "ScoreDistributionPlot"
+  - source: "ThresholdOptimization"
+    relation: "VISUALIZED_BY"
+    target: "PrecisionRecallCurve"

@@ -1,0 +1,493 @@
+# ===========================================================================
+# ALIASES — Model Validation Ontology
+# ===========================================================================
+# Formato: "alias" : "CanonicalName"
+# Case-insensitive. Fuzzy matching (85%) pega variacoes nao listadas.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# MODELS — Linear Regression
+# ---------------------------------------------------------------------------
+"OLS": "OrdinaryLeastSquares"
+"MQO": "OrdinaryLeastSquares"
+"minimos quadrados": "OrdinaryLeastSquares"
+"least squares": "OrdinaryLeastSquares"
+"WLS": "WeightedLeastSquares"
+"GLS": "GeneralizedLeastSquares"
+"MQG": "GeneralizedLeastSquares"
+"ridge": "RidgeRegression"
+"L2 regression": "RidgeRegression"
+"lasso": "LassoRegression"
+"L1 regression": "LassoRegression"
+"elastic net": "ElasticNet"
+
+# ---------------------------------------------------------------------------
+# MODELS — Panel Data
+# ---------------------------------------------------------------------------
+"FE": "FixedEffects"
+"efeitos fixos": "FixedEffects"
+"fixed effects": "FixedEffects"
+"within estimator": "FixedEffects"
+"RE": "RandomEffects"
+"efeitos aleatorios": "RandomEffects"
+"random effects": "RandomEffects"
+"GMM": "GeneralizedMethodOfMoments"
+"Arellano-Bond": "ArellanoBondGMM"
+"difference GMM": "ArellanoBondGMM"
+"Blundell-Bond": "BlundellBondGMM"
+"system GMM": "BlundellBondGMM"
+"Hausman-Taylor": "HausmanTaylorEstimator"
+"pooled OLS": "PooledOLS"
+
+# ---------------------------------------------------------------------------
+# MODELS — Time Series
+# ---------------------------------------------------------------------------
+"ARIMA": "ARIMA"
+"SARIMA": "SeasonalARIMA"
+"ETS": "ExponentialSmoothing"
+"VAR": "VectorAutoregression"
+"VECM": "VectorErrorCorrection"
+"GARCH": "GARCH"
+"EGARCH": "EGARCH"
+
+# ---------------------------------------------------------------------------
+# MODELS — GLM
+# ---------------------------------------------------------------------------
+"logistic regression": "LogisticRegression"
+"regressao logistica": "LogisticRegression"
+"logit": "LogisticRegression"
+"probit": "ProbitRegression"
+"poisson regression": "PoissonRegression"
+
+# ---------------------------------------------------------------------------
+# MODELS — Survival
+# ---------------------------------------------------------------------------
+"Cox": "CoxProportionalHazards"
+"Cox PH": "CoxProportionalHazards"
+"proportional hazards": "CoxProportionalHazards"
+"Kaplan-Meier": "KaplanMeierEstimator"
+"KM": "KaplanMeierEstimator"
+"AFT": "AcceleratedFailureTime"
+
+# ---------------------------------------------------------------------------
+# MODELS — Classification ML
+# ---------------------------------------------------------------------------
+"decision tree": "DecisionTree"
+"arvore de decisao": "DecisionTree"
+"CART": "DecisionTree"
+"random forest": "RandomForest"
+"floresta aleatoria": "RandomForest"
+"RF": "RandomForest"
+"XGBoost": "XGBoost"
+"xgb": "XGBoost"
+"LightGBM": "LightGBM"
+"lgbm": "LightGBM"
+"CatBoost": "CatBoost"
+"gradient boosting": "GradientBoosting"
+"GBM": "GradientBoosting"
+"GBDT": "GradientBoosting"
+"SVM": "SupportVectorMachine"
+"SVC": "SupportVectorMachine"
+"SVR": "SupportVectorRegression"
+"kNN": "KNearestNeighbors"
+"k-nearest neighbors": "KNearestNeighbors"
+"naive bayes": "NaiveBayes"
+"AdaBoost": "AdaBoost"
+
+# ---------------------------------------------------------------------------
+# MODELS — Clustering
+# ---------------------------------------------------------------------------
+"k-means": "KMeans"
+"kmeans": "KMeans"
+"DBSCAN": "DBSCAN"
+"HDBSCAN": "HDBSCAN"
+
+# ---------------------------------------------------------------------------
+# MODELS — Bayesian
+# ---------------------------------------------------------------------------
+"GP": "GaussianProcess"
+"gaussian process": "GaussianProcess"
+"BNN": "BayesianNeuralNetwork"
+"BART": "BayesianAdditiveRegressionTrees"
+"HMM": "HiddenMarkovModel"
+
+# ---------------------------------------------------------------------------
+# MODELS — Deep Learning
+# ---------------------------------------------------------------------------
+"MLP": "MultilayerPerceptron"
+"perceptron": "MultilayerPerceptron"
+"CNN": "ConvolutionalNeuralNetwork"
+"ResNet": "ResNet"
+"EfficientNet": "EfficientNet"
+"ViT": "VisionTransformer"
+"YOLO": "YOLO"
+"U-Net": "UNet"
+"RNN": "RecurrentNeuralNetwork"
+"LSTM": "LongShortTermMemory"
+"GRU": "GatedRecurrentUnit"
+"Transformer": "TransformerArchitecture"
+"attention": "AttentionMechanism"
+"self-attention": "AttentionMechanism"
+"TabNet": "TabNet"
+"seq2seq": "Seq2Seq"
+"encoder-decoder": "Seq2Seq"
+
+# ---------------------------------------------------------------------------
+# MODELS — NLP / Embeddings
+# ---------------------------------------------------------------------------
+"Word2Vec": "Word2Vec"
+"GloVe": "GloVe"
+"FastText": "FastText"
+"BERT": "BERT"
+"RoBERTa": "RoBERTa"
+"DeBERTa": "DeBERTa"
+"SBERT": "SentenceBERT"
+"sentence-BERT": "SentenceBERT"
+"TF-IDF": "TFIDF"
+"tf-idf": "TFIDF"
+"bag of words": "BagOfWords"
+"BoW": "BagOfWords"
+"LDA": "LatentDirichletAllocation"
+"topic modeling": "LatentDirichletAllocation"
+"NER": "NamedEntityRecognition"
+
+# ---------------------------------------------------------------------------
+# MODELS — LLM
+# ---------------------------------------------------------------------------
+"GPT": "GPT"
+"GPT-4": "GPT4"
+"GPT-4o": "GPT4o"
+"Claude": "Claude"
+"Llama": "Llama"
+"Llama 2": "Llama2"
+"Llama 3": "Llama3"
+"Mistral": "Mistral"
+"Gemini": "Gemini"
+"Phi": "Phi"
+"Gemma": "Gemma"
+"T5": "T5"
+"BART model": "BART"
+"RAG": "RetrievalAugmentedGeneration"
+
+# ---------------------------------------------------------------------------
+# MODELS — Generative
+# ---------------------------------------------------------------------------
+"GAN": "GenerativeAdversarialNetwork"
+"VAE": "VariationalAutoencoder"
+"diffusion model": "DiffusionModel"
+"Stable Diffusion": "StableDiffusion"
+"DALL-E": "DALLE"
+"CTGAN": "CTGAN"
+
+# ---------------------------------------------------------------------------
+# MODELS — Recommender
+# ---------------------------------------------------------------------------
+"collaborative filtering": "CollaborativeFiltering"
+"matrix factorization": "MatrixFactorization"
+
+# ---------------------------------------------------------------------------
+# MODELS — Anomaly Detection
+# ---------------------------------------------------------------------------
+"Isolation Forest": "IsolationForest"
+"iForest": "IsolationForest"
+"One-Class SVM": "OneClassSVM"
+"LOF": "LocalOutlierFactor"
+"autoencoder anomaly": "AnomalyAutoencoder"
+
+# ---------------------------------------------------------------------------
+# MODELS — Causal Inference
+# ---------------------------------------------------------------------------
+"DiD": "DifferenceInDifferences"
+"diff-in-diff": "DifferenceInDifferences"
+"RDD": "RegressionDiscontinuityDesign"
+"IV": "InstrumentalVariables"
+"2SLS": "TwoStageLeastSquares"
+"PSM": "PropensityScoreMatching"
+"IPW": "InverseProbabilityWeighting"
+"DML": "DoubleDebiasedMachineLearning"
+"causal forest": "CausalForest"
+"SEM": "StructuralEquationModel"
+"DAG": "DirectedAcyclicGraph"
+
+# ---------------------------------------------------------------------------
+# MODELS — Graph
+# ---------------------------------------------------------------------------
+"GCN": "GraphConvolutionalNetwork"
+"GraphSAGE": "GraphSAGE"
+"GAT": "GraphAttentionNetwork"
+"GNN": "GraphNeuralNetwork"
+"TransE": "TransE"
+
+# ---------------------------------------------------------------------------
+# MODELS — Optimization / Simulation
+# ---------------------------------------------------------------------------
+"LP": "LinearProgramming"
+"MIP": "MixedIntegerProgramming"
+"Monte Carlo": "MonteCarloSimulation"
+"ABM": "AgentBasedModel"
+
+# ---------------------------------------------------------------------------
+# METRICS
+# ---------------------------------------------------------------------------
+"R2": "RSquared"
+"R²": "RSquared"
+"r-squared": "RSquared"
+"coeficiente de determinacao": "RSquared"
+"adjusted R2": "AdjustedRSquared"
+"RMSE": "RootMeanSquaredError"
+"MAE": "MeanAbsoluteError"
+"MAPE": "MeanAbsolutePercentageError"
+"MSE": "MeanSquaredError"
+"AUC": "AUCROC"
+"AUC-ROC": "AUCROC"
+"area under the curve": "AUCROC"
+"AUC-PR": "AUCPR"
+"precision-recall AUC": "AUCPR"
+"F1": "F1Score"
+"F1-score": "F1Score"
+"log loss": "LogLoss"
+"cross-entropy loss": "LogLoss"
+"Brier score": "BrierScore"
+"Gini": "GiniCoefficient"
+"gini coefficient": "GiniCoefficient"
+"KS": "KolmogorovSmirnovStatistic"
+"KS statistic": "KolmogorovSmirnovStatistic"
+"PSI": "PopulationStabilityIndex"
+"population stability index": "PopulationStabilityIndex"
+"AIC": "AkaikeInformationCriterion"
+"BIC": "BayesianInformationCriterion"
+"perplexity": "Perplexity"
+"BLEU": "BLEUScore"
+"ROUGE": "ROUGEScore"
+"BERTScore": "BERTScore"
+"FID": "FrechetInceptionDistance"
+"NDCG": "NormalizedDiscountedCumulativeGain"
+"MRR": "MeanReciprocalRank"
+"C-statistic": "CStatistic"
+"Harrell's C": "CStatistic"
+"concordance index": "CStatistic"
+"SHAP": "SHAPValues"
+"shapley values": "SHAPValues"
+"VIF": "VarianceInflationFactor"
+"Cohen's Kappa": "CohensKappa"
+"MCC": "MatthewsCorrelationCoefficient"
+"silhouette": "SilhouetteScore"
+"WAIC": "WidelyApplicableInformationCriterion"
+"IoU": "IntersectionOverUnion"
+"SSIM": "StructuralSimilarityIndex"
+"FPS": "FramesPerSecond"
+"CLIP score": "CLIPScore"
+
+# ---------------------------------------------------------------------------
+# STATISTICAL TESTS
+# ---------------------------------------------------------------------------
+"Hausman": "HausmanTest"
+"teste de Hausman": "HausmanTest"
+"Breusch-Pagan": "BreuschPaganTest"
+"BP test": "BreuschPaganTest"
+"Wooldridge": "WooldridgeTest"
+"ADF": "AugmentedDickeyFullerTest"
+"Dickey-Fuller": "AugmentedDickeyFullerTest"
+"KPSS": "KPSSTest"
+"Phillips-Perron": "PhillipsPerronTest"
+"Ljung-Box": "LjungBoxTest"
+"Durbin-Watson": "DurbinWatsonTest"
+"DW": "DurbinWatsonTest"
+"Hosmer-Lemeshow": "HosmerLemeshowTest"
+"log-rank": "LogRankTest"
+"Schoenfeld": "SchoenfeldResidualsTest"
+"Johansen": "JohansenCointegrationTest"
+"Engle-Granger": "EngleGrangerTest"
+"ARCH-LM": "ARCHLMTest"
+"Hansen J": "HansenJTest"
+"Sargan": "SarganTest"
+"CUSUM": "CUSUMTest"
+"Pesaran CD": "PesaranCDTest"
+"Im-Pesaran-Shin": "ImPesaranShinTest"
+"Diebold-Mariano": "DieboldMarianoTest"
+"Bartlett": "BartlettTest"
+"KMO": "KaiserMeyerOlkinTest"
+"McCrary": "McCraryDensityTest"
+"Rosenbaum": "RosenbaumSensitivityAnalysis"
+"F-test": "FTest"
+"t-test": "TTest"
+"chi-squared": "ChiSquaredTest"
+"Pearson chi-squared": "PearsonChiSquaredTest"
+"Grubbs": "GrubbsTest"
+"Cook's distance": "CooksDistance"
+
+# ---------------------------------------------------------------------------
+# VALIDATION CONCEPTS
+# ---------------------------------------------------------------------------
+"overfitting": "Overfitting"
+"sobreajuste": "Overfitting"
+"underfitting": "Underfitting"
+"subajuste": "Underfitting"
+"bias": "Bias"
+"vies": "Bias"
+"fairness": "Fairness"
+"justica": "Fairness"
+"calibration": "Calibration"
+"calibracao": "Calibration"
+"data drift": "DataDrift"
+"concept drift": "ConceptDrift"
+"feature importance": "FeatureImportance"
+"importancia de features": "FeatureImportance"
+"explainability": "ModelExplainability"
+"explicabilidade": "ModelExplainability"
+"interpretability": "ModelExplainability"
+"interpretabilidade": "ModelExplainability"
+"hallucination": "Hallucination"
+"alucinacao": "Hallucination"
+"heteroscedasticity": "Heteroscedasticity"
+"heteroscedasticidade": "Heteroscedasticity"
+"autocorrelation": "Autocorrelation"
+"autocorrelacao": "Autocorrelation"
+"serial correlation": "Autocorrelation"
+"correlacao serial": "Autocorrelation"
+"multicollinearity": "Multicollinearity"
+"multicolinearidade": "Multicollinearity"
+"endogeneity": "Endogeneity"
+"endogeneidade": "Endogeneity"
+"stationarity": "Stationarity"
+"estacionariedade": "Stationarity"
+"class imbalance": "ClassImbalance"
+"desbalanceamento": "ClassImbalance"
+"mode collapse": "ModeCollapse"
+"cold start": "ColdStartProblem"
+"toxicity": "Toxicity"
+"toxicidade": "Toxicity"
+"convergence": "Convergence"
+"convergencia": "Convergence"
+
+# ---------------------------------------------------------------------------
+# TECHNIQUES
+# ---------------------------------------------------------------------------
+"cross-validation": "CrossValidation"
+"validacao cruzada": "CrossValidation"
+"CV": "CrossValidation"
+"k-fold": "KFoldCrossValidation"
+"bootstrap": "Bootstrapping"
+"regularization": "Regularization"
+"regularizacao": "Regularization"
+"early stopping": "EarlyStopping"
+"dropout": "Dropout"
+"data augmentation": "DataAugmentation"
+"aumento de dados": "DataAugmentation"
+"feature engineering": "FeatureEngineering"
+"engenharia de features": "FeatureEngineering"
+"hyperparameter tuning": "HyperparameterTuning"
+"grid search": "GridSearch"
+"random search": "RandomSearch"
+"bayesian optimization": "BayesianOptimization"
+"SMOTE": "SMOTE"
+"oversampling": "Oversampling"
+"undersampling": "Undersampling"
+"RLHF": "ReinforcementLearningFromHumanFeedback"
+"fine-tuning": "FineTuning"
+"transfer learning": "TransferLearning"
+"prompt engineering": "PromptEngineering"
+
+# ---------------------------------------------------------------------------
+# REGULATORY
+# ---------------------------------------------------------------------------
+"SR 11-7": "SR117"
+"SR11-7": "SR117"
+"Basel III": "BaselIII"
+"Basel IV": "BaselIV"
+"EU AI Act": "EUAIAct"
+"NIST AI RMF": "NISTAIMRF"
+"IFRS 9": "IFRS9"
+"IFRS 17": "IFRS17"
+"Solvency II": "SolvencyII"
+"CCAR": "CCAR"
+"DFAST": "DFAST"
+"GDPR": "GDPR"
+"ECOA": "EqualCreditOpportunityAct"
+
+# ---------------------------------------------------------------------------
+# FRAUD / RARE EVENTS
+# ---------------------------------------------------------------------------
+"fraude": "AnomalyDetection"
+"fraud": "AnomalyDetection"
+"fraud detection": "AnomalyDetection"
+"deteccao de fraude": "AnomalyDetection"
+"rare event": "RareEventModeling"
+"evento raro": "RareEventModeling"
+"eventos raros": "RareEventModeling"
+"low prevalence": "RareEventModeling"
+"desbalanceamento de classes": "ClassImbalance"
+"imbalanced dataset": "ClassImbalance"
+"dataset desbalanceado": "ClassImbalance"
+"base desbalanceada": "ClassImbalance"
+"custo assimetrico": "AsymmetricCost"
+"asymmetric cost": "AsymmetricCost"
+"cost-sensitive": "CostSensitiveLearning"
+"threshold tuning": "ThresholdOptimization"
+"ponto de corte": "ThresholdOptimization"
+"alert fatigue": "AlertFatigue"
+"fadiga de alertas": "AlertFatigue"
+"falso positivo": "AlertFatigue"
+"temporal validation": "TemporalValidation"
+"validacao temporal": "TemporalValidation"
+"time-based split": "TemporalSplit"
+"adversarial drift": "AdversarialDrift"
+"drift adversarial": "AdversarialDrift"
+"Precision@K": "PrecisionAtK"
+"precision at k": "PrecisionAtK"
+"Recall@FPR": "RecallAtFixedFPR"
+"alert rate": "AlertRate"
+"taxa de alerta": "AlertRate"
+"detection rate": "DetectionRate"
+"taxa de deteccao": "DetectionRate"
+"expected cost": "ExpectedCost"
+"custo esperado": "ExpectedCost"
+"lift chart": "LiftChart"
+"curva de lift": "LiftChart"
+"gains chart": "CumulativeGainsChart"
+"curva de ganhos": "CumulativeGainsChart"
+"PR curve": "PrecisionRecallCurve"
+"curva PR": "PrecisionRecallCurve"
+"precision-recall curve": "PrecisionRecallCurve"
+"score distribution": "ScoreDistributionPlot"
+"focal loss": "FocalLoss"
+"stratified sampling": "StratifiedSampling"
+"amostragem estratificada": "StratifiedSampling"
+"PCI-DSS": "PCIDSS"
+"PCI DSS": "PCIDSS"
+"AML": "AMLRegulations"
+"anti-money laundering": "AMLRegulations"
+"lavagem de dinheiro": "AMLRegulations"
+"SAR": "AMLRegulations"
+
+# ---------------------------------------------------------------------------
+# DOMAINS
+# ---------------------------------------------------------------------------
+"regressao linear": "LinearRegressionModels"
+"linear regression": "LinearRegressionModels"
+"dados em painel": "PanelDataModels"
+"panel data": "PanelDataModels"
+"series temporais": "TimeSeriesModels"
+"time series": "TimeSeriesModels"
+"GLM": "GeneralizedLinearModels"
+"survival analysis": "SurvivalModels"
+"analise de sobrevivencia": "SurvivalModels"
+"classificacao": "ClassificationModels"
+"classification": "ClassificationModels"
+"deep learning": "DeepLearningTabular"
+"NLP": "NLPClassical"
+"processamento de linguagem natural": "NLPClassical"
+"LLM": "LargeLanguageModels"
+"large language model": "LargeLanguageModels"
+"modelo de linguagem": "LargeLanguageModels"
+"recommender system": "RecommenderSystems"
+"sistema de recomendacao": "RecommenderSystems"
+"deteccao de anomalia": "AnomalyDetection"
+"anomaly detection": "AnomalyDetection"
+"inferencia causal": "CausalInferenceModels"
+"causal inference": "CausalInferenceModels"
+"otimizacao": "OptimizationModels"
+"optimization": "OptimizationModels"
+"simulacao": "SimulationModels"
+"simulation": "SimulationModels"
+"Monte Carlo": "SimulationModels"

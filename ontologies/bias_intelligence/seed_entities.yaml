@@ -1,0 +1,279 @@
+entities:
+  # Level 3 - Domains (FairnessDomain)
+  - type: FairnessDomain
+    name: "Credit_Lending"
+    properties:
+      description: "Concessao de credito e emprestimos"
+      industry: "Financial Services"
+
+  - type: FairnessDomain
+    name: "Hiring"
+    properties:
+      description: "Processos de recrutamento e selecao"
+      industry: "Human Resources"
+
+  - type: FairnessDomain
+    name: "Criminal_Justice"
+    properties:
+      description: "Sistema de justica criminal e avaliacao de risco de reincidencia"
+      industry: "Public Safety"
+
+  - type: FairnessDomain
+    name: "Healthcare"
+    properties:
+      description: "Sistemas de saude e triagem de pacientes"
+      industry: "Healthcare"
+
+  # Level 2 - Concepts (BiasType)
+  - type: BiasType
+    name: "Selection_Bias"
+    properties:
+      description: "Vies causado por amostragem nao representativa dos dados de treinamento"
+      detection_method: "Comparar distribuicao do treino com populacao alvo"
+
+  - type: BiasType
+    name: "Measurement_Bias"
+    properties:
+      description: "Vies causado por erro sistematico na coleta ou medicao de dados"
+      detection_method: "Auditar processo de coleta, verificar proxies"
+
+  - type: BiasType
+    name: "Algorithmic_Bias"
+    properties:
+      description: "Vies introduzido pelo algoritmo de aprendizado ou funcao objetivo"
+      detection_method: "Comparar metricas de fairness entre grupos protegidos"
+
+  - type: BiasType
+    name: "Historical_Bias"
+    properties:
+      description: "Vies presente nos dados historicos que reflete desigualdades passadas"
+      detection_method: "Analisar tendencias historicas nos dados de treinamento"
+
+  # Level 2 - Concepts (FairnessMetric)
+  - type: FairnessMetric
+    name: "Disparate_Impact"
+    properties:
+      formula: "P(Y=1|G=unprivileged) / P(Y=1|G=privileged)"
+      threshold: ">= 0.8 (regra dos 80%)"
+      interpretation: "Razao de taxas de selecao entre grupos. Abaixo de 0.8 indica impacto desproporcional"
+
+  - type: FairnessMetric
+    name: "Statistical_Parity"
+    properties:
+      formula: "P(Y=1|G=0) - P(Y=1|G=1)"
+      threshold: "< 0.1"
+      interpretation: "Diferenca nas taxas de resultado positivo entre grupos. Proximo de 0 indica paridade"
+
+  - type: FairnessMetric
+    name: "Equalized_Odds"
+    properties:
+      formula: "P(Y_hat=1|Y=y,G=0) = P(Y_hat=1|Y=y,G=1) para y in {0,1}"
+      threshold: "Diferenca < 0.1 para ambos y=0 e y=1"
+      interpretation: "Taxas de VP e FP iguais entre grupos para ambas as classes"
+
+  - type: FairnessMetric
+    name: "Calibration"
+    properties:
+      formula: "P(Y=1|S=s,G=0) = P(Y=1|S=s,G=1) para todo score s"
+      threshold: "Diferenca < 0.05"
+      interpretation: "Mesmo score significa mesma probabilidade real independente do grupo"
+
+  # Level 1 - Facts (ProtectedAttribute)
+  - type: ProtectedAttribute
+    name: "Race"
+    properties:
+      legal_basis: "Civil Rights Act, ECOA, EU AI Act"
+      jurisdiction: "US, EU, BR"
+
+  - type: ProtectedAttribute
+    name: "Gender"
+    properties:
+      legal_basis: "Civil Rights Act, CEDAW, EU AI Act"
+      jurisdiction: "US, EU, BR"
+
+  - type: ProtectedAttribute
+    name: "Age"
+    properties:
+      legal_basis: "ADEA, EU AI Act, Estatuto do Idoso"
+      jurisdiction: "US, EU, BR"
+
+  - type: ProtectedAttribute
+    name: "Disability"
+    properties:
+      legal_basis: "ADA, EU AI Act, Lei Brasileira de Inclusao"
+      jurisdiction: "US, EU, BR"
+
+  - type: ProtectedAttribute
+    name: "Religion"
+    properties:
+      legal_basis: "Civil Rights Act, EU AI Act"
+      jurisdiction: "US, EU, BR"
+
+  # Level 1 - Facts (ProxyVariable)
+  - type: ProxyVariable
+    name: "ZipCode"
+    properties:
+      correlation_strength: "high"
+      proxy_for: "Race, Income"
+
+  - type: ProxyVariable
+    name: "Name"
+    properties:
+      correlation_strength: "medium"
+      proxy_for: "Race, Gender, Ethnicity"
+
+  - type: ProxyVariable
+    name: "School"
+    properties:
+      correlation_strength: "medium"
+      proxy_for: "Race, Socioeconomic Status"
+
+  - type: ProxyVariable
+    name: "Neighborhood"
+    properties:
+      correlation_strength: "high"
+      proxy_for: "Race, Income"
+
+  # Level 1 - Facts (MitigationStrategy)
+  - type: MitigationStrategy
+    name: "Reweighing"
+    properties:
+      description: "Ajustar pesos das amostras para balancear representacao entre grupos"
+      stage: "pre-processing"
+
+  - type: MitigationStrategy
+    name: "Adversarial_Debiasing"
+    properties:
+      description: "Treinar modelo adversario para remover informacao de grupo protegido"
+      stage: "in-processing"
+
+  - type: MitigationStrategy
+    name: "Calibrated_Equalized_Odds"
+    properties:
+      description: "Ajustar thresholds de decisao pos-treinamento para equalizar odds"
+      stage: "post-processing"
+
+  # Level 1 - Facts (Dataset)
+  - type: Dataset
+    name: "COMPAS"
+    properties:
+      size: 7214
+      protected_groups: "Race, Gender"
+
+  - type: Dataset
+    name: "Adult_Census"
+    properties:
+      size: 48842
+      protected_groups: "Race, Gender, Age"
+
+  - type: Dataset
+    name: "German_Credit"
+    properties:
+      size: 1000
+      protected_groups: "Gender, Age"
+
+relationships:
+  # FairnessDomain -> BiasType
+  - source: "Credit_Lending"
+    relation: "APPLIES_TO"
+    target: "Historical_Bias"
+
+  - source: "Credit_Lending"
+    relation: "APPLIES_TO"
+    target: "Algorithmic_Bias"
+
+  - source: "Hiring"
+    relation: "APPLIES_TO"
+    target: "Selection_Bias"
+
+  - source: "Hiring"
+    relation: "APPLIES_TO"
+    target: "Historical_Bias"
+
+  - source: "Criminal_Justice"
+    relation: "APPLIES_TO"
+    target: "Historical_Bias"
+
+  - source: "Criminal_Justice"
+    relation: "APPLIES_TO"
+    target: "Measurement_Bias"
+
+  - source: "Healthcare"
+    relation: "APPLIES_TO"
+    target: "Selection_Bias"
+
+  - source: "Healthcare"
+    relation: "APPLIES_TO"
+    target: "Measurement_Bias"
+
+  # FairnessMetric -> BiasType
+  - source: "Disparate_Impact"
+    relation: "MEASURES_BIAS"
+    target: "Algorithmic_Bias"
+
+  - source: "Statistical_Parity"
+    relation: "MEASURES_BIAS"
+    target: "Algorithmic_Bias"
+
+  - source: "Equalized_Odds"
+    relation: "MEASURES_BIAS"
+    target: "Algorithmic_Bias"
+
+  - source: "Calibration"
+    relation: "MEASURES_BIAS"
+    target: "Measurement_Bias"
+
+  # MitigationStrategy -> BiasType
+  - source: "Reweighing"
+    relation: "MITIGATES_BIAS"
+    target: "Selection_Bias"
+
+  - source: "Reweighing"
+    relation: "MITIGATES_BIAS"
+    target: "Historical_Bias"
+
+  - source: "Adversarial_Debiasing"
+    relation: "MITIGATES_BIAS"
+    target: "Algorithmic_Bias"
+
+  - source: "Calibrated_Equalized_Odds"
+    relation: "MITIGATES_BIAS"
+    target: "Algorithmic_Bias"
+
+  # ProxyVariable -> ProtectedAttribute
+  - source: "ZipCode"
+    relation: "PROXY_FOR"
+    target: "Race"
+
+  - source: "Name"
+    relation: "PROXY_FOR"
+    target: "Race"
+
+  - source: "Name"
+    relation: "PROXY_FOR"
+    target: "Gender"
+
+  - source: "School"
+    relation: "PROXY_FOR"
+    target: "Race"
+
+  - source: "Neighborhood"
+    relation: "PROXY_FOR"
+    target: "Race"
+
+  # BiasType -> ProtectedAttribute
+  - source: "Historical_Bias"
+    relation: "AFFECTS"
+    target: "Race"
+
+  - source: "Historical_Bias"
+    relation: "AFFECTS"
+    target: "Gender"
+
+  - source: "Selection_Bias"
+    relation: "AFFECTS"
+    target: "Race"
+
+  - source: "Selection_Bias"
+    relation: "AFFECTS"
+    target: "Age"

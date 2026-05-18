@@ -1,0 +1,84 @@
+name: bias_intelligence
+version: "1.0"
+description: "Deteccao e mitigacao de vies em modelos de IA"
+
+entity_types:
+  # Level 1 - Facts
+  MLModel:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      algorithm: { type: str }
+      target_variable: { type: str }
+      training_data: { type: str }
+
+  Feature:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      data_type: { type: str }
+      source: { type: str }
+
+  ProtectedAttribute:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      legal_basis: { type: str }
+      jurisdiction: { type: str }
+
+  ProxyVariable:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      correlation_strength: { type: str }
+      proxy_for: { type: str }
+
+  MitigationStrategy:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      stage: { type: str, valid_values: [pre-processing, in-processing, post-processing] }
+
+  Dataset:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      size: { type: int }
+      protected_groups: { type: str }
+
+  # Level 2 - Concepts
+  BiasType:
+    level: 2
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      detection_method: { type: str }
+
+  FairnessMetric:
+    level: 2
+    properties:
+      name: { type: str, required: true }
+      formula: { type: str }
+      threshold: { type: str }
+      interpretation: { type: str }
+
+  # Level 3 - Domains
+  FairnessDomain:
+    level: 3
+    properties:
+      name: { type: str, required: true }
+      description: { type: str }
+      industry: { type: str }
+
+relationship_types:
+  USES_FEATURE: { source: MLModel, target: Feature }
+  PROXY_FOR: { source: ProxyVariable, target: ProtectedAttribute, cross_level: false }
+  CORRELATES_WITH: { source: Feature, target: ProxyVariable }
+  MEASURES_BIAS: { source: FairnessMetric, target: BiasType, cross_level: false }
+  MITIGATES_BIAS: { source: MitigationStrategy, target: BiasType, cross_level: true }
+  TRAINED_ON: { source: MLModel, target: Dataset }
+  PRODUCES_OUTCOME: { source: MLModel, target: Feature }
+  EXHIBITS: { source: MLModel, target: BiasType, cross_level: true }
+  AFFECTS: { source: BiasType, target: ProtectedAttribute, cross_level: true }
+  APPLIES_TO: { source: FairnessDomain, target: BiasType, cross_level: true }
