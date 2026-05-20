@@ -48,12 +48,16 @@ def main():
         help="Tipos de arquivo para processar (default: .py .md)"
     )
     parser.add_argument("--batch-size", type=int, default=50, help="Batch size para extracao")
-    parser.add_argument("--model", default="claude-sonnet-4-20250514", help="Modelo LLM")
+    parser.add_argument(
+        "--model", default=None,
+        help="Modelo LLM (override; default = configurado no provider via env)"
+    )
     parser.add_argument("--dry-run", action="store_true", help="Extrair triples sem carregar no Neo4j")
     parser.add_argument("--full", action="store_true", help="Modo full (ignora cache incremental)")
     args = parser.parse_args()
 
     from graphenda_shared.graph.connection import Neo4jConnection
+    from graphenda_build.llm import provider_from_env
     from graphenda_build.ontology.manager import OntologyRegistry
     from graphenda_build.ingestion.pipeline import IngestPipeline
 
@@ -89,10 +93,13 @@ def main():
     print(f"  Dry run: {args.dry_run}")
     print()
 
+    llm = provider_from_env()
+    print(f"LLM provider: {llm.name} (model: {args.model or llm.model})")
+
     pipeline = IngestPipeline(
         ontology=ontology,
         neo4j=neo4j,
-        api_key=os.getenv("ANTHROPIC_API_KEY"),
+        llm=llm,
         model=args.model,
         batch_size=args.batch_size,
     )

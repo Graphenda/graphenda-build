@@ -11,6 +11,7 @@ import logging
 import time
 from pathlib import Path
 
+from graphenda_build.llm import LLMProvider, provider_from_env
 from graphenda_build.ontology.manager import OntologySchema
 from graphenda_build.ingestion.chunker import Chunker
 from graphenda_build.ingestion.entity_resolver import EntityResolver, ResolvedTriple
@@ -39,8 +40,8 @@ class IngestPipeline:
         ontology: OntologySchema,
         neo4j: Neo4jConnection | None = None,
         registry: ParserRegistry | None = None,
-        api_key: str | None = None,
-        model: str = "claude-sonnet-4-20250514",
+        llm: LLMProvider | None = None,
+        model: str | None = None,
         batch_size: int = 50,
     ) -> None:
         """Inicializa pipeline com ontologia.
@@ -49,8 +50,9 @@ class IngestPipeline:
             ontology: Schema da ontologia ativa.
             neo4j: Conexao Neo4j para graph loading (opcional — se None, retorna triples sem carregar).
             registry: ParserRegistry customizado (opcional).
-            api_key: Anthropic API key (opcional, usa env var se None).
-            model: Modelo LLM para extracao.
+            llm: LLM provider para extracao. Se None, e construido a partir de
+                GRAPHENDA_LLM_PROVIDER e demais env vars (ver llm/registry.py).
+            model: Override do modelo (passa para LLMProvider.complete). None usa o default do provider.
             batch_size: Tamanho padrao do batch.
         """
         self._ontology = ontology
@@ -59,8 +61,9 @@ class IngestPipeline:
 
         self._registry = registry or ParserRegistry.default()
         self._chunker = Chunker(registry=self._registry)
+        self._llm = llm if llm is not None else provider_from_env()
         self._extractor = OntologyTripleExtractor(
-            ontology=ontology, model=model, api_key=api_key,
+            ontology=ontology, llm=self._llm, model=model,
         )
         self._resolver = EntityResolver(ontology=ontology)
 

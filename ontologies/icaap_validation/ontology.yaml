@@ -1,0 +1,299 @@
+name: icaap_validation
+version: "0.1"
+description: "Ontologia para validacao de Relatorios ICAAP (Processo Interno de Avaliacao da Adequacao de Capital) contra a base normativa BCB/CMN + referencias internacionais BCBS. Cobre Res. CMN 4557/2017, Circ. BCB 3846/2017 (e alteradoras), IN BCB 686/2025 (modelos), Res. CMN 4955/4958/2021 (capital), BCBS d450 (stress testing), BCBS d465+Basel Framework SRP (Pilar 2)."
+
+entity_types:
+
+  # =========================================================================
+  # Level 1 - Facts: entidades concretas extraidas do relatorio + base normativa
+  # =========================================================================
+
+  ICAAPReport:
+    level: 1
+    properties:
+      institution_name: { type: str, required: true, description: "Nome da instituicao financeira reportante" }
+      data_base: { type: str, required: true, description: "Data-base do relatorio (deve ser 31/12 do ano anterior)" }
+      submission_deadline: { type: str, description: "Prazo de submissao (deve ser ate 30/04)" }
+      submission_date: { type: str, description: "Data efetiva de submissao do relatorio" }
+      segment: { type: str, required: true, valid_values: [S1, S2, S3, S4, S5], description: "Segmento da instituicao conforme Res. CMN 4553/2017" }
+      conglomerate_type: { type: str, valid_values: [bancario, tipo_3], description: "Bancario (Res 4557) ou Tipo 3 (Res BCB 265)" }
+      icaap_mode: { type: str, required: true, valid_values: [ICAAP, IcaapSimp], description: "Completo ou simplificado" }
+      projection_horizon_years: { type: int, description: "Horizonte de projecao declarado (Circ 3846 exige >= 3)" }
+
+  ReportChapter:
+    level: 1
+    properties:
+      number: { type: str, required: true, description: "Numero do capitulo conforme IN 686 (I a VII)" }
+      title: { type: str, required: true }
+      page_start: { type: int }
+      page_end: { type: int }
+      text_excerpt: { type: str, description: "Trecho-chave do capitulo (para citacao)" }
+
+  ReportSection:
+    level: 1
+    properties:
+      title: { type: str, required: true }
+      subsection_number: { type: str, description: "Ex: IV.2, V.1" }
+      content_summary: { type: str, description: "Sumario do conteudo declarado pela instituicao" }
+      page_reference: { type: int }
+
+  RegulatoryNorm:
+    level: 1
+    properties:
+      issuer: { type: str, required: true, valid_values: [CMN, BCB, BCBS, FED, NGFS, TCFD], description: "Emissor" }
+      type: { type: str, required: true, valid_values: [Resolucao, Circular, CartaCircular, InstrucaoNormativa, Standard, Letter], description: "Tipo do normativo" }
+      number: { type: str, required: true }
+      year: { type: int, required: true }
+      title: { type: str }
+      status: { type: str, valid_values: [vigente, alterada, revogada, superseded], description: "Vigencia atual" }
+      url: { type: str, description: "URL oficial" }
+
+  RegulatoryClause:
+    level: 1
+    properties:
+      citation: { type: str, required: true, description: "Ex: 'art. 5, inciso III' ou 'paragrafo unico do art. 32'" }
+      text: { type: str, required: true, description: "Texto literal da clausula" }
+      obligation_type: { type: str, valid_values: [mandatory, recommended, definitional], description: "Forca normativa" }
+
+  RequiredItem:
+    level: 1
+    properties:
+      name: { type: str, required: true, description: "Nome curto do requisito (ex: 'horizonte minimo 3 anos')" }
+      description: { type: str, required: true, description: "Descricao do que deve estar presente no relatorio" }
+      check_kind: { type: str, required: true, valid_values: [structural, methodological, quantitative, governance, temporal], description: "Tipo de check" }
+      satisfaction_rule: { type: str, description: "Regra formal para validar atendimento (ex: 'projection_horizon_years >= 3')" }
+      applies_to_segment: { type: list, description: "Lista de segmentos aplicaveis (S1..S5); vazio = todos" }
+      applies_to_mode: { type: str, valid_values: [ICAAP, IcaapSimp, ambos], description: "ICAAP completo, simplificado ou ambos" }
+
+  RiskType:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      pillar: { type: str, valid_values: [pilar_1, demais_riscos], description: "Pilar 1 (cre/mer/op) ou demais riscos" }
+      definition_clause: { type: str, description: "Citacao da definicao oficial (ex: 'Res 4557 art. 22')" }
+      icaap_required: { type: bool, default: true, description: "Se o ICAAP deve cobrir esse risco" }
+
+  StressTestScenario:
+    level: 1
+    properties:
+      name: { type: str, required: true }
+      severity: { type: str, valid_values: [base, adverso, severo, reverse], description: "Severidade do cenario" }
+      horizon_years: { type: int, description: "Horizonte do cenario em anos" }
+      variables_shocked: { type: list, description: "Variaveis macro/setoriais com choque" }
+      narrative: { type: str, description: "Narrativa do cenario" }
+      origin: { type: str, valid_values: [interno, regulatorio, hibrido], description: "Origem da especificacao" }
+
+  CapitalProjection:
+    level: 1
+    properties:
+      year: { type: int, required: true, description: "Ano da projecao" }
+      pr_projected: { type: str, description: "Patrimonio de Referencia projetado" }
+      rwa_projected: { type: str, description: "RWA projetado" }
+      ib_projected: { type: str, description: "Indice de Basileia projetado (%)" }
+      icp_projected: { type: str, description: "Indice de Capital Principal projetado (%)" }
+      acp_projected: { type: str, description: "Adicional de Capital Principal projetado" }
+      scenario_link: { type: str, description: "Cenario de estresse associado (referencia)" }
+
+  Indicator:
+    level: 1
+    properties:
+      name: { type: str, required: true, description: "Ex: Indice de Basileia, ICP, IN1, RA, LCR, NSFR" }
+      regulatory_minimum: { type: str, description: "Limite minimo regulatorio (ex: '8% IB')" }
+      reported_value: { type: str, description: "Valor reportado pela instituicao" }
+      formula: { type: str, description: "Formula de calculo" }
+
+  Policy:
+    level: 1
+    properties:
+      name: { type: str, required: true, description: "Ex: politica de dividendos, politica de divulgacao, politica de gestao de risco operacional" }
+      approval_authority: { type: str, description: "Quem aprova (Conselho/Diretoria)" }
+      last_revision_date: { type: str }
+      document_reference: { type: str, description: "Referencia ao documento interno" }
+
+  ResponsibleAgent:
+    level: 1
+    properties:
+      name: { type: str }
+      role: { type: str, required: true, valid_values: [CRO, Diretor, Conselheiro, Comite, Auditoria_Interna], description: "Papel na governanca" }
+      governance_body: { type: str, description: "Orgao/Comite vinculado" }
+
+  ValidationFinding:
+    level: 1
+    properties:
+      finding_type: { type: str, required: true, valid_values: [conformidade, alerta, gap, critico], description: "Severidade do achado" }
+      message: { type: str, required: true, description: "Mensagem de validacao" }
+      evidence: { type: str, description: "Trecho do relatorio que evidencia o achado" }
+      clause_violated: { type: str, description: "Citacao da clausula nao atendida" }
+      remediation_hint: { type: str, description: "Sugestao de remediacao" }
+
+  # =========================================================================
+  # Level 2 - Concepts: conceitos abstratos do dominio
+  # =========================================================================
+
+  RiskManagementPrinciple:
+    level: 2
+    properties:
+      name: { type: str, required: true, description: "Ex: proporcionalidade, integracao, independencia da validacao" }
+      description: { type: str, required: true }
+      source_norm: { type: str, description: "Norma de origem (ex: Res 4557 art. 3)" }
+
+  CapitalAdequacyConcept:
+    level: 2
+    properties:
+      name: { type: str, required: true, description: "Ex: Capital Principal, Nivel I, Adicional Contraciclico" }
+      description: { type: str, required: true }
+      formula: { type: str, description: "Definicao formal/formula" }
+      regulatory_source: { type: str, description: "Norma definidora" }
+
+  ValidationMethodology:
+    level: 2
+    properties:
+      name: { type: str, required: true, description: "Ex: backtesting, sensibilidade, reverse stress test" }
+      description: { type: str, required: true }
+      applicable_to_risk: { type: list, description: "Tipos de risco onde se aplica" }
+      reference: { type: str, description: "Referencia BCBS ou interna" }
+
+  # =========================================================================
+  # Level 3 - Domains: agrupadores tematicos
+  # =========================================================================
+
+  RegulatoryFramework:
+    level: 3
+    properties:
+      name: { type: str, required: true, description: "Ex: 'BCB Prudencial', 'Basileia III', 'Pilar 2'" }
+      description: { type: str, required: true }
+      jurisdiction: { type: str, valid_values: [BR, internacional], description: "Jurisdicao" }
+
+  RiskCategory:
+    level: 3
+    properties:
+      name: { type: str, required: true, description: "Ex: 'Riscos de Pilar 1', 'Demais Riscos', 'Riscos ESG'" }
+      description: { type: str, required: true }
+
+  ICAAPProcessArea:
+    level: 3
+    properties:
+      name: { type: str, required: true, description: "Ex: 'Governanca', 'Mensuracao', 'Planejamento de Capital', 'Testes de Estresse'" }
+      description: { type: str, required: true }
+
+
+relationship_types:
+
+  # --- Estrutura do relatorio ---
+  CONTAINS_CHAPTER:
+    source: ICAAPReport
+    target: ReportChapter
+    properties:
+      order: { type: int, description: "Ordem do capitulo no relatorio" }
+
+  CONTAINS_SECTION:
+    source: ReportChapter
+    target: ReportSection
+    properties:
+      order: { type: int }
+
+  # --- Validacao (CORE) ---
+  MUST_CONTAIN:
+    source: [ReportChapter, ReportSection]
+    target: RequiredItem
+    cross_level: false
+    properties:
+      criticality: { type: str, valid_values: [must, should, may], description: "RFC-style MUST/SHOULD/MAY" }
+
+  SATISFIES:
+    source: [ReportChapter, ReportSection]
+    target: RequiredItem
+    properties:
+      evidence: { type: str, description: "Trecho do relatorio que evidencia atendimento" }
+      confidence: { type: float, description: "Confianca do extractor LLM (0..1)" }
+
+  PRODUCES_FINDING:
+    source: RequiredItem
+    target: ValidationFinding
+    description: "Quando um requisito nao e satisfeito, gera-se um finding"
+
+  # --- Rastreabilidade regulatoria ---
+  DERIVES_FROM:
+    source: RequiredItem
+    target: RegulatoryClause
+
+  PART_OF:
+    source: RegulatoryClause
+    target: RegulatoryNorm
+
+  AMENDS:
+    source: RegulatoryNorm
+    target: RegulatoryNorm
+    properties:
+      amendment_date: { type: str }
+      amendment_scope: { type: str, description: "Resumo do que foi alterado" }
+
+  REVOKES:
+    source: RegulatoryNorm
+    target: RegulatoryNorm
+
+  # --- Cobertura de risco ---
+  COVERS_RISK:
+    source: [ReportChapter, ReportSection]
+    target: RiskType
+    properties:
+      coverage_quality: { type: str, valid_values: [completa, parcial, ausente], description: "Avaliacao da cobertura" }
+
+  RISK_HAS_CATEGORY:
+    source: RiskType
+    target: RiskCategory
+    cross_level: true
+
+  # --- Estresse e projecao ---
+  APPLIES_SCENARIO:
+    source: ICAAPReport
+    target: StressTestScenario
+
+  PROJECTS:
+    source: StressTestScenario
+    target: CapitalProjection
+
+  REPORTS_INDICATOR:
+    source: ICAAPReport
+    target: Indicator
+    properties:
+      time_point: { type: str, description: "Data-base ou ano da projecao" }
+
+  # --- Governanca ---
+  SIGNED_BY:
+    source: ICAAPReport
+    target: ResponsibleAgent
+
+  POLICY_REFERENCED_BY:
+    source: ReportSection
+    target: Policy
+
+  POLICY_APPROVED_BY:
+    source: Policy
+    target: ResponsibleAgent
+
+  # --- Vinculos conceituais cross-level ---
+  IMPLEMENTS_PRINCIPLE:
+    source: ReportChapter
+    target: RiskManagementPrinciple
+    cross_level: true
+
+  USES_METHODOLOGY:
+    source: [ReportChapter, ReportSection, StressTestScenario]
+    target: ValidationMethodology
+    cross_level: true
+
+  RELATES_TO_CONCEPT:
+    source: [Indicator, RequiredItem]
+    target: CapitalAdequacyConcept
+    cross_level: true
+
+  WITHIN_PROCESS_AREA:
+    source: ReportChapter
+    target: ICAAPProcessArea
+    cross_level: true
+
+  PART_OF_FRAMEWORK:
+    source: RegulatoryNorm
+    target: RegulatoryFramework
+    cross_level: true

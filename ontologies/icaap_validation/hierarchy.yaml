@@ -1,0 +1,42 @@
+levels:
+  1:
+    name: "Facts"
+    description: "Entidades concretas extraidas do relatorio ICAAP candidato + base normativa de referencia: capitulos/secoes do relatorio, normas, clausulas, requisitos, riscos, cenarios, projecoes, indicadores, politicas, agentes responsaveis, achados de validacao"
+    entity_types:
+      - ICAAPReport
+      - ReportChapter
+      - ReportSection
+      - RegulatoryNorm
+      - RegulatoryClause
+      - RequiredItem
+      - RiskType
+      - StressTestScenario
+      - CapitalProjection
+      - Indicator
+      - Policy
+      - ResponsibleAgent
+      - ValidationFinding
+
+  2:
+    name: "Concepts"
+    description: "Conceitos abstratos do dominio prudencial: principios de gerenciamento de risco, conceitos de adequacao de capital, metodologias de validacao/estresse"
+    entity_types:
+      - RiskManagementPrinciple
+      - CapitalAdequacyConcept
+      - ValidationMethodology
+
+  3:
+    name: "Domains"
+    description: "Agrupadores tematicos macro: arcabouco regulatorio (BCB/Basel), categoria de risco, area do processo ICAAP"
+    entity_types:
+      - RegulatoryFramework
+      - RiskCategory
+      - ICAAPProcessArea
+
+cross_level_relationships:
+  - RISK_HAS_CATEGORY
+  - IMPLEMENTS_PRINCIPLE
+  - USES_METHODOLOGY
+  - RELATES_TO_CONCEPT
+  - WITHIN_PROCESS_AREA
+  - PART_OF_FRAMEWORK

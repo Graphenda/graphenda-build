@@ -11,8 +11,7 @@ import logging
 from pathlib import Path
 from typing import Any
 
-from anthropic import Anthropic
-
+from graphenda_build.llm import LLMMessage, LLMProvider
 from graphenda_build.ontology.manager import OntologySchema
 from graphenda_shared.graph.connection import Neo4jConnection
 
@@ -47,13 +46,13 @@ class CommunitySummarizer:
     def __init__(
         self,
         connection: Neo4jConnection,
-        anthropic_client: Anthropic,
+        llm: LLMProvider,
         ontology: OntologySchema,
-        model: str = "claude-sonnet-4-20250514",
+        model: str | None = None,
         cache_dir: str | Path | None = None,
     ) -> None:
         self._conn = connection
-        self._client = anthropic_client
+        self._llm = llm
         self._ontology = ontology
         self._model = model
         self._cache_dir = Path(cache_dir) if cache_dir else Path("data/community_cache")
@@ -89,16 +88,16 @@ class CommunitySummarizer:
         return results
 
     def summarize_community(self, community_id: int, members: list[dict[str, Any]]) -> str:
-        """Generate a summary for a single community using Claude."""
+        """Generate a summary for a single community via the LLM provider."""
         prompt = self._build_summary_prompt(members)
         try:
-            response = self._client.messages.create(
+            text = self._llm.complete(
+                messages=[LLMMessage(role="user", content=prompt)],
                 model=self._model,
                 max_tokens=300,
                 temperature=0.3,
-                messages=[{"role": "user", "content": prompt}],
             )
-            return response.content[0].text.strip()
+            return text.strip()
         except Exception as e:
             logger.error("Failed to summarize community %d: %s", community_id, e)
             names = [m.get("name", "unknown") for m in members]

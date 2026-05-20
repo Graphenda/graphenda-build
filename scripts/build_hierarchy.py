@@ -54,6 +54,7 @@ def main():
     instance_name = args.instance or args.ontology
 
     from graphenda_shared.graph.connection import Neo4jConnection
+    from graphenda_build.llm import provider_from_env
     from graphenda_build.ontology.manager import OntologyRegistry
     from graphenda_build.hierarchy.level_assigner import LevelAssigner
     from graphenda_build.hierarchy.inter_level_linker import InterLevelLinker
@@ -126,7 +127,9 @@ def main():
             from graphenda_build.hierarchy.meta_community import MetaCommunityBuilder
             from graphenda_build.community.summarizer import CommunitySummarizer
 
-            summarizer = CommunitySummarizer(neo4j)
+            llm = provider_from_env()
+            print(f"  LLM provider: {llm.name} (model: {llm.model})")
+            summarizer = CommunitySummarizer(neo4j, llm=llm, ontology=ontology)
             builder = MetaCommunityBuilder(neo4j, summarizer)
             builder.build(resolution=0.5)
             meta_stats = builder.verify()

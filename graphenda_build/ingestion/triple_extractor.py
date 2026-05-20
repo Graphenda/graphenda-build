@@ -10,6 +10,7 @@ import re
 from pathlib import Path
 
 from graphenda_build.core.base_extractor import BaseTripleExtractor
+from graphenda_build.llm import LLMMessage, LLMProvider
 from graphenda_shared.models.core import Chunk, Entity, Triple
 from graphenda_build.ontology.manager import OntologySchema
 from graphenda_build.ingestion.prompts import (
@@ -31,13 +32,13 @@ class OntologyTripleExtractor(BaseTripleExtractor):
     def __init__(
         self,
         ontology: OntologySchema,
-        model: str = "claude-sonnet-4-20250514",
-        api_key: str | None = None,
+        llm: LLMProvider,
+        model: str | None = None,
         cache_dir: str | Path = "cache/triples",
     ) -> None:
         self._ontology = ontology
+        self._llm = llm
         self._model = model
-        self._api_key = api_key
         self._cache_dir = Path(cache_dir)
         self._cache_dir.mkdir(parents=True, exist_ok=True)
 
@@ -88,23 +89,22 @@ class OntologyTripleExtractor(BaseTripleExtractor):
             return cached
 
         user_prompt = self._build_chunk_prompt(chunk)
-        messages = self._few_shot_messages + [
-            {"role": "user", "content": user_prompt},
+        messages: list[LLMMessage] = [
+            LLMMessage(role=m["role"], content=m["content"])
+            for m in self._few_shot_messages
         ]
+        messages.append(LLMMessage(role="user", content=user_prompt))
 
         try:
-            from anthropic import Anthropic
-
-            client = Anthropic(api_key=self._api_key) if self._api_key else Anthropic()
-            response = client.messages.create(
+            response_text = self._llm.complete(
+                messages=messages,
+                system=self._system_prompt,
                 model=self._model,
                 max_tokens=2048,
-                system=self._system_prompt,
-                messages=messages,
+                temperature=0.3,
             )
-            response_text = response.content[0].text
         except Exception as e:
-            logger.error("API call falhou para chunk %s: %s", chunk.chunk_id, e)
+            logger.error("LLM call falhou para chunk %s: %s", chunk.chunk_id, e)
             return []
 
         triples = self._parse_response(response_text, chunk)

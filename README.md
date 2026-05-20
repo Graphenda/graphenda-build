@@ -5,9 +5,11 @@
 
 Motor offline de construção de grafos de conhecimento do Graphenda (Pilar 1).
 
-`graphenda-build` lê ontologias e fontes textuais, executa extração via LLM (Anthropic
-Claude Opus 4.7), monta a hierarquia de comunidades e materializa o resultado em Neo4j.
-É um processo **batch**: roda quando você precisa construir ou reconstruir um grafo.
+`graphenda-build` lê ontologias e fontes textuais, executa extração via LLM
+(provider configurável — Anthropic, OpenAI-compatible, Gemini, Ollama, ou endpoint
+corporativo `/chatCompletion`), monta a hierarquia de comunidades e materializa o
+resultado em Neo4j. É um processo **batch**: roda quando você precisa construir ou
+reconstruir um grafo.
 
 ## Quando usar
 
@@ -48,6 +50,39 @@ python -m graphenda_build.scripts.ingest --ontology panelbox
 
 Outras ontologias suportadas: `ai_governance`, `model_intelligence`, `model_validation`,
 `bias_intelligence`.
+
+## LLM providers
+
+O provider de LLM é selecionado por env var (`GRAPHENDA_LLM_PROVIDER`). Suportados:
+
+| Provider | Env vars necessárias | Dependência extra |
+|---|---|---|
+| `anthropic` (default) | `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL` | (já no core) |
+| `openai`, `deepseek`, `groq`, `openrouter`, `lmstudio`, `vllm` | `OPENAI_API_KEY`, opcionalmente `OPENAI_BASE_URL`, `OPENAI_MODEL` | `pip install -e ".[openai]"` |
+| `gemini` | `GEMINI_API_KEY`, `GEMINI_MODEL` | `pip install -e ".[gemini]"` |
+| `ollama` | `OLLAMA_BASE_URL` (default `http://localhost:11434`), `OLLAMA_MODEL` | (já no core via httpx) |
+| `internal-llm` | `INTERNAL_LLM_ENDPOINT`, `INTERNAL_LLM_USER_UUID` | (já no core via httpx) |
+| `internal-llm-agentic` | mesmas do `internal-llm` (acresce trimming de contexto 128k) | (já no core via httpx) |
+
+Os presets de OpenAI-compatible já preenchem `base_url` automaticamente — para apontar
+para outro endpoint, basta setar `OPENAI_BASE_URL`.
+
+Exemplo: rodar a ingestão com o endpoint corporativo:
+
+```bash
+export GRAPHENDA_LLM_PROVIDER=internal-llm-agentic
+export INTERNAL_LLM_ENDPOINT=http://localhost:5001/chatCompletion
+export INTERNAL_LLM_USER_UUID=00000000-0000-0000-0000-000000000000
+python scripts/ingest.py --instance minha_inst --ontology model_intelligence --source ./docs
+```
+
+Para instalar todos os SDKs opcionais de uma vez:
+
+```bash
+pip install -e ".[all-llm]"
+```
+
+Ver `.env.example` para o contrato completo das env vars.
 
 ## Imagem Docker
 

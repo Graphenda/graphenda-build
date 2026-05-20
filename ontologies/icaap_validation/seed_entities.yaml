@@ -1,0 +1,586 @@
+# =============================================================================
+# Seed entities - dados canonicos pre-populados que NAO devem ser extraidos
+# do relatorio, mas servem como base de comparacao
+# =============================================================================
+entities:
+
+  # =========================================================================
+  # Level 3 - Frameworks Regulatorios
+  # =========================================================================
+
+  - type: RegulatoryFramework
+    name: "BCB Prudential Framework"
+    properties:
+      description: "Arcabouco prudencial brasileiro emitido pelo CMN e pelo BCB, baseado em Basileia III/IV adaptado ao mercado local"
+      jurisdiction: "BR"
+
+  - type: RegulatoryFramework
+    name: "Basel III/IV Framework"
+    properties:
+      description: "Padroes internacionais de capital, liquidez e gerenciamento de risco do BCBS"
+      jurisdiction: "internacional"
+
+  - type: RegulatoryFramework
+    name: "Pilar 2 - Supervisory Review Process"
+    properties:
+      description: "Segundo pilar de Basileia: revisao supervisora; orienta ICAAP/SREP. BCBS SRP + Pilar 2 Overview (d465)"
+      jurisdiction: "internacional"
+
+  # =========================================================================
+  # Level 3 - Categorias de Risco
+  # =========================================================================
+
+  - type: RiskCategory
+    name: "Riscos de Pilar 1"
+    properties:
+      description: "Riscos com requerimento de capital regulatorio direto: credito, mercado, operacional"
+
+  - type: RiskCategory
+    name: "Demais Riscos Relevantes"
+    properties:
+      description: "Riscos materiais sem requerimento Pilar 1 direto: liquidez, contraparte, concentracao, reputacao, estrategia, contagio, fundos de pensao"
+
+  - type: RiskCategory
+    name: "Riscos ESG"
+    properties:
+      description: "Risco social, risco ambiental e risco climatico, conforme Res. CMN 4943/2021 e Res. BCB 306/2023"
+
+  # =========================================================================
+  # Level 3 - Areas do Processo ICAAP
+  # =========================================================================
+
+  - type: ICAAPProcessArea
+    name: "Governanca do ICAAP"
+    properties:
+      description: "Atribuicoes do Conselho/Diretoria, mecanismos de governanca, fluxo de informacoes - Cap. II IN 686"
+
+  - type: ICAAPProcessArea
+    name: "Estrategia Corporativa"
+    properties:
+      description: "Estrategia, modelo de negocios, orcamento - Cap. III IN 686"
+
+  - type: ICAAPProcessArea
+    name: "Gestao e Mensuracao de Riscos"
+    properties:
+      description: "Governanca de risco, riscos relevantes, agregacao, testes de estresse, validacao - Cap. IV IN 686"
+
+  - type: ICAAPProcessArea
+    name: "Planejamento de Capital"
+    properties:
+      description: "Plano de capital, politica de dividendos, fontes de capital, contingencias - Cap. V IN 686"
+
+  - type: ICAAPProcessArea
+    name: "Auditoria Interna"
+    properties:
+      description: "Escopo e conclusoes da auditoria interna sobre gestao de riscos - Cap. VI IN 686"
+
+  - type: ICAAPProcessArea
+    name: "Planos de Acao"
+    properties:
+      description: "Autoavaliacao e medidas corretivas - Cap. VII IN 686"
+
+  # =========================================================================
+  # Level 1 - Normas regulatorias canonicas (referenciais)
+  # =========================================================================
+
+  - type: RegulatoryNorm
+    name: "Resolucao_CMN_4557_2017"
+    properties:
+      issuer: "CMN"
+      type: "Resolucao"
+      number: "4557"
+      year: 2017
+      title: "Estrutura de gerenciamento de riscos, estrutura de gerenciamento de capital e politica de divulgacao de informacoes"
+      status: "alterada"
+      url: "https://normativos.bcb.gov.br/Lists/Normativos/Attachments/50344/Res_4557_v5_L.pdf"
+
+  - type: RegulatoryNorm
+    name: "Circular_BCB_3846_2017"
+    properties:
+      issuer: "BCB"
+      type: "Circular"
+      number: "3846"
+      year: 2017
+      title: "Procedimentos e parametros do ICAAP e do IcaapSimp"
+      status: "alterada"
+      url: "https://normativos.bcb.gov.br/Lists/Normativos/Attachments/50436/Circ_3846_v2_L.pdf"
+
+  - type: RegulatoryNorm
+    name: "Resolucao_BCB_306_2023"
+    properties:
+      issuer: "BCB"
+      type: "Resolucao"
+      number: "306"
+      year: 2023
+      title: "Altera ICAAP, base de risco operacional, Pilar 3, GRSAC, TB vs BB, Tipo 3"
+      status: "vigente"
+      url: "https://www.lex.com.br/resolucao-bacen-no-306-de-23-de-marco-de-2023/"
+
+  - type: RegulatoryNorm
+    name: "IN_BCB_686_2025"
+    properties:
+      issuer: "BCB"
+      type: "InstrucaoNormativa"
+      number: "686"
+      year: 2025
+      title: "Divulga modelos de relatorios para o ICAAP e IcaapSimp"
+      status: "vigente"
+      url: "https://www.legisweb.com.br/legislacao/?id=487595"
+
+  - type: RegulatoryNorm
+    name: "IN_BCB_322_2022"
+    properties:
+      issuer: "BCB"
+      type: "InstrucaoNormativa"
+      number: "322"
+      year: 2022
+      title: "Modelos de relatorios ICAAP (revogada pela IN 686/2025)"
+      status: "revogada"
+
+  - type: RegulatoryNorm
+    name: "Resolucao_CMN_4955_2021"
+    properties:
+      issuer: "CMN"
+      type: "Resolucao"
+      number: "4955"
+      year: 2021
+      title: "Patrimonio de Referencia"
+      status: "vigente"
+
+  - type: RegulatoryNorm
+    name: "Resolucao_CMN_4958_2021"
+    properties:
+      issuer: "CMN"
+      type: "Resolucao"
+      number: "4958"
+      year: 2021
+      title: "Requerimentos minimos de PR, Nivel I, Capital Principal e ACP"
+      status: "vigente"
+
+  - type: RegulatoryNorm
+    name: "Resolucao_BCB_265_2022"
+    properties:
+      issuer: "BCB"
+      type: "Resolucao"
+      number: "265"
+      year: 2022
+      title: "Estrutura de gerenciamento de riscos, capital e divulgacao para conglomerado Tipo 3"
+      status: "alterada"
+
+  - type: RegulatoryNorm
+    name: "Resolucao_CMN_4553_2017"
+    properties:
+      issuer: "CMN"
+      type: "Resolucao"
+      number: "4553"
+      year: 2017
+      title: "Segmentacao S1-S5"
+      status: "vigente"
+
+  - type: RegulatoryNorm
+    name: "Resolucao_CMN_4502_2016"
+    properties:
+      issuer: "CMN"
+      type: "Resolucao"
+      number: "4502"
+      year: 2016
+      title: "Plano de Recuperacao"
+      status: "vigente"
+
+  - type: RegulatoryNorm
+    name: "BCBS_d450"
+    properties:
+      issuer: "BCBS"
+      type: "Standard"
+      number: "d450"
+      year: 2018
+      title: "Stress Testing Principles"
+      status: "vigente"
+      url: "https://www.bis.org/bcbs/publ/d450.pdf"
+
+  - type: RegulatoryNorm
+    name: "BCBS_d465"
+    properties:
+      issuer: "BCBS"
+      type: "Standard"
+      number: "d465"
+      year: 2019
+      title: "Pillar 2 Supervisory Review Process Overview"
+      status: "vigente"
+      url: "https://www.bis.org/bcbs/publ/d465.pdf"
+
+  - type: RegulatoryNorm
+    name: "BCBS_BaselFramework"
+    properties:
+      issuer: "BCBS"
+      type: "Standard"
+      number: "BaselFramework"
+      year: 2024
+      title: "Consolidated Basel Framework (inclui capitulo SRP)"
+      status: "vigente"
+      url: "https://www.bis.org/baselframework/BaselFramework.pdf"
+
+  # =========================================================================
+  # Level 1 - Tipos de risco canonicos (Pilar 1 + demais)
+  # =========================================================================
+
+  - type: RiskType
+    name: "RiscoCredito"
+    properties:
+      pillar: "pilar_1"
+      definition_clause: "Res. CMN 4557 art. 21"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoMercado"
+    properties:
+      pillar: "pilar_1"
+      definition_clause: "Res. CMN 4557 art. 26"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoOperacional"
+    properties:
+      pillar: "pilar_1"
+      definition_clause: "Res. CMN 4557 art. 32"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoTaxaJuros_CarteiraBancaria"
+    properties:
+      pillar: "demais_riscos"
+      definition_clause: "Res. CMN 4557 art. 27 / Circ. BCB 3876/2018"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoLiquidez"
+    properties:
+      pillar: "demais_riscos"
+      definition_clause: "Res. CMN 4557 art. 39"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoContraparte"
+    properties:
+      pillar: "demais_riscos"
+      definition_clause: "Res. CMN 4557 (CCR)"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoConcentracao"
+    properties:
+      pillar: "demais_riscos"
+      definition_clause: "Res. CMN 4557"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoReputacao"
+    properties:
+      pillar: "demais_riscos"
+      definition_clause: "Circ. BCB 3846 art. 3 II.b (alterado pela Res. 306/2023)"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoEstrategia"
+    properties:
+      pillar: "demais_riscos"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoSocial"
+    properties:
+      pillar: "demais_riscos"
+      definition_clause: "Res. CMN 4943/2021 + Circ. 3846 art. 3 II.c (Res. 306/2023)"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoAmbiental"
+    properties:
+      pillar: "demais_riscos"
+      definition_clause: "Res. CMN 4943/2021 + Circ. 3846 art. 3 II.d"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoClimatico"
+    properties:
+      pillar: "demais_riscos"
+      definition_clause: "Res. CMN 4943/2021 + Circ. 3846 art. 3 II.e + BCBS d518/d532"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoContagio"
+    properties:
+      pillar: "demais_riscos"
+      definition_clause: "Res. CMN 4557"
+      icaap_required: false
+
+  - type: RiskType
+    name: "RiscoCibernetico"
+    properties:
+      pillar: "demais_riscos"
+      definition_clause: "Res. CMN 4893/2021 + Res. BCB 85/2021"
+      icaap_required: true
+
+  - type: RiskType
+    name: "RiscoFundosPensao"
+    properties:
+      pillar: "demais_riscos"
+      icaap_required: false
+
+  # =========================================================================
+  # Level 1 - RequiredItems CANONICOS (regras de validacao critica)
+  # Estes sao os "validation checks" que o relatorio sera medido contra.
+  # =========================================================================
+
+  - type: RequiredItem
+    name: "horizonte_projecao_minimo_3_anos"
+    properties:
+      description: "O ICAAP deve avaliar adequacao de capital em horizonte minimo de 3 anos"
+      check_kind: "temporal"
+      satisfaction_rule: "ICAAPReport.projection_horizon_years >= 3"
+      applies_to_mode: "ambos"
+
+  - type: RequiredItem
+    name: "data_base_31_dezembro"
+    properties:
+      description: "Relatorio deve ser elaborado com data-base 31 de dezembro do ano anterior"
+      check_kind: "temporal"
+      satisfaction_rule: "ICAAPReport.data_base ends with '12-31'"
+      applies_to_mode: "ambos"
+
+  - type: RequiredItem
+    name: "submissao_ate_30_abril"
+    properties:
+      description: "Relatorio deve ser disponibilizado ate 30 de abril do ano seguinte a data-base"
+      check_kind: "temporal"
+      satisfaction_rule: "ICAAPReport.submission_date <= year(data_base)+1-04-30"
+      applies_to_mode: "ambos"
+
+  - type: RequiredItem
+    name: "capitulo_governanca_icaap"
+    properties:
+      description: "Relatorio deve conter Capitulo de Governanca do ICAAP (Cap. II IN 686): atribuicoes do conselho, alta administracao, mecanismos de governanca, fluxo de informacoes"
+      check_kind: "structural"
+      satisfaction_rule: "EXISTS ReportChapter WHERE number='II'"
+      applies_to_mode: "ICAAP"
+
+  - type: RequiredItem
+    name: "capitulo_estrategia_corporativa"
+    properties:
+      description: "Relatorio deve conter Capitulo de Estrategia Corporativa (Cap. III IN 686)"
+      check_kind: "structural"
+      satisfaction_rule: "EXISTS ReportChapter WHERE number='III'"
+      applies_to_mode: "ambos"
+
+  - type: RequiredItem
+    name: "capitulo_gestao_riscos"
+    properties:
+      description: "Relatorio deve conter Capitulo de Gestao e Mensuracao de Riscos (Cap. IV IN 686)"
+      check_kind: "structural"
+      satisfaction_rule: "EXISTS ReportChapter WHERE number='IV'"
+      applies_to_mode: "ambos"
+
+  - type: RequiredItem
+    name: "secao_riscos_relevantes_completa"
+    properties:
+      description: "Secao IV.2 deve cobrir TODOS os riscos relevantes: Pilar 1 (cre/mer/op) + IRRBB, liquidez, concentracao, contraparte, social, ambiental, climatico, reputacao, estrategia, e demais aplicaveis"
+      check_kind: "structural"
+      satisfaction_rule: "COVERS_RISK(secao_riscos_relevantes) >= [todos os RiskType com icaap_required=true]"
+      applies_to_mode: "ICAAP"
+
+  - type: RequiredItem
+    name: "secao_agregacao_riscos"
+    properties:
+      description: "Secao IV.3 deve descrever metodologia de agregacao de riscos e efeitos de diversificacao"
+      check_kind: "methodological"
+      applies_to_mode: "ICAAP"
+
+  - type: RequiredItem
+    name: "secao_testes_estresse_metodologia"
+    properties:
+      description: "Secao IV.4 deve descrever metodologia de testes de estresse, arcabouco, processos de elaboracao de cenarios, analise qualitativa, usos da ferramenta"
+      check_kind: "methodological"
+      applies_to_mode: "ambos"
+
+  - type: RequiredItem
+    name: "cenarios_estresse_severos"
+    properties:
+      description: "Devem ser aplicados cenarios de estresse de severidade adversa e severa, com origem documentada (interno/regulatorio)"
+      check_kind: "methodological"
+      satisfaction_rule: "EXISTS StressTestScenario WHERE severity IN ('adverso','severo')"
+      applies_to_mode: "ambos"
+
+  - type: RequiredItem
+    name: "projecao_capital_3_anos"
+    properties:
+      description: "Devem ser projetados PR, RWA, IB, ICP, ACP para cada um dos 3 anos do horizonte do ICAAP, em pelo menos cenario base e severo"
+      check_kind: "quantitative"
+      satisfaction_rule: "COUNT(CapitalProjection) >= 3 anos * 2 cenarios"
+      applies_to_mode: "ICAAP"
+
+  - type: RequiredItem
+    name: "capitulo_planejamento_capital"
+    properties:
+      description: "Relatorio deve conter Capitulo de Planejamento de Capital (Cap. V IN 686): plano alinhado a estrategia, politica de dividendos, fontes de capital, projecoes, contingencias"
+      check_kind: "structural"
+      applies_to_mode: "ICAAP"
+
+  - type: RequiredItem
+    name: "plano_contingencia_capital"
+    properties:
+      description: "Plano de capital deve conter plano de contingencia de capital (Res 4557 art. 48 inciso V, alterada por Res 306/2023)"
+      check_kind: "structural"
+      applies_to_mode: "ICAAP"
+
+  - type: RequiredItem
+    name: "capitulo_auditoria_interna"
+    properties:
+      description: "Relatorio deve conter capitulo de Auditoria Interna (Cap. VI IN 686): escopo de atuacao, conclusoes sobre gestao de riscos, adequacao da funcao"
+      check_kind: "structural"
+      applies_to_mode: "ICAAP"
+
+  - type: RequiredItem
+    name: "capitulo_planos_acao"
+    properties:
+      description: "Relatorio deve conter capitulo de Planos de Acao (Cap. VII IN 686): autoavaliacao e medidas corretivas"
+      check_kind: "structural"
+      applies_to_mode: "ambos"
+
+  - type: RequiredItem
+    name: "responsabilidade_CRO"
+    properties:
+      description: "O Diretor de Gerenciamento de Riscos (CRO) deve ser identificado como responsavel pelo ICAAP"
+      check_kind: "governance"
+      satisfaction_rule: "EXISTS ResponsibleAgent WHERE role='CRO' AND SIGNED_BY(report)"
+      applies_to_mode: "ambos"
+
+  - type: RequiredItem
+    name: "aprovacao_conselho_administracao"
+    properties:
+      description: "O relatorio ICAAP deve ser aprovado pelo Conselho de Administracao"
+      check_kind: "governance"
+      applies_to_mode: "ambos"
+
+  - type: RequiredItem
+    name: "icaapsimp_dispensa_governanca_detalhada"
+    properties:
+      description: "Instituicoes em IcaapSimp ficam DISPENSADAS de apresentar: governanca do Icaap, governanca de risco detalhada, agregacao de riscos, consideracoes gerais sobre gestao (IN 686 art. 2)"
+      check_kind: "structural"
+      applies_to_mode: "IcaapSimp"
+
+  - type: RequiredItem
+    name: "cobertura_risco_climatico_pos_306"
+    properties:
+      description: "Apos Res. BCB 306/2023 (vigente desde 01/07/2023), o ICAAP deve avaliar risco social, ambiental e climatico (Circ 3846 art. 3 incisos II.c/d/e)"
+      check_kind: "structural"
+      applies_to_mode: "ICAAP"
+
+  - type: RequiredItem
+    name: "vinculo_plano_recuperacao_S1"
+    properties:
+      description: "Instituicoes S1 devem ter ICAAP alinhado/referenciando o Plano de Recuperacao (Res. CMN 4502/2016)"
+      check_kind: "governance"
+      applies_to_segment: ["S1"]
+      applies_to_mode: "ICAAP"
+
+  # =========================================================================
+  # Level 2 - Principios de gerenciamento de risco
+  # =========================================================================
+
+  - type: RiskManagementPrinciple
+    name: "Proporcionalidade"
+    properties:
+      description: "A estrutura de gerenciamento de riscos deve ser compativel com a natureza, complexidade e perfil de risco da instituicao"
+      source_norm: "Res. CMN 4557 art. 3 + Res. CMN 4553 (segmentacao)"
+
+  - type: RiskManagementPrinciple
+    name: "Integracao"
+    properties:
+      description: "Gerenciamento de riscos integrado entre risco de credito, mercado, operacional, IRRBB, liquidez, ESG"
+      source_norm: "Res. CMN 4557 art. 3"
+
+  - type: RiskManagementPrinciple
+    name: "Independencia_Validacao"
+    properties:
+      description: "A validacao do ICAAP deve ser independente da area que o elabora"
+      source_norm: "Res. CMN 4557 + SR 11-7 (model risk management)"
+
+  - type: RiskManagementPrinciple
+    name: "Estresse_Severo_Plausivel"
+    properties:
+      description: "Cenarios de estresse devem ser severos mas plausiveis, abrangendo periodos de >=2 anos"
+      source_norm: "BCBS d450 Stress Testing Principles + Res. CMN 4557"
+
+  - type: RiskManagementPrinciple
+    name: "Forward_Looking"
+    properties:
+      description: "Avaliacao deve ser prospectiva, considerando estrategia, plano de negocios e horizonte plurianual"
+      source_norm: "Res. CMN 4557 + Circ. 3846 + BCBS d465"
+
+  # =========================================================================
+  # Level 2 - Conceitos de adequacao de capital
+  # =========================================================================
+
+  - type: CapitalAdequacyConcept
+    name: "Patrimonio_de_Referencia"
+    properties:
+      description: "PR = Nivel I + Nivel II. Base do calculo do Indice de Basileia"
+      formula: "PR = (Capital_Principal + Capital_Complementar) + Nivel_II - Deducoes"
+      regulatory_source: "Res. CMN 4955/2021"
+
+  - type: CapitalAdequacyConcept
+    name: "Indice_de_Basileia"
+    properties:
+      description: "IB = PR / RWA. Limite minimo regulatorio: 8%"
+      formula: "IB = PR / RWA"
+      regulatory_source: "Res. CMN 4958/2021"
+
+  - type: CapitalAdequacyConcept
+    name: "Capital_Principal"
+    properties:
+      description: "Componente de maior qualidade do PR; minimo regulatorio: 4,5% RWA + ACP"
+      formula: "Capital_Principal = Capital_Social + Reservas + Lucros - Deducoes_Regulamentares"
+      regulatory_source: "Res. CMN 4955/2021"
+
+  - type: CapitalAdequacyConcept
+    name: "Adicional_de_Capital_Principal"
+    properties:
+      description: "Buffer adicional acima do CP minimo: ACP_Conservacao + ACP_Contraciclico + ACP_Sistemico"
+      regulatory_source: "Res. CMN 4958/2021 + Res. BCB 200/2022"
+
+  - type: CapitalAdequacyConcept
+    name: "Razao_de_Alavancagem"
+    properties:
+      description: "RA = Nivel I / Exposicao Total. Minimo: 3%. Aplicavel S1 e S2"
+      formula: "RA = Nivel_I / Exposicao_Total"
+      regulatory_source: "Res. CMN 4615/2017 + Circ. BCB 3748/2015"
+
+  # =========================================================================
+  # Level 2 - Metodologias de validacao
+  # =========================================================================
+
+  - type: ValidationMethodology
+    name: "Backtesting"
+    properties:
+      description: "Comparacao retrospectiva entre projecoes e realizado para aferir qualidade do modelo"
+      applicable_to_risk: ["RiscoCredito", "RiscoMercado", "RiscoTaxaJuros_CarteiraBancaria"]
+      reference: "Basel Framework + BCBS d450"
+
+  - type: ValidationMethodology
+    name: "Reverse_Stress_Test"
+    properties:
+      description: "Identifica o cenario que levaria a instituicao a um ponto de falha pre-definido"
+      applicable_to_risk: ["RiscoCredito", "RiscoMercado", "RiscoLiquidez", "RiscoOperacional"]
+      reference: "BCBS d450 Principle 6"
+
+  - type: ValidationMethodology
+    name: "Analise_Sensibilidade"
+    properties:
+      description: "Avaliacao do impacto de variacao individual de fatores de risco em isolamento"
+      reference: "BCBS d450"
+
+  - type: ValidationMethodology
+    name: "Analise_Cenarios"
+    properties:
+      description: "Avaliacao do impacto de combinacao plausivel de choques em multiplos fatores"
+      reference: "BCBS d450 + Res. CMN 4557"
