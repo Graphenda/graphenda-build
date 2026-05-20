@@ -5,7 +5,8 @@ description = "Graphenda Build — offline graph construction engine"
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [{name = "Graphenda"}]
-license = {text = "Proprietary"}
+license = {text = "BUSL-1.1"}
+license-files = ["LICENSE"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
