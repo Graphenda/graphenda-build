@@ -76,7 +76,7 @@ def main():
     neo4j = None
     if not args.dry_run:
         print(f"Conectando ao Neo4j (database: {args.instance})")
-        neo4j = Neo4jConnection(database=args.instance)
+        neo4j = Neo4jConnection()
         result = neo4j.run("MATCH (n) RETURN count(n) AS count")
         existing = result[0]["count"] if result else 0
         print(f"  Nodes existentes: {existing}")
